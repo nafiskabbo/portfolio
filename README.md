@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nafis Islam Kabbo - Portfolio
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 15, React 19, and Tailwind CSS. Showcasing my work as a Mobile & Web Developer specializing in Flutter, Kotlin, Swift, and cross-platform development.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-cyan?style=for-the-badge&logo=tailwindcss)
+
+## 🚀 Features
+
+- **Modern Design** - Clean, professional UI with smooth animations
+- **Fully Responsive** - Optimized for all device sizes
+- **Dark Theme** - Eye-friendly dark color scheme
+- **Multi-Page Navigation** - Separate pages for better organization
+- **Fast Performance** - Built with Next.js App Router for optimal performance
+- **SEO Optimized** - Proper metadata and semantic HTML
+- **Accessibility** - WCAG compliant components
+
+## 📱 Sections
+
+- **Hero** - Introduction with personal photo and social links
+- **About** - Professional background and journey timeline
+- **Skills** - Technical expertise with proficiency levels
+- **Projects** - Featured mobile applications showcase (separate page)
+- **Contact** - Multiple ways to get in touch
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Library**: React 19
+- **Styling**: Tailwind CSS 4
+- **Language**: TypeScript
+- **Fonts**: Inter, JetBrains Mono
+
+## 📦 Getting Started
+
+### Prerequisites
+
+- Node.js 18.x or later
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/nafiskabbo/portfolio.git
+cd portfolio
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+portfolio/
+├── app/
+│   ├── components/        # Reusable UI components
+│   │   ├── AboutSection.tsx
+│   │   ├── ContactSection.tsx
+│   │   ├── Footer.tsx
+│   │   ├── HeroSection.tsx
+│   │   ├── Icons.tsx
+│   │   ├── Navbar.tsx
+│   │   ├── ProjectsPreview.tsx
+│   │   └── SkillsSection.tsx
+│   ├── projects/          # Projects page
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── public/
+│   ├── cv.pdf             # Downloadable CV
+│   ├── personal.jpg       # Profile photo
+│   └── logo_*.{jpg,png}   # App logos
+└── README.md
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔗 Connect With Me
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Platform | Link |
+|----------|------|
+| **GitHub** | [github.com/nafiskabbo](https://github.com/nafiskabbo) |
+| **LinkedIn** | [linkedin.com/in/nafiskabbo30](https://www.linkedin.com/in/nafiskabbo30/) |
+| **Freelancer** | [freelancer.com/u/nafiskabbo30](https://www.freelancer.com/u/nafiskabbo30) |
+| **Email** | [nafiskabbo30@gmail.com](mailto:nafiskabbo30@gmail.com) |
+| **WhatsApp** | [+880 1772 988050](https://wa.me/8801772988050) |
 
-## Deploy on Vercel
+## 🤝 Hiring
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Looking to build a mobile app? I'm available for freelance projects!
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Services Offered
+
+- Android Development (Kotlin, Java)
+- iOS Development (Swift, SwiftUI)
+- Cross-Platform Development (Flutter)
+- Web Development (Next.js, React)
+- Backend Development (Node.js, Firebase)
+
+### Contact for Projects
+
+- **Email**: nafiskabbo30@gmail.com
+- **WhatsApp**: +880 1772 988050
+- **Freelancer**: [Hire me on Freelancer](https://www.freelancer.com/u/nafiskabbo30)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+Built with ❤️ by [Nafis Islam Kabbo](https://github.com/nafiskabbo)
