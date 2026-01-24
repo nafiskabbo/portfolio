@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PlayStoreIcon, AppStoreIcon, WebIcon, ExternalLinkIcon, ArrowRightIcon } from './Icons';
+import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon } from './Icons';
 
 interface ProjectLink {
   type: 'android' | 'ios' | 'web';
@@ -18,6 +18,7 @@ interface Project {
   gradient: string;
   tags: string[];
   links: ProjectLink[];
+  platform: 'android' | 'ios' | 'cross-platform';
 }
 
 const featuredProjects: Project[] = [
@@ -33,6 +34,7 @@ const featuredProjects: Project[] = [
       { type: 'ios', url: 'https://apps.apple.com/us/app/santa-personal-video-call/id6755621227' },
       { type: 'web', url: 'https://santachat.org/' },
     ],
+    platform: 'cross-platform',
   },
   {
     id: 'heal-tone',
@@ -46,6 +48,7 @@ const featuredProjects: Project[] = [
       { type: 'ios', url: 'https://apps.apple.com/us/app/heal-tone-ai-frequency-sounds/id6746277347' },
       { type: 'web', url: 'https://healtone.org/' },
     ],
+    platform: 'cross-platform',
   },
   {
     id: 'viozor',
@@ -58,13 +61,20 @@ const featuredProjects: Project[] = [
       { type: 'ios', url: 'https://apps.apple.com/us/app/viozor-2-ai-video-generator/id6753830046' },
       { type: 'web', url: 'https://viozor.com/' },
     ],
+    platform: 'ios',
   },
 ];
 
 const linkIcons = {
-  android: { icon: PlayStoreIcon, color: 'hover:text-green-400' },
-  ios: { icon: AppStoreIcon, color: 'hover:text-blue-400' },
-  web: { icon: WebIcon, color: 'hover:text-cyan-400' },
+  android: { icon: PlayStoreIcon, color: 'hover:text-green-400 hover:bg-green-500/10' },
+  ios: { icon: AppStoreIcon, color: 'hover:text-blue-400 hover:bg-blue-500/10' },
+  web: { icon: WebIcon, color: 'hover:text-cyan-400 hover:bg-cyan-500/10' },
+};
+
+const platformBadge = {
+  android: { icon: AndroidIcon, label: 'Android', color: 'text-green-400 bg-green-500/10 border-green-500/30' },
+  ios: { icon: AppleIcon, label: 'iOS', color: 'text-slate-300 bg-slate-500/10 border-slate-400/30' },
+  'cross-platform': { icon: FlutterIcon, label: 'Cross-Platform', color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30' },
 };
 
 export function ProjectsPreview() {
@@ -92,93 +102,103 @@ export function ProjectsPreview() {
     <section
       ref={sectionRef}
       id="projects"
-      className="relative py-24 bg-gradient-to-b from-slate-950 to-slate-900 overflow-hidden"
+      className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-slate-950 to-slate-900 overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-green-500/8 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-purple-500/8 rounded-full blur-3xl" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-sm font-medium mb-4">
+        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
+          <span className="inline-block px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
             Portfolio
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 lg:mb-8">
             Featured{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
-          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-400 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
             A showcase of mobile applications I&apos;ve built with passion and precision, available on both App Store and Play Store.
           </p>
         </div>
 
         {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {featuredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className={`group relative bg-slate-800/30 rounded-2xl border border-slate-700/50 overflow-hidden hover:border-cyan-500/30 transition-all duration-500 hover:scale-105 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-              }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              {/* Project Header */}
-              <div className={`relative h-44 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                <div className="absolute inset-0 bg-black/10" />
-                <div className="relative w-20 h-20 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-110 transition-transform duration-300">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-12 sm:mb-16">
+          {featuredProjects.map((project, index) => {
+            const badge = platformBadge[project.platform];
+            return (
+              <div
+                key={project.id}
+                className={`group relative bg-slate-800/40 rounded-2xl sm:rounded-3xl border border-slate-700/50 overflow-hidden hover:border-green-500/30 transition-all duration-500 hover:scale-[1.02] backdrop-blur-sm ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                {/* Project Header */}
+                <div className={`relative h-40 sm:h-48 lg:h-52 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
+                  <div className="absolute inset-0 bg-black/10" />
+                  
+                  {/* Platform Badge */}
+                  <div className={`absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1.5 sm:gap-2 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-semibold border ${badge.color}`}>
+                    <badge.icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                    <span className="hidden sm:inline">{badge.label}</span>
+                  </div>
 
-              {/* Project Content */}
-              <div className="p-5">
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-slate-400 text-sm mb-4 line-clamp-2">
-                  {project.description}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2.5 py-1 rounded-full bg-slate-700/50 text-slate-300 text-xs font-medium"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group-hover:scale-110 transition-transform duration-500 ring-2 sm:ring-4 ring-white/20">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
                 </div>
 
-                {/* Links */}
-                <div className="flex items-center gap-3 pt-4 border-t border-slate-700/50">
-                  {project.links.map((link) => {
-                    const { icon: Icon, color } = linkIcons[link.type];
-                    return (
-                      <a
-                        key={link.type}
-                        href={link.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`text-slate-400 ${color} transition-colors`}
+                {/* Project Content */}
+                <div className="p-5 sm:p-6 lg:p-7">
+                  <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-green-400 transition-colors line-clamp-1">
+                    {project.title}
+                  </h3>
+                  <p className="text-slate-400 text-xs sm:text-sm md:text-base mb-4 sm:mb-5 line-clamp-2 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-6">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full bg-slate-700/50 text-slate-300 text-[10px] sm:text-xs font-medium"
                       >
-                        <Icon className="w-5 h-5" />
-                      </a>
-                    );
-                  })}
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Links */}
+                  <div className="flex items-center gap-2 sm:gap-3 pt-4 sm:pt-5 border-t border-slate-700/50">
+                    {project.links.map((link) => {
+                      const { icon: Icon, color } = linkIcons[link.type];
+                      return (
+                        <a
+                          key={link.type}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl text-slate-400 ${color} transition-all duration-300`}
+                        >
+                          <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                        </a>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* View All CTA */}
@@ -190,10 +210,10 @@ export function ProjectsPreview() {
         >
           <Link
             href="/projects"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-slate-800/50 border border-slate-700/50 text-white font-semibold hover:border-cyan-500/30 hover:text-cyan-400 transition-all duration-300 group"
+            className="inline-flex items-center gap-2 sm:gap-3 px-6 sm:px-8 lg:px-10 py-3.5 sm:py-4 lg:py-5 rounded-xl sm:rounded-2xl bg-slate-800/60 border border-slate-700/50 text-white font-bold hover:border-green-500/30 hover:text-green-400 transition-all duration-300 group backdrop-blur-sm text-sm sm:text-base"
           >
             <span>View All Projects</span>
-            <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRightIcon className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform" />
           </Link>
         </div>
       </div>
