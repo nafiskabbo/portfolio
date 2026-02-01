@@ -31,11 +31,11 @@ const skillCategories = [
     gradient: 'from-green-500 to-emerald-600',
     bgGlow: 'bg-green-500/10',
     skills: [
+      { name: 'Android', icon: AndroidIcon, level: 92, color: 'bg-green-500' },
+      { name: 'iOS', icon: AppleIcon, level: 85, color: 'bg-slate-400' },
       { name: 'Flutter', icon: FlutterIcon, level: 95, color: 'bg-cyan-500' },
       { name: 'Kotlin', icon: KotlinIcon, level: 90, color: 'bg-purple-500' },
       { name: 'Swift', icon: SwiftIcon, level: 85, color: 'bg-orange-500' },
-      { name: 'Android', icon: AndroidIcon, level: 92, color: 'bg-green-500' },
-      { name: 'iOS', icon: AppleIcon, level: 85, color: 'bg-slate-400' },
     ],
   },
   {

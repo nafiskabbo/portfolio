@@ -1,14 +1,12 @@
-import { Metadata } from 'next';
+'use client';
+
+import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { PlayStoreIcon, AppStoreIcon, WebIcon, ExternalLinkIcon, ArrowLeftIcon } from '../components/Icons';
-
-export const metadata: Metadata = {
-  title: 'Projects | Nafis Islam Kabbo',
-  description: 'Explore my portfolio of mobile applications built with Flutter, Kotlin, and Swift. Available on both App Store and Play Store.',
-};
+import { PlayStoreIcon, AppStoreIcon, WebIcon, ExternalLinkIcon, ArrowLeftIcon, AndroidIcon, AppleIcon, FlutterIcon, CodeIcon, RocketIcon } from '../components/Icons';
 
 interface ProjectLink {
   type: 'android' | 'ios' | 'web';
@@ -23,6 +21,8 @@ interface Project {
   gradient: string;
   tags: string[];
   links: ProjectLink[];
+  platform: 'android' | 'ios' | 'cross-platform';
+  category: 'mobile' | 'web' | 'ai' | 'fintech';
   featured?: boolean;
 }
 
@@ -33,12 +33,14 @@ const projects: Project[] = [
     description: 'An interactive app where users can video call and chat with Santa Claus. Features AI-powered conversations and personalized video messages for a magical holiday experience.',
     image: '/logo_santa_app.png',
     gradient: 'from-red-500 to-rose-600',
-    tags: ['Flutter', 'AI', 'Video Call', 'Cross-Platform'],
+    tags: ['Flutter', 'AI', 'Video Call'],
     links: [
       { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.santa.chatbot' },
       { type: 'ios', url: 'https://apps.apple.com/us/app/santa-personal-video-call/id6755621227' },
       { type: 'web', url: 'https://santachat.org/' },
     ],
+    platform: 'cross-platform',
+    category: 'ai',
     featured: true,
   },
   {
@@ -47,12 +49,14 @@ const projects: Project[] = [
     description: 'A wellness app featuring AI-generated healing frequencies and soundscapes. Helps users with meditation, relaxation, and sound therapy for better mental health.',
     image: '/logo_healtone.jpg',
     gradient: 'from-purple-500 to-violet-600',
-    tags: ['Flutter', 'AI', 'Audio', 'Health'],
+    tags: ['Flutter', 'AI', 'Audio'],
     links: [
       { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.anythingspeaker.healtone' },
       { type: 'ios', url: 'https://apps.apple.com/us/app/heal-tone-ai-frequency-sounds/id6746277347' },
       { type: 'web', url: 'https://healtone.org/' },
     ],
+    platform: 'cross-platform',
+    category: 'ai',
     featured: true,
   },
   {
@@ -61,11 +65,13 @@ const projects: Project[] = [
     description: 'Cutting-edge AI video generation app that transforms text and images into stunning videos. Features advanced AI models for creative content creation.',
     image: '/logo_viozor.jpg',
     gradient: 'from-cyan-500 to-blue-600',
-    tags: ['Swift', 'AI', 'Video Generation', 'iOS'],
+    tags: ['Swift', 'AI', 'iOS'],
     links: [
       { type: 'ios', url: 'https://apps.apple.com/us/app/viozor-2-ai-video-generator/id6753830046' },
       { type: 'web', url: 'https://viozor.com/' },
     ],
+    platform: 'ios',
+    category: 'ai',
     featured: true,
   },
   {
@@ -74,11 +80,13 @@ const projects: Project[] = [
     description: 'Professional AI-powered image editing app with advanced filters, background removal, and AI enhancement features for stunning photos.',
     image: '/logo_edipic.jpg',
     gradient: 'from-amber-500 to-orange-600',
-    tags: ['Swift', 'AI', 'Image Processing', 'iOS'],
+    tags: ['Swift', 'AI', 'Image Processing'],
     links: [
       { type: 'ios', url: 'https://apps.apple.com/us/app/edipic-ai-image-editor/id6753642840' },
       { type: 'web', url: 'https://edipic.com/' },
     ],
+    platform: 'ios',
+    category: 'ai',
     featured: true,
   },
   {
@@ -87,11 +95,13 @@ const projects: Project[] = [
     description: 'A comprehensive Islamic app featuring Quran reading, prayer times, Qibla direction, and more. Designed to help Muslims with their daily religious practices.',
     image: '/logo_deenhub.jpeg',
     gradient: 'from-emerald-500 to-teal-600',
-    tags: ['Flutter', 'Islamic', 'Quran', 'Cross-Platform'],
+    tags: ['Flutter', 'Islamic', 'Quran'],
     links: [
       { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.deenhub.app&hl=en' },
       { type: 'ios', url: 'https://apps.apple.com/us/app/deenhub-quran-prayer-qibla/id6749580911' },
     ],
+    platform: 'cross-platform',
+    category: 'mobile',
   },
   {
     id: 'emaisha-pay',
@@ -99,10 +109,12 @@ const projects: Project[] = [
     description: 'A corporate payment and financial management app designed for seamless business transactions. Features secure payments and financial tracking.',
     image: '/logo_emaisha_pay.png',
     gradient: 'from-blue-500 to-indigo-600',
-    tags: ['Android', 'Fintech', 'Payments', 'Corporate'],
+    tags: ['Android', 'Fintech', 'Payments'],
     links: [
       { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.cabraltech.emaishacorporateapp&hl=en' },
     ],
+    platform: 'android',
+    category: 'fintech',
   },
   {
     id: 'elsie',
@@ -114,221 +126,226 @@ const projects: Project[] = [
     links: [
       { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.elsie.app' },
     ],
+    platform: 'android',
+    category: 'mobile',
   },
 ];
 
+const categories = [
+  { id: 'all', label: 'All Projects', icon: RocketIcon },
+  { id: 'ai', label: 'AI Apps', icon: CodeIcon },
+  { id: 'mobile', label: 'Utility', icon: AndroidIcon },
+  { id: 'fintech', label: 'Fintech', icon: FlutterIcon },
+];
+
+const platformBadge = {
+  android: { icon: AndroidIcon, label: 'Android', color: 'text-green-400 bg-green-500/10 border-green-500/30' },
+  ios: { icon: AppleIcon, label: 'iOS', color: 'text-slate-300 bg-slate-500/10 border-slate-400/30' },
+  'cross-platform': { icon: FlutterIcon, label: 'Cross-Platform', color: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30' },
+};
+
 const linkConfig = {
-  android: { icon: PlayStoreIcon, label: 'Play Store', color: 'text-green-400 hover:text-green-300', bg: 'bg-green-500/10 hover:bg-green-500/20' },
-  ios: { icon: AppStoreIcon, label: 'App Store', color: 'text-blue-400 hover:text-blue-300', bg: 'bg-blue-500/10 hover:bg-blue-500/20' },
-  web: { icon: WebIcon, label: 'Website', color: 'text-cyan-400 hover:text-cyan-300', bg: 'bg-cyan-500/10 hover:bg-cyan-500/20' },
+  android: { icon: PlayStoreIcon, label: 'Play Store' },
+  ios: { icon: AppStoreIcon, label: 'App Store' },
+  web: { icon: WebIcon, label: 'Website' },
 };
 
 export default function ProjectsPage() {
-  const featuredProjects = projects.filter(p => p.featured);
-  const otherProjects = projects.filter(p => !p.featured);
+  const [activeCategory, setActiveCategory] = useState('all');
+
+  const filteredProjects = useMemo(() => {
+    if (activeCategory === 'all') return projects;
+    return projects.filter(p => p.category === activeCategory);
+  }, [activeCategory]);
 
   return (
     <>
       <Navbar />
-      <main className="bg-slate-950 min-h-screen pt-20 sm:pt-24">
-        {/* Header Section */}
-        <section className="relative py-12 sm:py-16 overflow-hidden">
-          <div className="absolute inset-0 grid-bg opacity-30" />
-          <div className="absolute top-0 right-0 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-cyan-500/8 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 bg-purple-500/8 rounded-full blur-3xl" />
+      <main className="bg-slate-950 min-h-screen pt-24 sm:pt-32 pb-20 overflow-hidden">
+        {/* Animated Background Blobs */}
+        <div className="fixed inset-0 pointer-events-none">
+          <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px] animate-blob" />
+          <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-green-600/10 rounded-full blur-[120px] animate-blob" style={{ animationDelay: '5s' }} />
+          <div className="absolute top-[30%] right-[10%] w-[30%] h-[40%] bg-emerald-600/5 rounded-full blur-[100px] animate-blob" style={{ animationDelay: '10s' }} />
+        </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 text-slate-400 hover:text-cyan-400 transition-colors mb-6 sm:mb-8 text-sm sm:text-base"
+        <div className="relative z-10 section-container">
+          {/* Header Section */}
+          <div className="max-w-4xl mx-auto text-center mb-16 sm:mb-24">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              <ArrowLeftIcon className="w-4 h-4" />
-              <span>Back to Home</span>
-            </Link>
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700/50 text-slate-400 hover:text-green-400 hover:border-green-500/30 transition-all mb-8 group"
+              >
+                <ArrowLeftIcon className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+                <span className="text-sm font-medium">Back to Home</span>
+              </Link>
 
-            <div className="text-center">
-              <span className="inline-block px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
-                Portfolio
-              </span>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
-                My{' '}
-                <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                  Projects
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+                Crafting Digital{' '}
+                <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-cyan-500 bg-clip-text text-transparent">
+                  Masterpieces
                 </span>
               </h1>
-              <p className="text-slate-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
-                A collection of mobile applications I&apos;ve built with passion and precision. 
-                Each project showcases my commitment to quality and user experience.
+              <p className="text-slate-400 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+                Explore a collection of high-performance mobile and web applications reflecting my passion for clean code and exceptional UI/UX.
               </p>
-            </div>
+            </motion.div>
           </div>
-        </section>
 
-        {/* Featured Projects */}
-        <section className="py-10 sm:py-12">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3">
-              <span className="w-6 h-1 sm:w-8 sm:h-1 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
-              Featured Projects
-            </h2>
+          {/* Filtering System */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-16 sm:mb-20"
+          >
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`flex items-center gap-2.5 px-6 py-3 rounded-2xl text-sm font-bold transition-all duration-300 border ${activeCategory === cat.id
+                    ? 'bg-green-500/20 border-green-500/50 text-green-400 shadow-lg shadow-green-500/10'
+                    : 'bg-slate-800/40 border-slate-700/50 text-slate-400 hover:border-green-500/30 hover:text-green-400'
+                  }`}
+              >
+                <cat.icon className="w-4 h-4" />
+                <span>{cat.label}</span>
+              </button>
+            ))}
+          </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
-              {featuredProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="group relative bg-slate-800/40 rounded-2xl sm:rounded-3xl border border-slate-700/50 overflow-hidden hover:border-cyan-500/30 transition-all duration-500 backdrop-blur-sm"
-                >
-                  {/* Project Image */}
-                  <div className={`relative h-44 sm:h-52 lg:h-56 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}>
-                    <div className="absolute inset-0 bg-black/20" />
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden shadow-2xl group-hover:scale-110 transition-transform duration-500 ring-2 sm:ring-4 ring-white/20">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                      />
+          {/* Projects Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => {
+                const badge = platformBadge[project.platform];
+                return (
+                  <motion.div
+                    layout
+                    key={project.id}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="group relative bg-slate-900/60 rounded-[2rem] border border-slate-800 hover:border-green-500/30 transition-all duration-500 overflow-hidden backdrop-blur-xl flex flex-col"
+                  >
+                    {/* Visual Header */}
+                    <div className={`relative h-56 sm:h-64 bg-gradient-to-br ${project.gradient} overflow-hidden`}>
+                      <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
+
+                      {/* Platform Badge Overlay */}
+                      <div className={`absolute top-5 right-5 z-20 flex items-center gap-2 px-4 py-2 rounded-full border ${badge.color} backdrop-blur-md shadow-xl`}>
+                        <badge.icon className="w-4 h-4" />
+                        <span className="text-[10px] font-bold tracking-widest uppercase">{badge.label}</span>
+                      </div>
+
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-3xl overflow-hidden shadow-2xl group-hover:scale-110 transition-transform duration-700 ring-4 ring-white/10 group-hover:ring-white/20">
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Project Content */}
-                  <div className="p-5 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3 group-hover:text-cyan-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-slate-400 text-xs sm:text-sm mb-3 sm:mb-4 leading-relaxed">
-                      {project.description}
-                    </p>
+                    {/* Content Section */}
+                    <div className="p-8 sm:p-10 flex flex-col flex-1">
+                      <div className="flex-1">
+                        <h3 className="text-xl sm:text-2xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors line-clamp-1">
+                          {project.title}
+                        </h3>
+                        <p className="text-slate-400 text-sm sm:text-base leading-relaxed mb-6 line-clamp-3">
+                          {project.description}
+                        </p>
 
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-4 sm:mb-5">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full bg-slate-700/50 text-slate-300 text-[10px] sm:text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                        {/* Tag Pillows */}
+                        <div className="flex flex-wrap gap-2 mb-8">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-3 py-1 rounded-lg bg-slate-800/80 border border-slate-700/50 text-slate-300 text-[10px] sm:text-xs font-semibold"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Call to Actions */}
+                      <div className="flex flex-wrap items-center gap-3 pt-6 border-t border-slate-800">
+                        {project.links.map((link) => {
+                          const config = linkConfig[link.type];
+                          return (
+                            <a
+                              key={link.type}
+                              href={link.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group/btn flex items-center gap-2 p-2 sm:p-2.5 rounded-xl bg-slate-800/40 border border-slate-700/50 hover:border-green-500/30 text-white transition-all duration-300"
+                              title={config.label}
+                            >
+                              <config.icon className="w-6 h-6 sm:w-7 sm:h-7" />
+                              <span className="hidden xl:inline text-xs font-bold text-slate-400 group-hover/btn:text-white transition-colors">{config.label}</span>
+                              <ExternalLinkIcon className="w-3 h-3 text-slate-600 group-hover/btn:text-green-400 transition-colors" />
+                            </a>
+                          );
+                        })}
+                      </div>
                     </div>
-
-                    {/* Links */}
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-3 pt-4 border-t border-slate-700/50">
-                      {project.links.map((link) => {
-                        const config = linkConfig[link.type];
-                        return (
-                          <a
-                            key={link.type}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg ${config.bg} ${config.color} transition-all text-xs sm:text-sm font-medium`}
-                          >
-                            <config.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                            <span className="hidden xs:inline">{config.label}</span>
-                            <ExternalLinkIcon className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-                          </a>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
-        </section>
 
-        {/* Other Projects */}
-        <section className="py-10 sm:py-12">
-          <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 flex items-center gap-3">
-              <span className="w-6 h-1 sm:w-8 sm:h-1 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full" />
-              More Projects
-            </h2>
+          {/* Empty State */}
+          {filteredProjects.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="py-20 text-center"
+            >
+              <div className="w-20 h-20 rounded-full bg-slate-800/50 flex items-center justify-center mx-auto mb-6 text-slate-500">
+                <CodeIcon className="w-10 h-10" />
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">No projects found</h3>
+              <p className="text-slate-500">Try selecting a different category.</p>
+            </motion.div>
+          )}
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
-              {otherProjects.map((project) => (
-                <div
-                  key={project.id}
-                  className="group relative bg-slate-800/40 rounded-xl sm:rounded-2xl border border-slate-700/50 overflow-hidden hover:border-cyan-500/30 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
-                >
-                  {/* Project Header */}
-                  <div className={`relative h-32 sm:h-40 bg-gradient-to-br ${project.gradient} flex items-center justify-center`}>
-                    <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shadow-lg ring-2 ring-white/20">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Project Content */}
-                  <div className="p-4 sm:p-5">
-                    <h3 className="text-base sm:text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-1">
-                      {project.title}
-                    </h3>
-                    <p className="text-slate-400 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-2 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-3 sm:mb-4">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-0.5 rounded-full bg-slate-700/50 text-slate-400 text-[10px] sm:text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Links */}
-                    <div className="flex items-center gap-2">
-                      {project.links.map((link) => {
-                        const config = linkConfig[link.type];
-                        return (
-                          <a
-                            key={link.type}
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className={`p-2 rounded-lg ${config.bg} ${config.color} transition-all`}
-                            title={config.label}
-                          >
-                            <config.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                          </a>
-                        );
-                      })}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="py-12 sm:py-16">
-          <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-center">
-            <div className="bg-gradient-to-r from-slate-800/60 to-slate-800/40 rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 lg:p-12 border border-slate-700/50 backdrop-blur-sm">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4">
-                Have a Project in Mind?
+          {/* Footer CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-32 text-center"
+          >
+            <div className="bg-gradient-to-br from-slate-900 to-slate-950 rounded-[3rem] p-12 sm:p-20 border border-slate-800 relative overflow-hidden group">
+              <div className="absolute inset-0 bg-green-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">
+                Ready to Start Your Journey?
               </h2>
-              <p className="text-slate-400 text-sm sm:text-base mb-6 sm:mb-8 max-w-xl mx-auto leading-relaxed">
-                I&apos;m always open to discussing new projects and opportunities. Let&apos;s create something amazing together!
+              <p className="text-slate-400 text-lg mb-10 max-w-xl mx-auto relative z-10">
+                Let&apos;s build something exceptional together. I am available for new projects and collaborations.
               </p>
               <Link
                 href="/#contact"
-                className="btn-shine inline-flex items-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 hover:scale-105 text-sm sm:text-base"
+                className="btn-shine relative z-10 inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold text-lg shadow-2xl shadow-green-500/20 hover:shadow-green-500/40 transition-all hover:scale-105"
               >
-                Get In Touch
+                <span>Hire Me Now</span>
+                <ArrowLeftIcon className="w-5 h-5 rotate-180" />
               </Link>
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </div>
       </main>
       <Footer />
     </>

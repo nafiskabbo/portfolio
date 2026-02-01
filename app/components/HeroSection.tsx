@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { GithubIcon, LinkedInIcon, FreelancerIcon, DownloadIcon, EmailIcon, AndroidIcon, AppleIcon, FlutterIcon } from './Icons';
+import { GithubIcon, LinkedInIcon, FreelancerIcon, DownloadIcon, EmailIcon, AndroidIcon, AppleIcon, FlutterIcon, UpworkIcon } from './Icons';
 
 const socialLinks = [
   { icon: GithubIcon, href: 'https://github.com/nafiskabbo', label: 'GitHub', color: 'hover:text-white hover:border-white/30 hover:bg-white/5' },
   { icon: LinkedInIcon, href: 'https://www.linkedin.com/in/nafiskabbo30/', label: 'LinkedIn', color: 'hover:text-blue-400 hover:border-blue-400/30 hover:bg-blue-400/5' },
   { icon: FreelancerIcon, href: 'https://www.freelancer.com/u/nafiskabbo30', label: 'Freelancer', color: 'hover:text-cyan-400 hover:border-cyan-400/30 hover:bg-cyan-400/5' },
+  { icon: UpworkIcon, href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca', label: 'Upwork', color: 'hover:text-green-500 hover:border-green-500/30 hover:bg-green-500/5' },
 ];
 
 export function HeroSection() {

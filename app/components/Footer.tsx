@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   GithubIcon,
   LinkedInIcon,
@@ -12,6 +13,7 @@ import {
   YouTubeIcon,
   InstagramIcon,
   UpworkIcon,
+  NextJsIcon,
 } from './Icons';
 
 const socialLinks = [
@@ -36,6 +38,7 @@ const techStack = [
   { icon: AndroidIcon, label: 'Android', color: 'text-green-400' },
   { icon: AppleIcon, label: 'iOS', color: 'text-slate-300' },
   { icon: FlutterIcon, label: 'Flutter', color: 'text-cyan-400' },
+  { icon: NextJsIcon, label: 'Next.js', color: 'text-white' },
 ];
 
 export function Footer() {
@@ -48,8 +51,8 @@ export function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2">
             <Link href="/" className="inline-flex items-center gap-3 mb-5">
-              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-green-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-green-500/20">
-                <AndroidIcon className="w-6 h-6 text-white" />
+              <div className="w-11 h-11 rounded-xl overflow-hidden shadow-lg shadow-green-500/20">
+                <Image src="/logo.png" alt="Nafis Logo" width={44} height={44} className="object-cover" />
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">
                 Nafis Kabbo

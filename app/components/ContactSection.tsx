@@ -42,12 +42,20 @@ const contactLinks = [
     description: 'Professional network',
   },
   {
+    title: 'Upwork',
+    value: 'nafiskabbo30',
+    href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca',
+    icon: UpworkIcon,
+    gradient: 'from-green-600 to-emerald-700',
+    description: 'Hire me on Upwork',
+  },
+  {
     title: 'Freelancer',
     value: 'nafiskabbo30',
     href: 'https://www.freelancer.com/u/nafiskabbo30',
     icon: FreelancerIcon,
     gradient: 'from-cyan-500 to-teal-500',
-    description: 'Hire me for projects',
+    description: 'Hire me on Freelancer',
   },
 ];
 
@@ -63,12 +71,6 @@ const socialLinks = [
     href: 'https://www.instagram.com/nafiskabbo30/',
     label: 'Instagram',
     gradient: 'from-pink-500 to-purple-600',
-  },
-  {
-    icon: UpworkIcon,
-    href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca',
-    label: 'Upwork',
-    gradient: 'from-green-500 to-green-600',
   },
 ];
 
