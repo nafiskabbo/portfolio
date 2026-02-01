@@ -137,10 +137,10 @@ export function SkillsSection() {
       <div className="absolute top-1/4 right-0 w-72 h-72 lg:w-96 lg:h-96 bg-purple-500/10 rounded-full blur-3xl" />
       <div className="absolute bottom-1/4 left-0 w-72 h-72 lg:w-96 lg:h-96 bg-green-500/10 rounded-full blur-3xl" />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="relative z-10 section-container">
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-20">
-          <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-semibold mb-6">
+          <span className="inline-block px-5 py-2.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-bold tracking-wide uppercase mb-6">
             Tech Stack
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
@@ -159,14 +159,13 @@ export function SkillsSection() {
           {skillCategories.map(({ title, icon: CategoryIcon, gradient, bgGlow, skills }, categoryIndex) => (
             <div
               key={title}
-              className={`relative bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all duration-500 backdrop-blur-sm ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
+              className={`relative bg-slate-800/50 rounded-2xl p-7 lg:p-8 border border-slate-700/50 hover:border-purple-500/30 transition-all duration-500 backdrop-blur-sm ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
               style={{ transitionDelay: `${categoryIndex * 150}ms` }}
             >
               {/* Background Glow */}
               <div className={`absolute -top-12 -right-12 w-32 h-32 ${bgGlow} rounded-full blur-3xl opacity-60`} />
-              
+
               {/* Category Header */}
               <div className="relative flex items-center gap-3 mb-6">
                 <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg`}>
@@ -204,13 +203,12 @@ export function SkillsSection() {
 
         {/* Why Choose Me - Redesigned */}
         <div
-          className={`transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+          className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           style={{ transitionDelay: '600ms' }}
         >
           <div className="text-center mb-12">
-            <span className="inline-block px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-semibold mb-4">
+            <span className="inline-block px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-bold tracking-wide uppercase mb-4">
               Why Work With Me
             </span>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
@@ -220,7 +218,7 @@ export function SkillsSection() {
               </span>
             </h3>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 gap-6">
             {whyChooseMe.map(({ title, description, icon: Icon, gradient, features }, index) => (
               <div
@@ -229,18 +227,18 @@ export function SkillsSection() {
               >
                 {/* Hover Gradient */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-                
+
                 <div className="relative flex flex-col lg:flex-row gap-5">
                   {/* Icon */}
                   <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
                     <Icon className="w-7 h-7 text-white" />
                   </div>
-                  
+
                   {/* Content */}
                   <div className="flex-1">
                     <h4 className="text-white font-bold text-lg lg:text-xl mb-2">{title}</h4>
                     <p className="text-slate-400 text-sm lg:text-base leading-relaxed mb-4">{description}</p>
-                    
+
                     {/* Feature Tags */}
                     <div className="flex flex-wrap gap-2">
                       {features.map((feature) => (

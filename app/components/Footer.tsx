@@ -1,13 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { 
-  GithubIcon, 
-  LinkedInIcon, 
-  FreelancerIcon, 
-  WhatsAppIcon, 
-  AndroidIcon, 
-  AppleIcon, 
+import {
+  GithubIcon,
+  LinkedInIcon,
+  FreelancerIcon,
+  WhatsAppIcon,
+  AndroidIcon,
+  AppleIcon,
   FlutterIcon,
   YouTubeIcon,
   InstagramIcon,
@@ -43,7 +43,7 @@ export function Footer() {
 
   return (
     <footer className="bg-slate-950 border-t border-slate-800/50">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-12 lg:py-16">
+      <div className="section-container py-12 lg:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="sm:col-span-2">
@@ -58,13 +58,13 @@ export function Footer() {
             <p className="text-slate-400 text-base leading-relaxed mb-6 max-w-md">
               Mobile Developer specializing in Flutter, Kotlin, and Swift. Building beautiful apps with clean architecture and seamless user experiences.
             </p>
-            
+
             {/* Tech Stack Icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3.5 pt-2">
               {techStack.map(({ icon: Icon, label, color }) => (
                 <div
                   key={label}
-                  className={`p-3 rounded-xl bg-slate-800/60 border border-slate-700/50 ${color} hover:border-green-500/30 transition-colors`}
+                  className={`p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/50 ${color} hover:border-green-500/30 transition-colors flex items-center justify-center`}
                   title={label}
                 >
                   <Icon className="w-5 h-5" />
@@ -93,14 +93,14 @@ export function Footer() {
           {/* Social Links */}
           <div>
             <h3 className="text-white font-bold text-lg mb-5">Connect</h3>
-            <div className="flex flex-wrap items-center gap-3 mb-5">
+            <div className="flex flex-wrap items-center gap-3.5 mb-5">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/50 text-slate-400 hover:text-green-400 hover:border-green-500/30 transition-all"
+                  className="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/50 text-slate-400 hover:text-green-400 hover:border-green-500/30 transition-all flex items-center justify-center"
                   aria-label={label}
                   title={label}
                 >
@@ -108,7 +108,7 @@ export function Footer() {
                 </a>
               ))}
             </div>
-            <a 
+            <a
               href="mailto:nafiskabbo30@gmail.com"
               className="text-slate-400 hover:text-green-400 transition-colors text-sm break-all"
             >

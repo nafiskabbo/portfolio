@@ -97,10 +97,10 @@ export function AboutSection() {
         </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="relative z-10 section-container">
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-20">
-          <span className="inline-block px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-semibold mb-6">
+          <span className="inline-block px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-bold tracking-wide uppercase mb-6">
             About Me
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
@@ -118,21 +118,20 @@ export function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 xl:gap-20 items-start mb-20">
           {/* Left Column - About Text */}
           <div
-            className={`space-y-8 transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-            }`}
+            className={`space-y-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+              }`}
           >
             <div className="space-y-5">
               <p className="text-slate-300 leading-relaxed text-lg lg:text-xl">
-                I&apos;m a <span className="text-green-400 font-bold">Mobile & Web Developer</span> with expertise in 
-                Java, Kotlin, SwiftUI, Dart, and Flutter. I&apos;m passionate about programming and continuously 
+                I&apos;m a <span className="text-green-400 font-bold">Mobile & Web Developer</span> with expertise in
+                Java, Kotlin, SwiftUI, Dart, and Flutter. I&apos;m passionate about programming and continuously
                 exploring innovative solutions.
               </p>
               <p className="text-slate-400 leading-relaxed text-base lg:text-lg">
-                With hands-on experience in Flutter, Kotlin, Java, and full-stack development, I create 
-                innovative mobile and web applications that are both functional and impactful. My focus? 
-                <span className="text-green-400 font-semibold"> Clean code</span>, 
-                <span className="text-cyan-400 font-semibold"> optimized performance</span>, and 
+                With hands-on experience in Flutter, Kotlin, Java, and full-stack development, I create
+                innovative mobile and web applications that are both functional and impactful. My focus?
+                <span className="text-green-400 font-semibold"> Clean code</span>,
+                <span className="text-cyan-400 font-semibold"> optimized performance</span>, and
                 <span className="text-blue-400 font-semibold"> seamless user experiences</span>.
               </p>
             </div>
@@ -168,9 +167,8 @@ export function AboutSection() {
 
           {/* Right Column - Timeline */}
           <div
-            className={`transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-            }`}
+            className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+              }`}
             style={{ transitionDelay: '200ms' }}
           >
             <h3 className="text-xl lg:text-2xl font-bold text-white mb-8 flex items-center gap-3">
@@ -206,36 +204,35 @@ export function AboutSection() {
 
         {/* Availability Section */}
         <div
-          className={`transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+          className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           style={{ transitionDelay: '400ms' }}
         >
           <div className="text-center mb-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold mb-4">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-bold tracking-wide uppercase mb-4">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               Available for Work
             </div>
             <h3 className="text-2xl lg:text-3xl font-bold text-white">Open to Opportunities</h3>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {availability.map(({ title, description }, index) => (
               <div
                 key={title}
-                className="group relative p-6 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-800/30 border border-slate-700/50 hover:border-green-500/40 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
+                className="group relative p-7 rounded-2xl bg-gradient-to-br from-slate-800/60 to-slate-800/30 border border-slate-700/50 hover:border-green-500/40 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
                 style={{ transitionDelay: `${500 + index * 100}ms` }}
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
-                    <BriefcaseIcon className="w-5 h-5 text-green-400" />
+                  <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
+                    <BriefcaseIcon className="w-6 h-6 text-green-400" />
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-base mb-1">{title}</h4>
                     <p className="text-slate-400 text-sm leading-relaxed">{description}</p>
                   </div>
                 </div>
-                <div className="absolute top-4 right-4">
+                <div className="absolute top-5 right-5">
                   <CheckCircleIcon className="w-5 h-5 text-green-500/60 group-hover:text-green-400 transition-colors" />
                 </div>
               </div>

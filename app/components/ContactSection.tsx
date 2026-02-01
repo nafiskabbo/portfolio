@@ -131,13 +131,13 @@ export function ContactSection() {
     const emailBody = encodeURIComponent(
       `From: ${formData.email}\n\nProject Type: ${categoryLabel}\n\nMessage:\n${formData.message}`
     );
-    
+
     // Open email client
     window.location.href = `mailto:nafiskabbo30@gmail.com?subject=${emailSubject}&body=${emailBody}`;
-    
+
     setIsSubmitting(false);
     setSubmitStatus('success');
-    
+
     // Reset form after delay
     setTimeout(() => {
       setFormData({ email: '', subject: '', category: '', message: '' });
@@ -167,10 +167,10 @@ export function ContactSection() {
         </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+      <div className="relative z-10 section-container">
         {/* Section Header */}
         <div className="text-center mb-16 lg:mb-20">
-          <span className="inline-block px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-semibold mb-6">
+          <span className="inline-block px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-bold tracking-wide uppercase mb-6">
             Get In Touch
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
@@ -188,13 +188,12 @@ export function ContactSection() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
           {/* Contact Form */}
           <div
-            className={`transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-            }`}
+            className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
+              }`}
           >
             <div className="bg-slate-800/50 rounded-2xl p-6 lg:p-8 border border-slate-700/50 backdrop-blur-sm">
               <h3 className="text-xl lg:text-2xl font-bold text-white mb-6">Send a Message</h3>
-              
+
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Email */}
                 <div>
@@ -209,7 +208,7 @@ export function ContactSection() {
                     onChange={handleInputChange}
                     required
                     placeholder="you@example.com"
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors"
+                    className="w-full px-5 py-3.5 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors"
                   />
                 </div>
 
@@ -241,7 +240,7 @@ export function ContactSection() {
                     value={formData.category}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors appearance-none cursor-pointer"
+                    className="w-full px-5 py-3.5 rounded-xl bg-slate-900/50 border border-slate-700 text-white focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors appearance-none cursor-pointer"
                     style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.75rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em', paddingRight: '2.5rem' }}
                   >
                     {projectCategories.map(({ value, label }) => (
@@ -265,7 +264,7 @@ export function ContactSection() {
                     required
                     rows={5}
                     placeholder="Tell me about your project..."
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors resize-none"
+                    className="w-full px-5 py-3.5 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors resize-none"
                   />
                 </div>
 
@@ -297,9 +296,8 @@ export function ContactSection() {
 
           {/* Contact Cards & Social */}
           <div
-            className={`space-y-6 transition-all duration-700 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-            }`}
+            className={`space-y-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+              }`}
             style={{ transitionDelay: '200ms' }}
           >
             {/* Contact Cards */}
@@ -310,7 +308,7 @@ export function ContactSection() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-green-500/30 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
+                  className="group relative p-6 sm:p-7 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-green-500/30 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
                 >
                   {/* Icon */}
                   <div className={`w-11 h-11 rounded-xl bg-gradient-to-r ${gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
@@ -374,9 +372,8 @@ export function ContactSection() {
 
         {/* CTA Banner */}
         <div
-          className={`bg-gradient-to-r from-slate-800/60 to-slate-800/40 rounded-2xl p-8 lg:p-12 border border-slate-700/50 transition-all duration-700 backdrop-blur-sm text-center ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
+          className={`bg-gradient-to-r from-slate-800/60 to-slate-800/40 rounded-2xl p-8 lg:p-12 border border-slate-700/50 transition-all duration-700 backdrop-blur-sm text-center ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
           style={{ transitionDelay: '400ms' }}
         >
           <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">

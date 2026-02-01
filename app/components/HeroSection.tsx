@@ -16,14 +16,14 @@ export function HeroSection() {
     >
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 grid-bg opacity-50" />
-      
+
       {/* Animated Gradient Blobs */}
       <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px] bg-green-500/10 rounded-full blur-[100px] animate-blob" />
       <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[600px] lg:h-[600px] bg-cyan-500/10 rounded-full blur-[100px] animate-blob" style={{ animationDelay: '5s' }} />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] bg-blue-500/8 rounded-full blur-[80px] animate-blob" style={{ animationDelay: '10s' }} />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-24 sm:py-28 lg:py-32">
+      <div className="relative z-10 section-container py-24 sm:py-28 lg:py-32">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16 xl:gap-20">
           {/* Profile Image */}
           <div className="relative flex-shrink-0 order-1 lg:order-2">
@@ -31,20 +31,20 @@ export function HeroSection() {
             <div className="absolute -inset-6 sm:-inset-8 lg:-inset-10">
               {/* Orbit Path */}
               <div className="absolute inset-0 rounded-full border border-dashed border-green-500/20 animate-orbit" />
-              
+
               {/* Orbiting Icons */}
               <div className="absolute inset-0 animate-orbit">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/90 border border-green-500/40 flex items-center justify-center shadow-lg shadow-green-500/20 backdrop-blur-sm">
                   <AndroidIcon className="w-4 h-4 sm:w-5 sm:h-5 text-green-400" />
                 </div>
               </div>
-              
+
               <div className="absolute inset-0 animate-orbit" style={{ animationDelay: '-8s' }}>
                 <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/90 border border-cyan-500/40 flex items-center justify-center shadow-lg shadow-cyan-500/20 backdrop-blur-sm">
                   <FlutterIcon className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400" />
                 </div>
               </div>
-              
+
               <div className="absolute inset-0 animate-orbit" style={{ animationDelay: '-16s' }}>
                 <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-900/90 border border-slate-400/40 flex items-center justify-center shadow-lg backdrop-blur-sm">
                   <AppleIcon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-300" />
@@ -73,12 +73,12 @@ export function HeroSection() {
           {/* Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1 flex-1 max-w-2xl lg:max-w-none">
             {/* Badge */}
-            <div className="inline-flex items-center gap-3 px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-green-500/10 border border-green-500/30 mb-6 sm:mb-8">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full bg-green-500/10 border border-green-500/30 mb-6 sm:mb-8 transition-colors hover:bg-green-500/20">
               <span className="relative flex h-2.5 w-2.5 sm:h-3 sm:w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 sm:h-3 sm:w-3 bg-green-500"></span>
               </span>
-              <span className="text-green-400 text-xs sm:text-sm font-semibold">Available for Freelance Projects</span>
+              <span className="text-green-400 text-xs sm:text-sm font-bold tracking-wide uppercase">Available for Freelance Projects</span>
             </div>
 
             {/* Name & Title */}
@@ -90,16 +90,16 @@ export function HeroSection() {
             </h1>
 
             {/* Role Tags */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-6 sm:mb-8">
-              <div className="flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-green-500/15 to-green-600/10 border border-green-500/30 shadow-lg shadow-green-500/10">
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-8 sm:mb-10">
+              <div className="flex items-center gap-2.5 px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-green-500/15 to-green-600/10 border border-green-500/30 shadow-lg shadow-green-500/10 backdrop-blur-md">
                 <AndroidIcon className="w-5 h-5 sm:w-6 sm:h-6 text-green-400" />
                 <span className="text-green-400 font-bold text-sm sm:text-base">Android</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-slate-400/15 to-slate-500/10 border border-slate-400/30 shadow-lg shadow-slate-500/10">
+              <div className="flex items-center gap-2.5 px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-slate-400/15 to-slate-500/10 border border-slate-400/30 shadow-lg shadow-slate-500/10 backdrop-blur-md">
                 <AppleIcon className="w-5 h-5 sm:w-6 sm:h-6 text-slate-300" />
                 <span className="text-slate-300 font-bold text-sm sm:text-base">iOS</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2.5 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-500/15 to-blue-500/10 border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
+              <div className="flex items-center gap-2.5 px-5 py-3 sm:px-6 sm:py-3.5 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-500/15 to-blue-500/10 border border-cyan-500/30 shadow-lg shadow-cyan-500/10 backdrop-blur-md">
                 <FlutterIcon className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400" />
                 <span className="text-cyan-400 font-bold text-sm sm:text-base">Flutter</span>
               </div>
@@ -141,7 +141,7 @@ export function HeroSection() {
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl bg-slate-800/60 border border-slate-700/50 text-slate-400 ${color} transition-all duration-300 hover:scale-110`}
+                  className={`p-4 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-800/60 border border-slate-700/50 text-slate-400 ${color} transition-all duration-300 hover:scale-110 flex items-center justify-center`}
                   aria-label={label}
                 >
                   <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
