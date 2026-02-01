@@ -17,6 +17,11 @@ import {
   MobileIcon,
   WebIcon,
   DatabaseIcon,
+  AIIcon,
+  CodeIcon,
+  RocketIcon,
+  CheckCircleIcon,
+  UserCheckIcon,
 } from './Icons';
 
 const skillCategories = [
@@ -45,7 +50,7 @@ const skillCategories = [
     ],
   },
   {
-    title: 'Database & Tools',
+    title: 'Database & Backend',
     icon: DatabaseIcon,
     gradient: 'from-cyan-500 to-blue-600',
     bgGlow: 'bg-cyan-500/10',
@@ -56,32 +61,47 @@ const skillCategories = [
       { name: 'SQL', icon: SQLIcon, level: 85, color: 'bg-blue-600' },
     ],
   },
+  {
+    title: 'AI & Automation',
+    icon: AIIcon,
+    gradient: 'from-violet-500 to-purple-600',
+    bgGlow: 'bg-violet-500/10',
+    skills: [
+      { name: 'AI Integration', icon: AIIcon, level: 85, color: 'bg-violet-500' },
+      { name: 'ML Features', icon: CodeIcon, level: 78, color: 'bg-pink-500' },
+      { name: 'Automation', icon: RocketIcon, level: 88, color: 'bg-indigo-500' },
+    ],
+  },
 ];
 
 const whyChooseMe = [
   {
-    title: 'Clean Code',
-    description: 'Strong problem-solving with maintainable architecture',
-    icon: '💎',
-    gradient: 'from-green-500/20 to-emerald-500/10',
+    title: 'Clean & Scalable Code',
+    description: 'I write maintainable, well-documented code with strong architecture patterns that scale with your business.',
+    icon: CodeIcon,
+    gradient: 'from-green-500 to-emerald-600',
+    features: ['SOLID Principles', 'Design Patterns', 'Code Reviews'],
   },
   {
-    title: 'Fast Delivery',
-    description: 'Quick turnaround with consistent updates',
-    icon: '🚀',
-    gradient: 'from-cyan-500/20 to-blue-500/10',
+    title: 'Lightning Fast Delivery',
+    description: 'Efficient workflows and proven methodologies ensure your project launches on time, every time.',
+    icon: RocketIcon,
+    gradient: 'from-cyan-500 to-blue-600',
+    features: ['Agile Process', 'Daily Updates', 'Quick Iterations'],
   },
   {
-    title: 'Communication',
-    description: 'Professional and easy collaboration',
-    icon: '💬',
-    gradient: 'from-purple-500/20 to-pink-500/10',
+    title: 'Clear Communication',
+    description: 'Regular updates, transparent progress tracking, and responsive communication throughout the project.',
+    icon: UserCheckIcon,
+    gradient: 'from-purple-500 to-pink-600',
+    features: ['24/7 Availability', 'Progress Reports', 'Video Calls'],
   },
   {
-    title: 'Reliability',
-    description: 'Focus on long-term stability, not shortcuts',
-    icon: '🎯',
-    gradient: 'from-amber-500/20 to-orange-500/10',
+    title: 'Quality Guaranteed',
+    description: 'Rigorous testing, bug-free delivery, and post-launch support to ensure long-term success.',
+    icon: CheckCircleIcon,
+    gradient: 'from-amber-500 to-orange-600',
+    features: ['Unit Testing', 'QA Process', 'Free Bug Fixes'],
   },
 ];
 
@@ -110,63 +130,63 @@ export function SkillsSection() {
     <section
       ref={sectionRef}
       id="skills"
-      className="relative py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden"
+      className="relative py-24 lg:py-32 bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden"
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute top-1/4 right-0 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-purple-500/8 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-0 w-64 h-64 sm:w-80 sm:h-80 md:w-[400px] md:h-[400px] bg-green-500/8 rounded-full blur-3xl" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-500/5 via-transparent to-transparent" />
+      <div className="absolute top-1/4 right-0 w-72 h-72 lg:w-96 lg:h-96 bg-purple-500/10 rounded-full blur-3xl" />
+      <div className="absolute bottom-1/4 left-0 w-72 h-72 lg:w-96 lg:h-96 bg-green-500/10 rounded-full blur-3xl" />
 
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16 lg:mb-20">
-          <span className="inline-block px-4 py-2 sm:px-5 sm:py-2.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs sm:text-sm font-semibold mb-4 sm:mb-6">
+        <div className="text-center mb-16 lg:mb-20">
+          <span className="inline-block px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-semibold mb-6">
             Tech Stack
           </span>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 sm:mb-6 lg:mb-8">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
             Skills &{' '}
             <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
               Expertise
             </span>
           </h2>
-          <p className="text-slate-400 text-sm sm:text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-            Specialized in mobile development with a strong foundation in web technologies and backend services.
+          <p className="text-slate-400 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+            Specialized in mobile development with a strong foundation in web technologies, backend services, and AI automation.
           </p>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-12 sm:mb-16 lg:mb-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {skillCategories.map(({ title, icon: CategoryIcon, gradient, bgGlow, skills }, categoryIndex) => (
             <div
               key={title}
-              className={`relative bg-slate-800/40 rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-slate-700/50 hover:border-green-500/30 transition-all duration-500 backdrop-blur-sm ${
+              className={`relative bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 hover:border-purple-500/30 transition-all duration-500 backdrop-blur-sm ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${categoryIndex * 150}ms` }}
             >
               {/* Background Glow */}
-              <div className={`absolute -top-16 -right-16 w-32 h-32 sm:w-40 sm:h-40 ${bgGlow} rounded-full blur-3xl opacity-60`} />
+              <div className={`absolute -top-12 -right-12 w-32 h-32 ${bgGlow} rounded-full blur-3xl opacity-60`} />
               
               {/* Category Header */}
-              <div className="relative flex items-center gap-3 sm:gap-4 mb-5 sm:mb-6 lg:mb-8">
-                <div className={`w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg`}>
-                  <CategoryIcon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" />
+              <div className="relative flex items-center gap-3 mb-6">
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg`}>
+                  <CategoryIcon className="w-6 h-6 text-white" />
                 </div>
-                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-white">{title}</h3>
+                <h3 className="text-lg font-bold text-white">{title}</h3>
               </div>
 
               {/* Skills List */}
-              <div className="relative space-y-4 sm:space-y-5">
+              <div className="relative space-y-4">
                 {skills.map(({ name, icon: SkillIcon, level, color }, skillIndex) => (
                   <div key={name} className="group">
-                    <div className="flex items-center justify-between mb-2 sm:mb-2.5">
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <SkillIcon className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400 group-hover:text-white transition-colors" />
-                        <span className="text-slate-300 text-sm sm:text-base font-medium">{name}</span>
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <SkillIcon className="w-4 h-4 text-slate-400 group-hover:text-white transition-colors" />
+                        <span className="text-slate-300 text-sm font-medium">{name}</span>
                       </div>
-                      <span className="text-slate-500 text-xs sm:text-sm font-medium">{level}%</span>
+                      <span className="text-slate-500 text-xs font-medium">{level}%</span>
                     </div>
-                    <div className="h-2 sm:h-2.5 bg-slate-700/50 rounded-full overflow-hidden">
+                    <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
                       <div
                         className={`h-full ${color} rounded-full transition-all duration-1000 ease-out`}
                         style={{
@@ -182,25 +202,57 @@ export function SkillsSection() {
           ))}
         </div>
 
-        {/* Why Choose Me */}
+        {/* Why Choose Me - Redesigned */}
         <div
           className={`transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
-          style={{ transitionDelay: '500ms' }}
+          style={{ transitionDelay: '600ms' }}
         >
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white text-center mb-8 sm:mb-10 lg:mb-12">Why Clients Choose Me</h3>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
-            {whyChooseMe.map(({ title, description, icon, gradient }) => (
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-semibold mb-4">
+              Why Work With Me
+            </span>
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+              Why Clients{' '}
+              <span className="bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">
+                Choose Me
+              </span>
+            </h3>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 gap-6">
+            {whyChooseMe.map(({ title, description, icon: Icon, gradient, features }, index) => (
               <div
                 key={title}
-                className={`group relative p-5 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${gradient} border border-slate-700/50 hover:border-green-500/30 transition-all duration-300 hover:scale-105 text-center backdrop-blur-sm overflow-hidden`}
+                className="group relative p-6 lg:p-8 rounded-2xl bg-slate-800/40 border border-slate-700/50 hover:border-green-500/30 transition-all duration-300 backdrop-blur-sm overflow-hidden"
               >
-                <div className="absolute inset-0 bg-slate-900/70" />
-                <div className="relative">
-                  <div className="text-3xl sm:text-4xl lg:text-5xl mb-3 sm:mb-4 lg:mb-5">{icon}</div>
-                  <h4 className="text-white font-bold text-sm sm:text-base lg:text-lg mb-2 sm:mb-3">{title}</h4>
-                  <p className="text-slate-400 text-xs sm:text-sm leading-relaxed">{description}</p>
+                {/* Hover Gradient */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                
+                <div className="relative flex flex-col lg:flex-row gap-5">
+                  {/* Icon */}
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${gradient} flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
+                    <Icon className="w-7 h-7 text-white" />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1">
+                    <h4 className="text-white font-bold text-lg lg:text-xl mb-2">{title}</h4>
+                    <p className="text-slate-400 text-sm lg:text-base leading-relaxed mb-4">{description}</p>
+                    
+                    {/* Feature Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {features.map((feature) => (
+                        <span
+                          key={feature}
+                          className="px-3 py-1 rounded-full bg-slate-700/50 text-slate-300 text-xs font-medium"
+                        >
+                          {feature}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
