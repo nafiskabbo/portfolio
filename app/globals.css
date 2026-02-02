@@ -6,62 +6,66 @@
   --background: #020617;
   --foreground: #f8fafc;
   --android-green: #3DDC84;
-  --ios-blue: #007AFF;
+  --ios-blue: #0A84FF;
   --flutter-cyan: #54C5F8;
-  --web-purple: #A855F7;
+  --web-pink: #F472B6;
   
   /* Dynamic theme colors */
   --theme-primary: #3DDC84;
-  --theme-secondary: #34A853;
-  --theme-accent: #00C853;
-  --theme-background: #0a1a0f;
-  --theme-surface: #0f2515;
-  --theme-border: #1a3d1f;
-  --theme-glow: rgba(61, 220, 132, 0.15);
+  --theme-secondary: #00BFA5;
+  --theme-accent: #76FF03;
+  --theme-background: #0D1F12;
+  --theme-surface: #1A2F1E;
+  --theme-border: #2E4A33;
+  --theme-glow: rgba(61, 220, 132, 0.2);
 }
 
-/* Android Theme */
+/* Android Theme - Material You inspired with circuit patterns */
 [data-theme="android"] {
   --theme-primary: #3DDC84;
-  --theme-secondary: #34A853;
-  --theme-accent: #00C853;
-  --theme-background: #020a05;
-  --theme-surface: #071510;
-  --theme-border: #0f2518;
-  --theme-glow: rgba(61, 220, 132, 0.12);
+  --theme-secondary: #00BFA5;
+  --theme-accent: #76FF03;
+  --theme-background: #0D1F12;
+  --theme-surface: #1A2F1E;
+  --theme-border: #2E4A33;
+  --theme-glow: rgba(61, 220, 132, 0.2);
+  --theme-text-muted: #86EFAC;
 }
 
-/* iOS Theme */
+/* iOS Theme - Pure black with vibrant Apple blue accents */
 [data-theme="ios"] {
   --theme-primary: #007AFF;
   --theme-secondary: #5856D6;
   --theme-accent: #AF52DE;
-  --theme-background: #020510;
-  --theme-surface: #070d1a;
-  --theme-border: #101d30;
-  --theme-glow: rgba(0, 122, 255, 0.12);
+  --theme-background: #000000;
+  --theme-surface: #1C1C1E;
+  --theme-border: #3A3A3C;
+  --theme-glow: rgba(0, 122, 255, 0.25);
+  --theme-text-muted: #64B5F6;
 }
 
-/* Flutter Theme */
+/* Flutter Theme - Cyan with deep blue, diagonal energy */
 [data-theme="flutter"] {
   --theme-primary: #54C5F8;
-  --theme-secondary: #02569B;
-  --theme-accent: #01579B;
-  --theme-background: #020812;
-  --theme-surface: #051020;
-  --theme-border: #0a1830;
-  --theme-glow: rgba(84, 197, 248, 0.12);
+  --theme-secondary: #01579B;
+  --theme-accent: #FF6D00;
+  --theme-background: #0A1929;
+  --theme-surface: #132F4C;
+  --theme-border: #1E4976;
+  --theme-glow: rgba(84, 197, 248, 0.25);
+  --theme-text-muted: #90CAF9;
 }
 
-/* Web/Next.js Theme */
+/* Web/Next.js Theme - Pink/purple terminal vibes */
 [data-theme="web"] {
-  --theme-primary: #A855F7;
-  --theme-secondary: #EC4899;
-  --theme-accent: #8B5CF6;
-  --theme-background: #05030a;
-  --theme-surface: #0d0815;
-  --theme-border: #1a1025;
-  --theme-glow: rgba(168, 85, 247, 0.12);
+  --theme-primary: #F472B6;
+  --theme-secondary: #A78BFA;
+  --theme-accent: #34D399;
+  --theme-background: #0F0A1A;
+  --theme-surface: #1A1525;
+  --theme-border: #2D2640;
+  --theme-glow: rgba(244, 114, 182, 0.2);
+  --theme-text-muted: #F9A8D4;
 }
 
 @theme inline {
@@ -211,6 +215,15 @@ body {
   50% {
     opacity: 0.7;
     transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
@@ -500,4 +513,99 @@ button:focus-visible {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* ===== THEME-SPECIFIC BACKGROUNDS ===== */
+
+/* Android Theme Background - Circuit board pattern */
+[data-theme="android"] .theme-bg-animated {
+  background: 
+    linear-gradient(135deg, rgba(61, 220, 132, 0.03) 0%, transparent 50%),
+    linear-gradient(225deg, rgba(0, 191, 165, 0.03) 0%, transparent 50%),
+    var(--theme-background);
+}
+
+[data-theme="android"] .theme-bg-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(61, 220, 132, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 80% 20%, rgba(0, 191, 165, 0.06) 0%, transparent 40%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v20M30 40v20M0 30h20M40 30h20' stroke='%233DDC84' stroke-opacity='0.05' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='3' fill='%233DDC84' fill-opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* iOS Theme Background - Apple-style gradients with SF symbols */
+[data-theme="ios"] .theme-bg-animated {
+  background: 
+    radial-gradient(ellipse at top left, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(88, 86, 214, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at center, rgba(175, 82, 222, 0.05) 0%, transparent 60%),
+    var(--theme-background);
+}
+
+[data-theme="ios"] .theme-bg-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(0, 122, 255, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 75% 75%, rgba(175, 82, 222, 0.06) 0%, transparent 25%),
+    radial-gradient(circle at 50% 10%, rgba(88, 86, 214, 0.1) 0%, transparent 30%),
+    radial-gradient(circle at 90% 40%, rgba(0, 122, 255, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 10% 60%, rgba(175, 82, 222, 0.05) 0%, transparent 20%);
+  pointer-events: none;
+}
+
+/* Flutter Theme Background - Diagonal stripes energy */
+[data-theme="flutter"] .theme-bg-animated {
+  background: 
+    linear-gradient(135deg, rgba(84, 197, 248, 0.05) 0%, transparent 50%),
+    linear-gradient(45deg, rgba(1, 87, 155, 0.05) 0%, transparent 50%),
+    var(--theme-background);
+}
+
+[data-theme="flutter"] .theme-bg-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(84, 197, 248, 0.02) 40px,
+      rgba(84, 197, 248, 0.02) 80px
+    ),
+    radial-gradient(ellipse at 20% 80%, rgba(255, 109, 0, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 20%, rgba(84, 197, 248, 0.08) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Web Theme Background - Code editor grid, terminal vibes */
+[data-theme="web"] .theme-bg-animated {
+  background: 
+    linear-gradient(180deg, rgba(244, 114, 182, 0.03) 0%, transparent 30%),
+    linear-gradient(0deg, rgba(167, 139, 250, 0.03) 0%, transparent 30%),
+    var(--theme-background);
+}
+
+[data-theme="web"] .theme-bg-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(244, 114, 182, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 114, 182, 0.03) 1px, transparent 1px),
+    radial-gradient(ellipse at 50% 0%, rgba(244, 114, 182, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(167, 139, 250, 0.08) 0%, transparent 50%);
+  background-size: 40px 40px, 40px 40px, 100% 100%, 100% 100%;
+  pointer-events: none;
+}
+
+/* Theme muted text utility */
+.theme-text-muted {
+  color: var(--theme-text-muted, var(--theme-primary));
+  opacity: 0.8;
 }

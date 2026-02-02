@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { GraduationIcon, CodeIcon, MobileIcon, CheckCircleIcon, BriefcaseIcon } from './Icons';
+import { ThemeBackground } from './ThemeBackground';
+import { Mascot2D } from './Mascot2D';
 
 const stats = [
   { value: '5+', label: 'Years Exp' },
@@ -20,9 +22,9 @@ const timeline = [
   },
   {
     year: '2020 - Present',
-    title: 'Mobile Developer',
+    title: 'Mobile & Web Developer',
     subtitle: 'Freelancer',
-    description: 'Built 50+ mobile applications with focus on innovation.',
+    description: 'Built 50+ mobile and web applications with focus on innovation.',
     icon: MobileIcon,
   },
   {
@@ -44,10 +46,10 @@ const whatIBuild = [
 ];
 
 const availability = [
-  { title: 'Freelance', description: 'Mobile & web dev' },
-  { title: 'Startups', description: 'MVP development' },
-  { title: 'Remote', description: 'Flexible timezone' },
-  { title: 'Enterprise', description: 'Business apps' },
+  { title: 'Freelance', description: 'Mobile & web dev', icon: '💼' },
+  { title: 'Startups', description: 'MVP development', icon: '🚀' },
+  { title: 'Remote', description: 'Flexible timezone', icon: '🌍' },
+  { title: 'Enterprise', description: 'Business apps', icon: '🏢' },
 ];
 
 export function AboutSection() {
@@ -76,13 +78,19 @@ export function AboutSection() {
       ref={sectionRef}
       id="about"
       className="relative py-16 lg:py-20 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--theme-background) 0%, var(--theme-surface) 100%)' }}
     >
-      {/* Background Elements */}
-      <div 
-        className="absolute bottom-0 left-0 w-64 h-64 lg:w-80 lg:h-80 rounded-full blur-3xl"
-        style={{ background: 'var(--theme-glow)' }}
-      />
+      {/* Animated Theme Background */}
+      <ThemeBackground intensity="medium" />
+
+      {/* 2D Mascot - Left side */}
+      <div className="hidden lg:block absolute left-8 top-1/4 z-10">
+        <Mascot2D size="medium" position="left" />
+      </div>
+      
+      {/* Additional mascot on right */}
+      <div className="hidden xl:block absolute right-8 bottom-32 z-10 opacity-40">
+        <Mascot2D size="small" position="right" />
+      </div>
 
       <div className="relative z-10 section-container">
         {/* Section Header */}
@@ -167,10 +175,9 @@ export function AboutSection() {
                   <div key={title} className="relative pl-10 lg:pl-12">
                     {/* Timeline Dot */}
                     <div 
-                      className="absolute left-0 w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center shadow-lg ring-4"
+                      className="absolute left-0 w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center shadow-lg ring-4 ring-[var(--theme-background)]"
                       style={{ 
-                        background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
-                        ringColor: 'var(--theme-background)'
+                        background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))'
                       }}
                     >
                       <Icon className="w-4 h-4 lg:w-5 lg:h-5 text-white" />
@@ -190,34 +197,111 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Availability Section - Compact */}
+        {/* Availability Section - Redesigned */}
         <div
           className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           style={{ transitionDelay: '400ms' }}
         >
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 lg:p-5 rounded-xl" style={{ background: 'var(--theme-surface)', border: '1px solid var(--theme-border)' }}>
-            <div className="flex items-center gap-3">
-              <div className="theme-badge flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold">
-                <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--theme-primary)' }} />
-                Open to Work
-              </div>
-              <h3 className="text-base lg:text-lg font-bold text-white hidden sm:block">Available for Opportunities</h3>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {availability.map(({ title, description }) => (
-                <div
-                  key={title}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg"
-                  style={{ background: 'var(--theme-background)', border: '1px solid var(--theme-border)' }}
-                >
-                  <CheckCircleIcon className="w-3.5 h-3.5" style={{ color: 'var(--theme-primary)' }} />
-                  <div>
-                    <span className="text-white font-medium text-xs">{title}</span>
-                    <span className="text-slate-500 text-[10px] ml-1 hidden lg:inline">• {description}</span>
+          {/* Gradient border wrapper */}
+          <div 
+            className="relative p-[2px] rounded-2xl overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary), var(--theme-accent))',
+            }}
+          >
+            {/* Animated glow effect */}
+            <div 
+              className="absolute inset-0 blur-xl opacity-50 animate-pulse-glow"
+              style={{
+                background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+              }}
+            />
+            
+            {/* Inner content */}
+            <div 
+              className="relative rounded-2xl p-6 lg:p-8"
+              style={{ background: 'var(--theme-surface)' }}
+            >
+              {/* Header */}
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+                <div className="flex items-center gap-4">
+                  {/* Animated hiring badge */}
+                  <div 
+                    className="relative flex items-center gap-2 px-4 py-2 rounded-full overflow-hidden"
+                    style={{ 
+                      background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                      boxShadow: '0 4px 20px var(--theme-glow)'
+                    }}
+                  >
+                    {/* Shine animation */}
+                    <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                    <span className="relative w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
+                    <span className="relative text-white font-bold text-sm tracking-wide">HIRING ME</span>
+                  </div>
+                  
+                  <div className="hidden sm:block">
+                    <h3 className="text-xl lg:text-2xl font-bold text-white">Available for Opportunities</h3>
+                    <p className="text-slate-400 text-sm">Let&apos;s build something amazing together</p>
                   </div>
                 </div>
-              ))}
+                
+                {/* CTA Button */}
+                <a 
+                  href="#contact"
+                  className="group flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: 'var(--theme-background)',
+                    border: '1px solid var(--theme-border)',
+                    color: 'var(--theme-primary)'
+                  }}
+                >
+                  <span>Get in Touch</span>
+                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Availability Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {availability.map(({ title, description, icon }, index) => (
+                  <div
+                    key={title}
+                    className="group relative p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-default"
+                    style={{ 
+                      background: 'var(--theme-background)',
+                      border: '1px solid var(--theme-border)'
+                    }}
+                  >
+                    {/* Hover glow */}
+                    <div 
+                      className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ 
+                        background: 'radial-gradient(circle at center, var(--theme-glow), transparent 70%)'
+                      }}
+                    />
+                    
+                    <div className="relative">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-xl">{icon}</span>
+                        <CheckCircleIcon className="w-4 h-4" style={{ color: 'var(--theme-primary)' }} />
+                      </div>
+                      <h4 className="text-white font-bold text-sm mb-1">{title}</h4>
+                      <p className="text-slate-400 text-xs">{description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Bottom tagline */}
+              <div className="mt-6 pt-4 text-center" style={{ borderTop: '1px solid var(--theme-border)' }}>
+                <p className="text-slate-500 text-xs">
+                  <span className="inline-flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--theme-primary)' }} />
+                    Response time: Usually within 24 hours
+                  </span>
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -7,7 +7,7 @@ export type Theme = 'android' | 'ios' | 'flutter' | 'web';
 
 interface ThemeContextType {
   theme: Theme;
-  setTheme: (theme: Theme, withAnimation?: boolean) => void;
+  setTheme: (theme: Theme, withAnimation?: boolean, clickEvent?: MouseEvent) => void;
   isTransitioning: boolean;
 }
 
@@ -17,46 +17,50 @@ export const themeConfig = {
   android: {
     name: 'Android',
     primary: '#3DDC84',
-    secondary: '#34A853',
-    accent: '#00C853',
-    background: '#0a1a0f',
-    surface: '#0f2515',
-    border: '#1a3d1f',
-    glow: 'rgba(61, 220, 132, 0.15)',
-    gradient: 'from-green-500 to-emerald-600',
+    secondary: '#00BFA5',
+    accent: '#76FF03',
+    background: '#0D1F12',
+    surface: '#1A2F1E',
+    border: '#2E4A33',
+    glow: 'rgba(61, 220, 132, 0.2)',
+    gradient: 'from-green-400 to-teal-500',
+    pattern: 'android',
   },
   ios: {
     name: 'iOS',
     primary: '#007AFF',
     secondary: '#5856D6',
     accent: '#AF52DE',
-    background: '#0a0f1a',
-    surface: '#0f1525',
-    border: '#1a2540',
-    glow: 'rgba(0, 122, 255, 0.15)',
+    background: '#000000',
+    surface: '#1C1C1E',
+    border: '#3A3A3C',
+    glow: 'rgba(0, 122, 255, 0.25)',
     gradient: 'from-blue-500 to-indigo-600',
+    pattern: 'ios',
   },
   flutter: {
     name: 'Flutter',
-    primary: '#02569B',
-    secondary: '#54C5F8',
-    accent: '#01579B',
-    background: '#050a14',
-    surface: '#0a1525',
-    border: '#152540',
-    glow: 'rgba(84, 197, 248, 0.15)',
-    gradient: 'from-cyan-500 to-blue-600',
+    primary: '#54C5F8',
+    secondary: '#01579B',
+    accent: '#FF6D00',
+    background: '#0A1929',
+    surface: '#132F4C',
+    border: '#1E4976',
+    glow: 'rgba(84, 197, 248, 0.25)',
+    gradient: 'from-cyan-400 to-blue-600',
+    pattern: 'flutter',
   },
   web: {
     name: 'Next.js',
-    primary: '#FFFFFF',
-    secondary: '#A855F7',
-    accent: '#EC4899',
-    background: '#09090b',
-    surface: '#18181b',
-    border: '#27272a',
-    glow: 'rgba(168, 85, 247, 0.15)',
-    gradient: 'from-purple-500 to-pink-600',
+    primary: '#F472B6',
+    secondary: '#A78BFA',
+    accent: '#34D399',
+    background: '#0F0A1A',
+    surface: '#1A1525',
+    border: '#2D2640',
+    glow: 'rgba(244, 114, 182, 0.2)',
+    gradient: 'from-pink-400 to-purple-500',
+    pattern: 'web',
   },
 } as const;
 
@@ -103,25 +107,125 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     root.setAttribute('data-theme', newTheme);
   };
 
-  const setTheme = useCallback((newTheme: Theme, withAnimation = true) => {
+  const setTheme = useCallback((newTheme: Theme, withAnimation = true, clickEvent?: MouseEvent) => {
     if (newTheme === theme) return;
     
     if (withAnimation) {
       setIsTransitioning(true);
       
-      // Add flash effect
-      const flash = document.createElement('div');
-      flash.className = 'theme-transition-flash';
-      flash.style.cssText = `
+      // Get click position for radial effect origin
+      const x = clickEvent?.clientX ?? window.innerWidth / 2;
+      const y = clickEvent?.clientY ?? window.innerHeight / 2;
+      
+      // Calculate max distance to corners for proper coverage
+      const maxDistance = Math.max(
+        Math.hypot(x, y),
+        Math.hypot(window.innerWidth - x, y),
+        Math.hypot(x, window.innerHeight - y),
+        Math.hypot(window.innerWidth - x, window.innerHeight - y)
+      );
+      
+      // Create container for effects
+      const effectsContainer = document.createElement('div');
+      effectsContainer.style.cssText = `
         position: fixed;
         inset: 0;
         z-index: 9999;
         pointer-events: none;
-        background: ${themeConfig[newTheme].primary};
-        opacity: 0;
-        animation: theme-flash 0.6s ease-out forwards;
+        overflow: hidden;
       `;
-      document.body.appendChild(flash);
+      document.body.appendChild(effectsContainer);
+      
+      // Radial wipe effect
+      const ripple = document.createElement('div');
+      ripple.style.cssText = `
+        position: absolute;
+        left: ${x}px;
+        top: ${y}px;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: radial-gradient(circle, ${themeConfig[newTheme].primary}40, ${themeConfig[newTheme].secondary}20, transparent 70%);
+        transform: translate(-50%, -50%);
+        animation: theme-ripple 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      `;
+      effectsContainer.appendChild(ripple);
+      
+      // Add CSS animation dynamically
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes theme-ripple {
+          0% {
+            width: 0;
+            height: 0;
+            opacity: 1;
+          }
+          100% {
+            width: ${maxDistance * 2.5}px;
+            height: ${maxDistance * 2.5}px;
+            opacity: 0;
+          }
+        }
+        @keyframes particle-float {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(var(--tx), var(--ty)) scale(0);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+      
+      // Create particles explosion
+      const particleCount = 20;
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        const angle = (i / particleCount) * Math.PI * 2;
+        const distance = 100 + Math.random() * 150;
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        const size = 4 + Math.random() * 8;
+        const delay = Math.random() * 0.2;
+        
+        particle.style.cssText = `
+          position: absolute;
+          left: ${x}px;
+          top: ${y}px;
+          width: ${size}px;
+          height: ${size}px;
+          border-radius: 50%;
+          background: ${i % 2 === 0 ? themeConfig[newTheme].primary : themeConfig[newTheme].secondary};
+          --tx: ${tx}px;
+          --ty: ${ty}px;
+          animation: particle-float 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s forwards;
+          box-shadow: 0 0 ${size}px ${themeConfig[newTheme].primary}80;
+        `;
+        effectsContainer.appendChild(particle);
+      }
+      
+      // Flash overlay for smooth color transition
+      const flash = document.createElement('div');
+      flash.style.cssText = `
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, ${themeConfig[newTheme].primary}15, ${themeConfig[newTheme].secondary}10);
+        opacity: 0;
+        animation: theme-flash-new 0.5s ease-out forwards;
+      `;
+      
+      const flashStyle = document.createElement('style');
+      flashStyle.textContent = `
+        @keyframes theme-flash-new {
+          0% { opacity: 0; }
+          30% { opacity: 1; }
+          100% { opacity: 0; }
+        }
+      `;
+      document.head.appendChild(flashStyle);
+      effectsContainer.appendChild(flash);
       
       // Apply theme after brief delay
       setTimeout(() => {
@@ -133,13 +237,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         const newParams = new URLSearchParams(searchParams.toString());
         newParams.set('theme', newTheme);
         router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
-      }, 200);
+      }, 150);
       
       // Clean up
       setTimeout(() => {
-        flash.remove();
+        effectsContainer.remove();
+        style.remove();
+        flashStyle.remove();
         setIsTransitioning(false);
-      }, 600);
+      }, 1000);
     } else {
       setThemeState(newTheme);
       applyTheme(newTheme);
@@ -183,8 +289,8 @@ export function ThemeTrigger({ targetTheme, children, className = '', as = 'butt
   const { setTheme, theme } = useTheme();
   const Component = as;
   
-  const handleClick = () => {
-    setTheme(targetTheme, true);
+  const handleClick = (e: React.MouseEvent) => {
+    setTheme(targetTheme, true, e.nativeEvent);
   };
   
   const isActive = theme === targetTheme;

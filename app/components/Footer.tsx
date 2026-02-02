@@ -46,9 +46,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
   const { theme, setTheme, isTransitioning } = useTheme();
 
-  const handleTechClick = (targetTheme: Theme) => {
+  const handleTechClick = (targetTheme: Theme, e: React.MouseEvent) => {
     if (!isTransitioning) {
-      setTheme(targetTheme, true);
+      setTheme(targetTheme, true, e.nativeEvent);
     }
   };
 
@@ -76,22 +76,19 @@ export function Footer() {
                 return (
                   <button
                     key={label}
-                    onClick={() => handleTechClick(targetTheme)}
+                    onClick={(e) => handleTechClick(targetTheme, e)}
                     disabled={isTransitioning}
-                    className={`p-2.5 rounded-lg transition-all duration-300 hover:scale-110 disabled:opacity-70 ${
-                      isActive ? 'ring-2 ring-offset-2' : ''
-                    }`}
-                    style={{ 
+                    className={`p-2.5 rounded-lg transition-all duration-300 hover:scale-110 disabled:opacity-70 ${isActive ? 'ring-2 ring-offset-2 ring-[var(--theme-primary)] ring-offset-[var(--theme-background)]' : ''
+                      }`}
+                    style={{
                       background: 'var(--theme-surface)',
-                      border: '1px solid var(--theme-border)',
-                      ringColor: isActive ? 'var(--theme-primary)' : undefined,
-                      ringOffsetColor: 'var(--theme-background)'
+                      border: '1px solid var(--theme-border)'
                     }}
                     title={`Switch to ${label} theme`}
                   >
-                    <Icon 
-                      className="w-4 h-4 transition-colors" 
-                      style={{ color: isActive ? 'var(--theme-primary)' : 'rgb(148, 163, 184)' }}
+                    <Icon
+                      className="w-4 h-4 transition-colors"
+                      style={{ color: isActive ? 'var(--theme-primary)' : 'white' }}
                     />
                   </button>
                 );
@@ -151,8 +148,8 @@ export function Footer() {
           </p>
           <p className="text-slate-600 text-xs flex items-center gap-1.5">
             <span>Built with</span>
-            <button 
-              onClick={() => handleTechClick('web')}
+            <button
+              onClick={(e) => handleTechClick('web', e)}
               className="font-medium hover:underline cursor-pointer"
               style={{ color: 'var(--theme-primary)' }}
             >

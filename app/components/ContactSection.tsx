@@ -13,6 +13,8 @@ import {
   InstagramIcon,
   UpworkIcon,
 } from './Icons';
+import { ThemeBackgroundCompact } from './ThemeBackground';
+import { Mascot2D } from './Mascot2D';
 
 const contactLinks = [
   {
@@ -119,13 +121,18 @@ export function ContactSection() {
       ref={sectionRef}
       id="contact"
       className="relative py-16 lg:py-20 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--theme-surface) 0%, var(--theme-background) 100%)' }}
     >
-      {/* Background Elements */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] rounded-full blur-3xl"
-        style={{ background: 'var(--theme-glow)' }}
-      />
+      {/* Theme Background */}
+      <ThemeBackgroundCompact />
+      
+      {/* 2D Mascot decorations */}
+      <div className="hidden lg:block absolute right-12 top-1/4 z-0 opacity-30">
+        <Mascot2D size="medium" position="right" />
+      </div>
+      
+      <div className="hidden xl:block absolute left-8 bottom-24 z-0 opacity-25">
+        <Mascot2D size="small" position="left" />
+      </div>
 
       <div className="relative z-10 section-container">
         {/* Section Header */}

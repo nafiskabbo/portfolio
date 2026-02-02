@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GithubIcon, LinkedInIcon, FreelancerIcon, DownloadIcon, EmailIcon, AndroidIcon, AppleIcon, FlutterIcon, UpworkIcon } from './Icons';
 import { useTheme, Theme } from './ThemeProvider';
+import { ThemeBackground } from './ThemeBackground';
+import { Mascot2D } from './Mascot2D';
 
 const socialLinks = [
   { icon: GithubIcon, href: 'https://github.com/nafiskabbo', label: 'GitHub', color: 'hover:text-white hover:border-white/30' },
@@ -21,9 +23,9 @@ const techBadges: { id: Theme; icon: typeof AndroidIcon; label: string; themeCol
 export function HeroSection() {
   const { theme, setTheme, isTransitioning } = useTheme();
 
-  const handleTechClick = (techTheme: Theme) => {
+  const handleTechClick = (techTheme: Theme, e: React.MouseEvent) => {
     if (!isTransitioning) {
-      setTheme(techTheme, true);
+      setTheme(techTheme, true, e.nativeEvent);
     }
   };
 
@@ -31,20 +33,22 @@ export function HeroSection() {
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: `linear-gradient(135deg, var(--theme-background) 0%, var(--theme-surface) 50%, var(--theme-background) 100%)` }}
     >
+      {/* Animated Theme Background */}
+      <ThemeBackground intensity="high" />
+      
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 grid-bg opacity-40" />
 
-      {/* Animated Gradient Blobs - Theme aware */}
-      <div 
-        className="absolute top-1/4 left-1/4 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] lg:w-[500px] lg:h-[500px] rounded-full blur-[100px] animate-blob"
-        style={{ background: 'var(--theme-glow)' }}
-      />
-      <div 
-        className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] lg:w-[500px] lg:h-[500px] rounded-full blur-[100px] animate-blob"
-        style={{ background: 'var(--theme-glow)', animationDelay: '5s' }}
-      />
+      {/* 2D Mascot - Large on right side, hidden on mobile */}
+      <div className="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 z-20">
+        <Mascot2D size="large" position="right" />
+      </div>
+      
+      {/* Additional floating mascots for visual interest */}
+      <div className="hidden xl:block absolute left-8 bottom-24 z-10 opacity-50">
+        <Mascot2D size="small" position="left" />
+      </div>
 
       {/* Main Content */}
       <div className="relative z-10 section-container py-20 sm:py-24 lg:py-28">
@@ -153,12 +157,11 @@ export function HeroSection() {
               {techBadges.map(({ id, icon: Icon, label, themeColor }) => (
                 <button
                   key={id}
-                  onClick={() => handleTechClick(id)}
+                  onClick={(e) => handleTechClick(id, e)}
                   disabled={isTransitioning}
                   className={`flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r ${themeColor} border backdrop-blur-md transition-all duration-300 hover:scale-105 disabled:opacity-70 ${
-                    theme === id ? 'ring-2 ring-offset-2 ring-offset-[var(--theme-background)]' : ''
+                    theme === id ? 'ring-2 ring-offset-2 ring-offset-[var(--theme-background)] ring-[var(--theme-primary)]' : ''
                   }`}
-                  style={theme === id ? { ringColor: 'var(--theme-primary)' } : {}}
                   title={`Switch to ${label} theme`}
                 >
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -171,19 +174,19 @@ export function HeroSection() {
             <p className="text-sm sm:text-base text-slate-400 max-w-lg mx-auto lg:mx-0 mb-5 sm:mb-6 leading-relaxed">
               Mobile App Developer specializing in{' '}
               <button 
-                onClick={() => handleTechClick('flutter')} 
+                onClick={(e) => handleTechClick('flutter', e)} 
                 className="text-cyan-400 font-semibold hover:underline cursor-pointer"
               >
                 Flutter
               </button>,{' '}
               <button 
-                onClick={() => handleTechClick('android')} 
+                onClick={(e) => handleTechClick('android', e)} 
                 className="text-green-400 font-semibold hover:underline cursor-pointer"
               >
                 Kotlin
               </button>, &{' '}
               <button 
-                onClick={() => handleTechClick('ios')} 
+                onClick={(e) => handleTechClick('ios', e)} 
                 className="text-blue-400 font-semibold hover:underline cursor-pointer"
               >
                 Swift

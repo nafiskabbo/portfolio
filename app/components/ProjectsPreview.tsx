@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon } from './Icons';
 import { useTheme, Theme } from './ThemeProvider';
+import { ThemeBackgroundCompact } from './ThemeBackground';
+import { Mascot2D } from './Mascot2D';
 
 interface ProjectLink {
   type: 'android' | 'ios' | 'web';
@@ -122,13 +124,17 @@ export function ProjectsPreview() {
       ref={sectionRef}
       id="projects"
       className="relative py-16 lg:py-20 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--theme-background) 0%, var(--theme-surface) 100%)' }}
     >
-      {/* Background Elements */}
-      <div 
-        className="absolute top-0 left-1/4 w-64 h-64 lg:w-80 lg:h-80 rounded-full blur-3xl"
-        style={{ background: 'var(--theme-glow)' }}
-      />
+      {/* Theme Background */}
+      <ThemeBackgroundCompact />
+      
+      {/* 2D Mascot decorations */}
+      <div className="hidden lg:block absolute right-8 top-1/4 z-10 opacity-40">
+        <Mascot2D size="small" position="right" />
+      </div>
+      <div className="hidden xl:block absolute left-6 bottom-24 z-10 opacity-30">
+        <Mascot2D size="small" position="left" />
+      </div>
 
       <div className="relative z-10 section-container">
         {/* Section Header */}

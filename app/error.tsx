@@ -2,7 +2,9 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { AndroidIcon, HomeIcon, RocketIcon } from './components/Icons';
+import { HomeIcon, RocketIcon } from './components/Icons';
+import { ThemeBackgroundCompact } from './components/ThemeBackground';
+import { Mascot2D } from './components/Mascot2D';
 
 export default function Error({
   error,
@@ -16,79 +18,84 @@ export default function Error({
   }, [error]);
 
   return (
-    <main className="min-h-screen bg-slate-950 flex items-center justify-center overflow-hidden relative">
-      {/* Background Effects */}
-      <div className="absolute inset-0 grid-bg opacity-30" />
-      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-red-500/10 rounded-full blur-[100px] animate-blob" />
-      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] bg-orange-500/10 rounded-full blur-[100px] animate-blob" style={{ animationDelay: '5s' }} />
+    <main className="min-h-screen flex items-center justify-center overflow-hidden relative">
+      {/* Theme Background */}
+      <ThemeBackgroundCompact />
+      
+      {/* Grid overlay */}
+      <div className="absolute inset-0 grid-bg opacity-20" />
 
-      {/* Floating particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 bg-red-400/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${5 + Math.random() * 5}s`,
-            }}
-          />
-        ))}
+      {/* 2D Mascot decoration */}
+      <div className="hidden lg:block absolute right-12 bottom-1/4 z-10 opacity-30">
+        <Mascot2D size="small" position="right" />
       </div>
 
-      <div className="relative z-10 w-full max-w-2xl mx-auto px-6 sm:px-8 lg:px-12 py-12">
+      <div className="relative z-10 w-full max-w-lg mx-auto px-6 py-12">
         <div className="text-center">
           {/* Error Icon */}
-          <div className="relative mb-8">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto rounded-full bg-red-500/10 border border-red-500/20 flex items-center justify-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center animate-pulse">
-                <span className="text-white text-3xl sm:text-4xl font-bold">!</span>
-              </div>
-            </div>
-            
-            {/* Orbiting element */}
-            <div className="absolute inset-0 animate-orbit">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-slate-900 border border-red-500/40 flex items-center justify-center shadow-lg">
-                <AndroidIcon className="w-4 h-4 text-red-400" />
+          <div className="relative mb-6">
+            <div 
+              className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full flex items-center justify-center"
+              style={{ 
+                background: 'color-mix(in srgb, var(--theme-primary) 10%, transparent)',
+                border: '1px solid color-mix(in srgb, var(--theme-primary) 25%, transparent)'
+              }}
+            >
+              <div 
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center animate-pulse"
+                style={{ background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))' }}
+              >
+                <span className="text-white text-2xl sm:text-3xl font-bold">!</span>
               </div>
             </div>
           </div>
 
           {/* Message */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold text-white mb-3">
             Oops! Something went{' '}
-            <span className="bg-gradient-to-r from-red-400 to-orange-500 bg-clip-text text-transparent">
-              wrong
-            </span>
+            <span className="theme-gradient-text">wrong</span>
           </h1>
-          <p className="text-slate-400 text-base sm:text-lg max-w-md mx-auto mb-8 leading-relaxed">
-            Don&apos;t worry, even the best apps crash sometimes. The good news? I build them to recover gracefully!
+          <p className="text-slate-400 text-sm sm:text-base max-w-sm mx-auto mb-6">
+            Don&apos;t worry, even the best apps crash sometimes. Let&apos;s try again!
           </p>
 
           {/* Fun fact box */}
-          <div className="inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-slate-800/50 border border-slate-700/50 mb-10">
-            <RocketIcon className="w-5 h-5 text-orange-400 flex-shrink-0" />
-            <p className="text-slate-300 text-sm sm:text-base">
-              Fun fact: I debug faster than most people write bugs!
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg mb-8 text-xs sm:text-sm"
+            style={{ 
+              background: 'var(--theme-surface)',
+              border: '1px solid var(--theme-border)'
+            }}
+          >
+            <RocketIcon className="w-4 h-4" style={{ color: 'var(--theme-primary)' }} />
+            <p className="text-slate-300">
+              I debug faster than most people write bugs!
             </p>
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <button
               onClick={() => reset()}
-              className="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold shadow-xl shadow-red-500/25 hover:shadow-red-500/40 transition-all duration-300 hover:scale-105"
+              className="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-white font-semibold shadow-xl transition-all duration-300 hover:scale-105 text-sm"
+              style={{ 
+                background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                boxShadow: '0 8px 24px var(--theme-glow)'
+              }}
             >
-              <RocketIcon className="w-5 h-5" />
+              <RocketIcon className="w-4 h-4" />
               <span>Try Again</span>
             </button>
             <Link
               href="/"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-transparent border-2 border-slate-600 text-slate-300 font-bold hover:border-red-500 hover:text-red-400 transition-all duration-300 hover:scale-105"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 text-sm"
+              style={{ 
+                background: 'transparent',
+                border: '1px solid var(--theme-border)',
+                color: 'var(--theme-primary)'
+              }}
             >
-              <HomeIcon className="w-5 h-5" />
+              <HomeIcon className="w-4 h-4" />
               <span>Go Home</span>
             </Link>
           </div>
@@ -96,9 +103,9 @@ export default function Error({
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
-        <p className="text-slate-600 text-sm">
-          Error occurred • <span className="text-red-400/60">Nafis Islam Kabbo</span>
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center">
+        <p className="text-slate-600 text-xs">
+          Error occurred • <span style={{ color: 'var(--theme-primary)' }}>Nafis Islam Kabbo</span>
         </p>
       </div>
     </main>

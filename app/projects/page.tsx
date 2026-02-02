@@ -8,6 +8,8 @@ import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import { PlayStoreIcon, AppStoreIcon, WebIcon, ExternalLinkIcon, ArrowLeftIcon, AndroidIcon, AppleIcon, FlutterIcon, CodeIcon, RocketIcon } from '../components/Icons';
 import { useTheme, Theme } from '../components/ThemeProvider';
+import { ThemeBackground } from '../components/ThemeBackground';
+import { Mascot2D } from '../components/Mascot2D';
 
 interface ProjectLink {
   type: 'android' | 'ios' | 'web';
@@ -179,20 +181,16 @@ export default function ProjectsPage() {
   return (
     <>
       <Navbar />
-      <main 
-        className="min-h-screen pt-20 pb-16 overflow-hidden"
-        style={{ background: 'var(--theme-background)' }}
-      >
-        {/* Animated Background Blobs */}
-        <div className="fixed inset-0 pointer-events-none">
-          <div 
-            className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full blur-[120px] animate-blob"
-            style={{ background: 'var(--theme-glow)' }}
-          />
-          <div 
-            className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full blur-[120px] animate-blob"
-            style={{ background: 'var(--theme-glow)', animationDelay: '5s' }}
-          />
+      <main className="min-h-screen pt-20 pb-16 overflow-hidden relative">
+        {/* Theme Background */}
+        <ThemeBackground intensity="medium" className="fixed" />
+        
+        {/* 2D Mascot decorations */}
+        <div className="hidden lg:block fixed right-8 top-32 z-10 opacity-30">
+          <Mascot2D size="medium" position="right" />
+        </div>
+        <div className="hidden xl:block fixed left-6 bottom-32 z-10 opacity-25">
+          <Mascot2D size="small" position="left" />
         </div>
 
         <div className="relative z-10 section-container">

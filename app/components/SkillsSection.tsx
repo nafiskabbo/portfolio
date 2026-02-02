@@ -25,6 +25,8 @@ import {
   NextJsIcon,
 } from './Icons';
 import { useTheme, Theme } from './ThemeProvider';
+import { ThemeBackgroundCompact } from './ThemeBackground';
+import { Mascot2D, MascotIcon } from './Mascot2D';
 
 // Map skills to themes
 const skillThemeMap: Record<string, Theme> = {
@@ -131,10 +133,10 @@ export function SkillsSection() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSkillClick = (skillName: string) => {
+  const handleSkillClick = (skillName: string, e: React.MouseEvent) => {
     const targetTheme = skillThemeMap[skillName];
     if (targetTheme && !isTransitioning) {
-      setTheme(targetTheme, true);
+      setTheme(targetTheme, true, e.nativeEvent);
     }
   };
 
@@ -143,13 +145,18 @@ export function SkillsSection() {
       ref={sectionRef}
       id="skills"
       className="relative py-16 lg:py-20 overflow-hidden"
-      style={{ background: 'linear-gradient(180deg, var(--theme-surface) 0%, var(--theme-background) 100%)' }}
     >
-      {/* Background Elements */}
-      <div 
-        className="absolute top-1/4 right-0 w-64 h-64 lg:w-80 lg:h-80 rounded-full blur-3xl"
-        style={{ background: 'var(--theme-glow)' }}
-      />
+      {/* Theme Background */}
+      <ThemeBackgroundCompact />
+      
+      {/* 2D Mascot elements */}
+      <div className="hidden lg:block absolute right-8 top-1/4 z-10 opacity-50">
+        <Mascot2D size="small" position="right" />
+      </div>
+      
+      <div className="hidden xl:block absolute left-6 bottom-40 z-10 opacity-40">
+        <MascotIcon />
+      </div>
 
       <div className="relative z-10 section-container">
         {/* Section Header */}
@@ -196,7 +203,7 @@ export function SkillsSection() {
                     <div 
                       key={name} 
                       className={`group ${isClickable ? 'cursor-pointer' : ''}`}
-                      onClick={() => isClickable && handleSkillClick(name)}
+                      onClick={(e) => isClickable && handleSkillClick(name, e)}
                       role={isClickable ? 'button' : undefined}
                       tabIndex={isClickable ? 0 : undefined}
                     >
