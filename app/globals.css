@@ -1,11 +1,67 @@
 @import "tailwindcss";
 
+/* Theme CSS Variables - Default Android Theme */
 :root {
+  /* Static colors */
   --background: #020617;
   --foreground: #f8fafc;
   --android-green: #3DDC84;
-  --ios-gray: #A2AAAD;
-  --flutter-cyan: #02569B;
+  --ios-blue: #007AFF;
+  --flutter-cyan: #54C5F8;
+  --web-purple: #A855F7;
+  
+  /* Dynamic theme colors */
+  --theme-primary: #3DDC84;
+  --theme-secondary: #34A853;
+  --theme-accent: #00C853;
+  --theme-background: #0a1a0f;
+  --theme-surface: #0f2515;
+  --theme-border: #1a3d1f;
+  --theme-glow: rgba(61, 220, 132, 0.15);
+}
+
+/* Android Theme */
+[data-theme="android"] {
+  --theme-primary: #3DDC84;
+  --theme-secondary: #34A853;
+  --theme-accent: #00C853;
+  --theme-background: #020a05;
+  --theme-surface: #071510;
+  --theme-border: #0f2518;
+  --theme-glow: rgba(61, 220, 132, 0.12);
+}
+
+/* iOS Theme */
+[data-theme="ios"] {
+  --theme-primary: #007AFF;
+  --theme-secondary: #5856D6;
+  --theme-accent: #AF52DE;
+  --theme-background: #020510;
+  --theme-surface: #070d1a;
+  --theme-border: #101d30;
+  --theme-glow: rgba(0, 122, 255, 0.12);
+}
+
+/* Flutter Theme */
+[data-theme="flutter"] {
+  --theme-primary: #54C5F8;
+  --theme-secondary: #02569B;
+  --theme-accent: #01579B;
+  --theme-background: #020812;
+  --theme-surface: #051020;
+  --theme-border: #0a1830;
+  --theme-glow: rgba(84, 197, 248, 0.12);
+}
+
+/* Web/Next.js Theme */
+[data-theme="web"] {
+  --theme-primary: #A855F7;
+  --theme-secondary: #EC4899;
+  --theme-accent: #8B5CF6;
+  --theme-background: #05030a;
+  --theme-surface: #0d0815;
+  --theme-border: #1a1025;
+  --theme-glow: rgba(168, 85, 247, 0.12);
 }
 
 @theme inline {
@@ -19,26 +75,27 @@
   box-sizing: border-box;
 }
 
+/* Section container - More compact */
 .section-container {
   width: 100%;
-  max-width: 80rem; /* 7xl - 1280px */
+  max-width: 76rem; /* Slightly narrower */
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem; /* px-6 */
-  padding-right: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 @media (min-width: 640px) {
   .section-container {
-    padding-left: 2rem; /* sm:px-8 */
-    padding-right: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
 
 @media (min-width: 1024px) {
   .section-container {
-    padding-left: 3rem; /* lg:px-12 */
-    padding-right: 3rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
@@ -47,42 +104,75 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: var(--theme-background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: hidden;
+  transition: background-color 0.5s ease;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Theme aware */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background);
+  background: var(--theme-background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border: 2px solid var(--background);
+  background: var(--theme-border);
+  border: 2px solid var(--theme-background);
   border-radius: 10px;
   transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--android-green);
+  background: var(--theme-primary);
 }
 
 /* Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #1e293b var(--background);
+  scrollbar-color: var(--theme-border) var(--theme-background);
 }
 
-/* Selection */
+/* Selection - Theme aware */
 ::selection {
-  background: rgba(61, 220, 132, 0.3);
+  background: var(--theme-glow);
   color: #fff;
+}
+
+/* Theme Transition Flash Animation */
+@keyframes theme-flash {
+  0% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+  20% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* Theme transition overlay */
+.theme-transitioning::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: var(--theme-primary);
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 9998;
+  animation: theme-pulse 0.5s ease-out;
+}
+
+@keyframes theme-pulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0; }
 }
 
 /* Animations */
@@ -230,9 +320,9 @@ body {
   animation: blob 15s ease-in-out infinite;
 }
 
-/* Gradient Text Animation */
+/* Gradient Text Animation - Theme aware */
 .gradient-text-animate {
-  background: linear-gradient(90deg, #3DDC84, #06b6d4, #3b82f6, #3DDC84);
+  background: linear-gradient(90deg, var(--theme-primary), var(--theme-secondary), var(--theme-accent), var(--theme-primary));
   background-size: 300% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -240,22 +330,22 @@ body {
   animation: gradient-shift 4s linear infinite;
 }
 
-/* Glass Effect */
+/* Glass Effect - Theme aware */
 .glass {
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--theme-surface);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--theme-border);
 }
 
-/* Card Hover Effects */
+/* Card Hover Effects - Theme aware */
 .card-hover {
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 25px 50px -12px rgba(61, 220, 132, 0.15);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px -12px var(--theme-glow);
 }
 
 /* Button Shine Effect */
@@ -279,7 +369,7 @@ body {
   left: 100%;
 }
 
-/* Link underline animation */
+/* Link underline animation - Theme aware */
 .link-underline {
   position: relative;
 }
@@ -291,12 +381,35 @@ body {
   left: 0;
   width: 0;
   height: 2px;
-  background: linear-gradient(90deg, #3DDC84, #06b6d4);
+  background: linear-gradient(90deg, var(--theme-primary), var(--theme-secondary));
   transition: width 0.3s ease;
 }
 
 .link-underline:hover::after {
   width: 100%;
+}
+
+/* Theme-aware primary button */
+.btn-primary {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  box-shadow: 0 4px 20px var(--theme-glow);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 30px var(--theme-glow);
+}
+
+/* Theme trigger button styles */
+.theme-trigger {
+  transition: all 0.3s ease;
+}
+
+.theme-trigger:hover {
+  transform: scale(1.05);
+}
+
+.theme-trigger.active {
+  box-shadow: 0 0 0 2px var(--theme-primary);
 }
 
 /* Line clamp utility */
@@ -332,19 +445,19 @@ body {
   color: #cbd5e1;
 }
 
-/* Focus styles */
+/* Focus styles - Theme aware */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #3DDC84;
+  outline: 2px solid var(--theme-primary);
   outline-offset: 2px;
 }
 
-/* Subtle Grid Background */
+/* Subtle Grid Background - Theme aware */
 .grid-bg {
   background-image: 
-    linear-gradient(rgba(61, 220, 132, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(61, 220, 132, 0.02) 1px, transparent 1px);
-  background-size: 80px 80px;
+    linear-gradient(color-mix(in srgb, var(--theme-primary) 3%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--theme-primary) 3%, transparent) 1px, transparent 1px);
+  background-size: 60px 60px;
 }
 
 /* Responsive text */
@@ -352,4 +465,39 @@ button:focus-visible {
   html {
     font-size: 15px;
   }
+}
+
+/* Theme background patterns */
+.theme-bg-pattern {
+  background-color: var(--theme-background);
+  background-image: 
+    radial-gradient(ellipse at top, var(--theme-glow) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, color-mix(in srgb, var(--theme-secondary) 8%, transparent) 0%, transparent 50%);
+}
+
+/* Theme surface cards */
+.theme-card {
+  background: var(--theme-surface);
+  border: 1px solid var(--theme-border);
+  transition: all 0.3s ease;
+}
+
+.theme-card:hover {
+  border-color: color-mix(in srgb, var(--theme-primary) 40%, transparent);
+  box-shadow: 0 8px 32px var(--theme-glow);
+}
+
+/* Theme badge */
+.theme-badge {
+  background: color-mix(in srgb, var(--theme-primary) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent);
+  color: var(--theme-primary);
+}
+
+/* Theme text gradient */
+.theme-gradient-text {
+  background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

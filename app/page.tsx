@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="bg-slate-950 text-white">
+      <main className="text-white" style={{ background: 'var(--theme-background)' }}>
         <HeroSection />
         <AboutSection />
         <SkillsSection />

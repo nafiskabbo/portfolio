@@ -8,8 +8,6 @@ import {
   WhatsAppIcon,
   DownloadIcon,
   ExternalLinkIcon,
-  AndroidIcon,
-  FlutterIcon,
   SendIcon,
   YouTubeIcon,
   InstagramIcon,
@@ -22,68 +20,40 @@ const contactLinks = [
     value: 'nafiskabbo30@gmail.com',
     href: 'mailto:nafiskabbo30@gmail.com',
     icon: EmailIcon,
-    gradient: 'from-red-500 to-rose-600',
-    description: 'Best for project inquiries',
   },
   {
     title: 'WhatsApp',
     value: '+880 1772 988050',
     href: 'https://wa.me/8801772988050',
     icon: WhatsAppIcon,
-    gradient: 'from-green-500 to-emerald-600',
-    description: 'Quick response guaranteed',
   },
   {
     title: 'LinkedIn',
     value: 'nafiskabbo30',
     href: 'https://www.linkedin.com/in/nafiskabbo30/',
     icon: LinkedInIcon,
-    gradient: 'from-blue-500 to-blue-700',
-    description: 'Professional network',
-  },
-  {
-    title: 'Upwork',
-    value: 'nafiskabbo30',
-    href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca',
-    icon: UpworkIcon,
-    gradient: 'from-green-600 to-emerald-700',
-    description: 'Hire me on Upwork',
   },
   {
     title: 'Freelancer',
     value: 'nafiskabbo30',
     href: 'https://www.freelancer.com/u/nafiskabbo30',
     icon: FreelancerIcon,
-    gradient: 'from-cyan-500 to-teal-500',
-    description: 'Hire me on Freelancer',
   },
 ];
 
 const socialLinks = [
-  {
-    icon: YouTubeIcon,
-    href: 'https://www.youtube.com/@nafiskabbo30',
-    label: 'YouTube',
-    gradient: 'from-red-500 to-red-600',
-  },
-  {
-    icon: InstagramIcon,
-    href: 'https://www.instagram.com/nafiskabbo30/',
-    label: 'Instagram',
-    gradient: 'from-pink-500 to-purple-600',
-  },
+  { icon: UpworkIcon, href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca', label: 'Upwork' },
+  { icon: YouTubeIcon, href: 'https://www.youtube.com/@nafiskabbo30', label: 'YouTube' },
+  { icon: InstagramIcon, href: 'https://www.instagram.com/nafiskabbo30/', label: 'Instagram' },
 ];
 
 const projectCategories = [
   { value: '', label: 'Select project type' },
   { value: 'mobile-flutter', label: 'Mobile App - Flutter' },
-  { value: 'mobile-android', label: 'Mobile App - Android (Kotlin/Java)' },
-  { value: 'mobile-ios', label: 'Mobile App - iOS (Swift)' },
-  { value: 'saas', label: 'SaaS Application' },
+  { value: 'mobile-android', label: 'Mobile App - Android' },
+  { value: 'mobile-ios', label: 'Mobile App - iOS' },
   { value: 'web-app', label: 'Web Application' },
-  { value: 'backend-api', label: 'Backend / API Development' },
   { value: 'ai-ml', label: 'AI / ML Integration' },
-  { value: 'consultation', label: 'Technical Consultation' },
   { value: 'other', label: 'Other' },
 ];
 
@@ -127,20 +97,17 @@ export function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Create mailto link with form data
     const categoryLabel = projectCategories.find(c => c.value === formData.category)?.label || formData.category;
     const emailSubject = encodeURIComponent(`[${categoryLabel}] ${formData.subject}`);
     const emailBody = encodeURIComponent(
       `From: ${formData.email}\n\nProject Type: ${categoryLabel}\n\nMessage:\n${formData.message}`
     );
 
-    // Open email client
     window.location.href = `mailto:nafiskabbo30@gmail.com?subject=${emailSubject}&body=${emailBody}`;
 
     setIsSubmitting(false);
     setSubmitStatus('success');
 
-    // Reset form after delay
     setTimeout(() => {
       setFormData({ email: '', subject: '', category: '', message: '' });
       setSubmitStatus('idle');
@@ -151,72 +118,96 @@ export function ContactSection() {
     <section
       ref={sectionRef}
       id="contact"
-      className="relative py-24 lg:py-32 bg-gradient-to-b from-slate-900 to-slate-950 overflow-hidden"
+      className="relative py-16 lg:py-20 overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, var(--theme-surface) 0%, var(--theme-background) 100%)' }}
     >
       {/* Background Elements */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-green-500/5 via-transparent to-transparent" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] lg:w-[700px] lg:h-[700px] bg-green-500/10 rounded-full blur-3xl" />
-
-      {/* Floating Elements */}
-      <div className="absolute left-[5%] top-1/4 hidden xl:block animate-float-slow opacity-40">
-        <div className="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center justify-center">
-          <AndroidIcon className="w-6 h-6 text-green-500/60" />
-        </div>
-      </div>
-      <div className="absolute right-[8%] bottom-1/3 hidden xl:block animate-float opacity-40" style={{ animationDelay: '2s' }}>
-        <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center">
-          <FlutterIcon className="w-5 h-5 text-cyan-500/60" />
-        </div>
-      </div>
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] rounded-full blur-3xl"
+        style={{ background: 'var(--theme-glow)' }}
+      />
 
       <div className="relative z-10 section-container">
         {/* Section Header */}
-        <div className="text-center mb-16 lg:mb-20">
-          <span className="inline-block px-5 py-2.5 rounded-full bg-green-500/10 border border-green-500/30 text-green-400 text-sm font-bold tracking-wide uppercase mb-6">
+        <div className="text-center mb-10">
+          <span className="theme-badge inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4">
             Get In Touch
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">
             Let&apos;s Build Something{' '}
-            <span className="bg-gradient-to-r from-green-400 to-cyan-500 bg-clip-text text-transparent">
-              Amazing
-            </span>
+            <span className="theme-gradient-text">Amazing</span>
           </h2>
-          <p className="text-slate-400 text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
-            Have a project in mind? I&apos;m available for freelance work and always excited to collaborate on innovative ideas.
+          <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
+            Have a project in mind? I&apos;m available for freelance work and always excited to collaborate.
           </p>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
-          {/* Contact Form */}
+        {/* Main Content Grid - More Compact */}
+        <div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
+          {/* Contact Form - Takes 3 cols */}
           <div
-            className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-              }`}
+            className={`lg:col-span-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}
           >
-            <div className="bg-slate-800/50 rounded-2xl p-6 lg:p-8 border border-slate-700/50 backdrop-blur-sm">
-              <h3 className="text-xl lg:text-2xl font-bold text-white mb-6">Send a Message</h3>
+            <div className="theme-card rounded-xl p-5 lg:p-6">
+              <h3 className="text-base lg:text-lg font-bold text-white mb-4">Send a Message</h3>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Email */}
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
-                    Your Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="you@example.com"
-                    className="w-full px-5 py-3.5 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors"
-                  />
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      Your Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      placeholder="you@example.com"
+                      className="w-full px-3 py-2.5 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
+                      style={{ 
+                        background: 'var(--theme-background)',
+                        border: '1px solid var(--theme-border)'
+                      }}
+                    />
+                  </div>
+
+                  {/* Category */}
+                  <div>
+                    <label htmlFor="category" className="block text-xs font-medium text-slate-300 mb-1.5">
+                      Project Type
+                    </label>
+                    <select
+                      id="category"
+                      name="category"
+                      value={formData.category}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-3 py-2.5 rounded-lg text-sm text-white focus:outline-none transition-colors appearance-none cursor-pointer"
+                      style={{ 
+                        background: 'var(--theme-background)',
+                        border: '1px solid var(--theme-border)',
+                        backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
+                        backgroundPosition: 'right 0.5rem center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: '1.25em 1.25em',
+                        paddingRight: '2rem'
+                      }}
+                    >
+                      {projectCategories.map(({ value, label }) => (
+                        <option key={value} value={value} style={{ background: 'var(--theme-surface)' }}>
+                          {label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
                 </div>
 
                 {/* Subject */}
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label htmlFor="subject" className="block text-xs font-medium text-slate-300 mb-1.5">
                     Subject
                   </label>
                   <input
@@ -227,35 +218,17 @@ export function ContactSection() {
                     onChange={handleInputChange}
                     required
                     placeholder="Project inquiry..."
-                    className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors"
+                    className="w-full px-3 py-2.5 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
+                    style={{ 
+                      background: 'var(--theme-background)',
+                      border: '1px solid var(--theme-border)'
+                    }}
                   />
-                </div>
-
-                {/* Category */}
-                <div>
-                  <label htmlFor="category" className="block text-sm font-medium text-slate-300 mb-2">
-                    Project Type
-                  </label>
-                  <select
-                    id="category"
-                    name="category"
-                    value={formData.category}
-                    onChange={handleInputChange}
-                    required
-                    className="w-full px-5 py-3.5 rounded-xl bg-slate-900/50 border border-slate-700 text-white focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors appearance-none cursor-pointer"
-                    style={{ backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`, backgroundPosition: 'right 0.75rem center', backgroundRepeat: 'no-repeat', backgroundSize: '1.5em 1.5em', paddingRight: '2.5rem' }}
-                  >
-                    {projectCategories.map(({ value, label }) => (
-                      <option key={value} value={value} className="bg-slate-800">
-                        {label}
-                      </option>
-                    ))}
-                  </select>
                 </div>
 
                 {/* Message */}
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-slate-300 mb-2">
+                  <label htmlFor="message" className="block text-xs font-medium text-slate-300 mb-1.5">
                     Message
                   </label>
                   <textarea
@@ -264,9 +237,13 @@ export function ContactSection() {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
-                    rows={5}
+                    rows={4}
                     placeholder="Tell me about your project..."
-                    className="w-full px-5 py-3.5 rounded-xl bg-slate-900/50 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-green-500/50 focus:ring-1 focus:ring-green-500/50 transition-colors resize-none"
+                    className="w-full px-3 py-2.5 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none transition-colors resize-none"
+                    style={{ 
+                      background: 'var(--theme-background)',
+                      border: '1px solid var(--theme-border)'
+                    }}
                   />
                 </div>
 
@@ -274,20 +251,22 @@ export function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-gradient-to-r from-green-500 to-cyan-500 text-white font-bold shadow-lg shadow-green-500/25 hover:shadow-green-500/40 transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg text-white font-semibold shadow-lg transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm"
+                  style={{ 
+                    background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                    boxShadow: '0 4px 20px var(--theme-glow)'
+                  }}
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                       <span>Sending...</span>
                     </>
                   ) : submitStatus === 'success' ? (
-                    <>
-                      <span>Opening Email Client...</span>
-                    </>
+                    <span>Opening Email Client...</span>
                   ) : (
                     <>
-                      <SendIcon className="w-5 h-5" />
+                      <SendIcon className="w-4 h-4" />
                       <span>Send Message</span>
                     </>
                   )}
@@ -296,97 +275,88 @@ export function ContactSection() {
             </div>
           </div>
 
-          {/* Contact Cards & Social */}
+          {/* Contact Info - Takes 2 cols */}
           <div
-            className={`space-y-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-              }`}
+            className={`lg:col-span-2 space-y-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}
             style={{ transitionDelay: '200ms' }}
           >
-            {/* Contact Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              {contactLinks.map(({ title, value, href, icon: Icon, gradient, description }, index) => (
+            {/* Contact Cards - Compact Grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {contactLinks.map(({ title, value, href, icon: Icon }) => (
                 <a
                   key={title}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative p-6 sm:p-7 rounded-2xl bg-slate-800/50 border border-slate-700/50 hover:border-green-500/30 transition-all duration-300 hover:scale-[1.02] backdrop-blur-sm"
+                  className="group theme-card p-3 rounded-xl transition-all duration-300 hover:scale-[1.02]"
                 >
-                  {/* Icon */}
-                  <div className={`w-11 h-11 rounded-xl bg-gradient-to-r ${gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                    <Icon className="w-5 h-5 text-white" />
+                  <div 
+                    className="w-8 h-8 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform"
+                    style={{ background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))' }}
+                  >
+                    <Icon className="w-4 h-4 text-white" />
                   </div>
-
-                  {/* Content */}
-                  <h3 className="text-white font-bold text-sm mb-1">{title}</h3>
-                  <p className="text-green-400 text-xs font-semibold mb-2 truncate">{value}</p>
-                  <p className="text-slate-500 text-xs hidden sm:block">{description}</p>
-
-                  {/* External Link Indicator */}
-                  <ExternalLinkIcon className="absolute top-4 right-4 w-4 h-4 text-slate-600 group-hover:text-green-400 transition-colors" />
+                  <h3 className="text-white font-semibold text-xs mb-0.5">{title}</h3>
+                  <p className="text-xs truncate" style={{ color: 'var(--theme-primary)' }}>{value}</p>
                 </a>
               ))}
             </div>
 
-            {/* Social Links */}
-            <div className="bg-slate-800/50 rounded-2xl p-6 border border-slate-700/50 backdrop-blur-sm">
-              <h3 className="text-lg font-bold text-white mb-4">Follow Me</h3>
-              <div className="flex flex-wrap gap-3">
-                {socialLinks.map(({ icon: Icon, href, label, gradient }) => (
+            {/* Social & Quick Actions Combined */}
+            <div className="theme-card rounded-xl p-4">
+              <h3 className="text-sm font-bold text-white mb-3">Connect & Follow</h3>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
                   <a
                     key={label}
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group flex items-center gap-3 px-4 py-3 rounded-xl bg-gradient-to-r ${gradient} bg-opacity-10 border border-slate-700/50 hover:border-green-500/30 transition-all duration-300 hover:scale-105`}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-300 hover:scale-105"
+                    style={{ background: 'var(--theme-background)', border: '1px solid var(--theme-border)' }}
                     aria-label={label}
                   >
-                    <Icon className="w-5 h-5 text-white" />
-                    <span className="text-white text-sm font-medium">{label}</span>
+                    <Icon className="w-4 h-4" style={{ color: 'var(--theme-primary)' }} />
+                    <span className="text-white text-xs font-medium">{label}</span>
                   </a>
                 ))}
               </div>
-            </div>
 
-            {/* Quick Actions */}
-            <div className="bg-gradient-to-r from-slate-800/60 to-slate-800/30 rounded-2xl p-6 border border-slate-700/50 backdrop-blur-sm">
-              <h3 className="text-lg font-bold text-white mb-4">Quick Actions</h3>
-              <div className="flex flex-col sm:flex-row gap-4">
+              {/* Quick Actions */}
+              <div className="flex gap-2">
                 <a
                   href="mailto:nafiskabbo30@gmail.com"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-green-500 to-cyan-500 text-white font-bold shadow-lg shadow-green-500/25 hover:shadow-green-500/40 transition-all duration-300 hover:scale-105 text-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-white font-semibold text-xs transition-all duration-300 hover:scale-105"
+                  style={{ 
+                    background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                    boxShadow: '0 2px 12px var(--theme-glow)'
+                  }}
                 >
-                  <EmailIcon className="w-4 h-4" />
-                  <span>Send Email</span>
+                  <EmailIcon className="w-3.5 h-3.5" />
+                  <span>Email</span>
                 </a>
                 <a
                   href="/cv.pdf"
                   download
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-transparent border-2 border-slate-600 text-slate-300 font-bold hover:border-green-500 hover:text-green-400 transition-all duration-300 hover:scale-105 text-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-xs"
+                  style={{ border: '1px solid var(--theme-border)', color: 'var(--theme-primary)' }}
                 >
-                  <DownloadIcon className="w-4 h-4" />
-                  <span>Download CV</span>
+                  <DownloadIcon className="w-3.5 h-3.5" />
+                  <span>CV</span>
                 </a>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* CTA Banner */}
-        <div
-          className={`bg-gradient-to-r from-slate-800/60 to-slate-800/40 rounded-2xl p-8 lg:p-12 border border-slate-700/50 transition-all duration-700 backdrop-blur-sm text-center ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          style={{ transitionDelay: '400ms' }}
-        >
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
-            Ready to start your project?
-          </h3>
-          <p className="text-slate-400 max-w-2xl mx-auto text-base lg:text-lg leading-relaxed mb-6">
-            Whether you need a mobile app, web application, or full-stack solution, I&apos;m here to help bring your vision to life.
-          </p>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            Available for new projects
+            {/* Availability Badge */}
+            <div 
+              className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl"
+              style={{ background: 'color-mix(in srgb, var(--theme-primary) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)' }}
+            >
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: 'var(--theme-primary)' }} />
+              <span className="text-xs font-semibold" style={{ color: 'var(--theme-primary)' }}>
+                Available for new projects
+              </span>
+            </div>
           </div>
         </div>
       </div>
