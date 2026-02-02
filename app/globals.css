@@ -53,14 +53,30 @@ body {
   overflow-x: hidden;
 }
 
-/* Hide Scrollbar - All Browsers */
-html {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border: 2px solid var(--background);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--android-green);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b var(--background);
 }
 
 /* Selection */

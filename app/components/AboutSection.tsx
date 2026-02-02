@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from 'react';
 import { GraduationIcon, CodeIcon, MobileIcon, AndroidIcon, FlutterIcon, CheckCircleIcon, BriefcaseIcon } from './Icons';
 
 const stats = [
-  { value: '4+', label: 'Years Experience' },
+  { value: '5+', label: 'Years Experience' },
   { value: '50+', label: 'Projects Delivered' },
   { value: '30+', label: 'Happy Clients' },
-  { value: '5', label: 'Countries Served' },
+  { value: '8', label: 'Countries Served' },
 ];
 
 const timeline = [

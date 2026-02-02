@@ -9,7 +9,7 @@ import {
   SwiftIcon,
   JavaScriptIcon,
   TypeScriptIcon,
-  NodeIcon,
+  NodeJsIcon,
   FirebaseIcon,
   SupabaseIcon,
   MongoDBIcon,
@@ -46,7 +46,7 @@ const skillCategories = [
     skills: [
       { name: 'TypeScript', icon: TypeScriptIcon, level: 88, color: 'bg-blue-500' },
       { name: 'JavaScript', icon: JavaScriptIcon, level: 90, color: 'bg-yellow-500' },
-      { name: 'Node.js', icon: NodeIcon, level: 82, color: 'bg-green-500' },
+      { name: 'Node.js', icon: NodeJsIcon, level: 88, color: 'bg-green-600' },
     ],
   },
   {
