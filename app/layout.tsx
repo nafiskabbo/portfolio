@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "./components/ThemeProvider";
 import "./globals.css";
 
@@ -68,6 +69,7 @@ export default function RootLayout({
           <ThemeProvider>{children}</ThemeProvider>
         </Suspense>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
