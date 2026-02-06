@@ -19,39 +19,66 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nafis Islam Kabbo | Mobile Developer",
+  title: {
+    default: "Nafis Kabbo | Mobile Developer — Android, iOS & Flutter",
+    template: "%s | Nafis Kabbo",
+  },
   description:
-    "Professional Mobile Developer specializing in Flutter, Kotlin, Swift, and cross-platform app development. Building beautiful, performant mobile applications with clean architecture.",
+    "Nafis Kabbo — Mobile Developer specializing in Native Android (Kotlin), Native iOS (SwiftUI/Swift), and Flutter cross-platform development. 5+ years building production apps with clean architecture, AI integration, and modern UI/UX.",
   keywords: [
-    "Mobile Developer",
-    "Flutter Developer",
-    "Android Developer",
-    "iOS Developer",
-    "Kotlin",
-    "Swift",
-    "Cross-Platform",
-    "App Development",
+    "Nafis Kabbo",
+    "Kabbo",
+    "Nafis",
     "Nafis Islam Kabbo",
+    "Mobile Developer",
+    "Android Developer",
+    "Android Development",
+    "iOS Developer",
+    "Flutter Developer",
+    "Kotlin Developer",
+    "Swift Developer",
+    "SwiftUI",
+    "Cross-Platform Developer",
+    "Native Android",
+    "Native iOS",
+    "App Development",
+    "Mobile App Developer",
+    "Freelance Developer",
+    "AI Mobile Apps",
+    "Bangladesh Developer",
   ],
-  authors: [{ name: "Nafis Islam Kabbo" }],
-  creator: "Nafis Islam Kabbo",
+  authors: [{ name: "Nafis Kabbo", url: "https://nafiskabbo.dev" }],
+  creator: "Nafis Kabbo",
+  metadataBase: new URL("https://nafiskabbo.dev"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Nafis Islam Kabbo | Mobile Developer",
+    title: "Nafis Kabbo — Mobile Developer | Android, iOS & Flutter",
     description:
-      "Professional Mobile Developer specializing in Flutter, Kotlin, Swift, and cross-platform app development.",
-    siteName: "Nafis Islam Kabbo Portfolio",
+      "Building high-performance mobile apps with Native Android, Native iOS, and Flutter. 5+ years of production experience with AI integration and clean architecture.",
+    siteName: "Nafis Kabbo Portfolio",
+    url: "https://nafiskabbo.dev",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nafis Islam Kabbo | Mobile Developer",
+    title: "Nafis Kabbo — Mobile Developer | Android, iOS & Flutter",
     description:
-      "Professional Mobile Developer specializing in Flutter, Kotlin, Swift, and cross-platform app development.",
+      "Building high-performance mobile apps with Native Android, Native iOS, and Flutter. 5+ years of production experience.",
+    creator: "@nafiskabbo30",
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://nafiskabbo.dev",
   },
 };
 

@@ -263,7 +263,7 @@ const FlutterElements = memo(function FlutterElements({ elements }: { elements: 
 // Web floating elements - Code and terminal
 const WebElements = memo(function WebElements({ elements }: { elements: FloatingElement[] }) {
   const codeSymbols = ['</', '/>', '{', '}', '()', '=>', '&&', '[ ]', '::'];
-  
+
   return (
     <>
       {elements.map((el) => (
@@ -348,11 +348,11 @@ interface ThemeBackgroundProps {
 export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeBackgroundProps) {
   const { theme } = useTheme();
   const elementCount = intensity === 'low' ? 12 : intensity === 'medium' ? 20 : 30;
-  
+
   // Start with deterministic elements, then randomize on client
   const [elements, setElements] = useState<FloatingElement[]>(() => generateDefaultElements(elementCount));
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setElements(generateRandomElements(elementCount));
     setMounted(true);
@@ -375,11 +375,11 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
 
   return (
     <div
-      className={`absolute inset-0 overflow-hidden theme-bg-animated ${className}`}
+      className={`absolute inset-0 overflow-hidden pointer-events-none theme-bg-animated ${className}`}
       style={{ background: 'var(--theme-background)' }}
     >
       {/* Base gradient layer */}
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           background: `
@@ -388,14 +388,14 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
           `,
         }}
       />
-      
+
       {/* Animated floating elements - only show after mount to avoid flicker */}
       <div className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
         {renderElements()}
       </div>
-      
+
       {/* Subtle noise overlay */}
-      <div 
+      <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
@@ -408,16 +408,16 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
 // Compact background for smaller sections
 export function ThemeBackgroundCompact({ className = '' }: { className?: string }) {
   const { theme } = useTheme();
-  
+
   // Start with deterministic elements, then randomize on client
   const [elements, setElements] = useState<FloatingElement[]>(() => generateDefaultElements(8));
   const [mounted, setMounted] = useState(false);
-  
+
   useEffect(() => {
     setElements(generateRandomElements(8));
     setMounted(true);
   }, []);
-  
+
   const renderMiniElements = () => {
     switch (theme) {
       case 'android':
@@ -432,13 +432,13 @@ export function ThemeBackgroundCompact({ className = '' }: { className?: string 
         return <AndroidElements elements={elements} />;
     }
   };
-  
+
   return (
     <div
       className={`absolute inset-0 overflow-hidden ${className}`}
       style={{ background: 'var(--theme-background)' }}
     >
-      <div 
+      <div
         className="absolute inset-0"
         style={{
           background: `
@@ -447,7 +447,7 @@ export function ThemeBackgroundCompact({ className = '' }: { className?: string 
           `,
         }}
       />
-      
+
       {/* Mini floating elements */}
       <div className={`absolute inset-0 overflow-hidden opacity-70 transition-opacity duration-500 ${mounted ? 'opacity-70' : 'opacity-0'}`}>
         {renderMiniElements()}

@@ -3,80 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon } from './Icons';
-import { useTheme, Theme } from './ThemeProvider';
+import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon, SmartphoneIcon } from './Icons';
+import { useTheme } from './ThemeProvider';
 import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
-
-interface ProjectLink {
-  type: 'android' | 'ios' | 'web';
-  url: string;
-}
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-  gradient: string;
-  tags: string[];
-  links: ProjectLink[];
-  platform: 'android' | 'ios' | 'cross-platform';
-}
-
-// Map tags to themes
-const tagThemeMap: Record<string, Theme> = {
-  'Flutter': 'flutter',
-  'Swift': 'ios',
-  'iOS': 'ios',
-  'Android': 'android',
-  'Kotlin': 'android',
-  'Next.js': 'web',
-};
-
-const featuredProjects: Project[] = [
-  {
-    id: 'santa-chat',
-    title: 'Santa Personal Video & Call',
-    description: 'An interactive app where users can video call and chat with Santa Claus with AI-powered conversations.',
-    image: '/logo_santa_app.png',
-    gradient: 'from-red-500 to-rose-600',
-    tags: ['Flutter', 'AI', 'Video Call'],
-    links: [
-      { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.santa.chatbot' },
-      { type: 'ios', url: 'https://apps.apple.com/us/app/santa-personal-video-call/id6755621227' },
-      { type: 'web', url: 'https://santachat.org/' },
-    ],
-    platform: 'cross-platform',
-  },
-  {
-    id: 'heal-tone',
-    title: 'Heal Tone AI Frequency Sounds',
-    description: 'A wellness app featuring AI-generated healing frequencies for meditation and relaxation.',
-    image: '/logo_healtone.jpg',
-    gradient: 'from-purple-500 to-violet-600',
-    tags: ['Flutter', 'AI', 'Health'],
-    links: [
-      { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.anythingspeaker.healtone' },
-      { type: 'ios', url: 'https://apps.apple.com/us/app/heal-tone-ai-frequency-sounds/id6746277347' },
-      { type: 'web', url: 'https://healtone.org/' },
-    ],
-    platform: 'cross-platform',
-  },
-  {
-    id: 'viozor',
-    title: 'Viozor 2: AI Video Generator',
-    description: 'Cutting-edge AI video generation app that transforms text and images into stunning videos.',
-    image: '/logo_viozor.jpg',
-    gradient: 'from-cyan-500 to-blue-600',
-    tags: ['Swift', 'AI', 'iOS'],
-    links: [
-      { type: 'ios', url: 'https://apps.apple.com/us/app/viozor-2-ai-video-generator/id6753830046' },
-      { type: 'web', url: 'https://viozor.com/' },
-    ],
-    platform: 'ios',
-  },
-];
+import { FEATURED_PROJECTS, TAG_THEME_MAP, type Project } from '../data/projects';
 
 const linkIcons = {
   android: { icon: PlayStoreIcon, color: 'hover:text-green-400' },
@@ -88,6 +19,7 @@ const platformBadge = {
   android: { icon: AndroidIcon, label: 'Android' },
   ios: { icon: AppleIcon, label: 'iOS' },
   'cross-platform': { icon: FlutterIcon, label: 'Cross-Platform' },
+  'native-multiplatform': { icon: SmartphoneIcon, label: 'Android & iOS' },
 };
 
 export function ProjectsPreview() {
@@ -113,7 +45,7 @@ export function ProjectsPreview() {
   }, []);
 
   const handleTagClick = (tag: string) => {
-    const targetTheme = tagThemeMap[tag];
+    const targetTheme = TAG_THEME_MAP[tag];
     if (targetTheme && !isTransitioning) {
       setTheme(targetTheme, true);
     }
@@ -151,9 +83,9 @@ export function ProjectsPreview() {
           </p>
         </div>
 
-        {/* Projects Grid - Compact */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 mb-10">
-          {featuredProjects.map((project, index) => {
+        {/* Projects Grid - 4 cols on desktop, 2 cols on tablet, 1 on mobile */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-5 mb-10">
+          {FEATURED_PROJECTS.map((project: Project, index: number) => {
             const badge = platformBadge[project.platform];
             return (
               <div
@@ -196,7 +128,7 @@ export function ProjectsPreview() {
                   {/* Tags - Clickable */}
                   <div className="flex flex-wrap gap-1.5 mb-3">
                     {project.tags.map((tag) => {
-                      const isClickable = tagThemeMap[tag];
+                      const isClickable = TAG_THEME_MAP[tag];
                       return (
                         <button
                           key={tag}

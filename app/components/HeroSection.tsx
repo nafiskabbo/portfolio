@@ -29,6 +29,19 @@ export function HeroSection() {
     }
   };
 
+  const handleDownloadCV = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Open in new tab
+    window.open('/cv.pdf', '_blank');
+    // Trigger download
+    const link = document.createElement('a');
+    link.href = '/cv.pdf';
+    link.download = 'cv.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <section
       id="home"
@@ -36,7 +49,7 @@ export function HeroSection() {
     >
       {/* Animated Theme Background */}
       <ThemeBackground intensity="high" />
-      
+
       {/* Subtle Grid Background */}
       <div className="absolute inset-0 grid-bg opacity-40" />
 
@@ -44,7 +57,7 @@ export function HeroSection() {
       <div className="hidden lg:block absolute right-12 top-1/2 -translate-y-1/2 z-20">
         <Mascot2D size="large" position="right" />
       </div>
-      
+
       {/* Additional floating mascots for visual interest */}
       <div className="hidden xl:block absolute left-8 bottom-24 z-10 opacity-50">
         <Mascot2D size="small" position="left" />
@@ -58,16 +71,16 @@ export function HeroSection() {
             {/* Outer Orbit Ring */}
             <div className="absolute -inset-4 sm:-inset-6 lg:-inset-8">
               {/* Orbit Path */}
-              <div 
+              <div
                 className="absolute inset-0 rounded-full border border-dashed animate-orbit"
                 style={{ borderColor: 'color-mix(in srgb, var(--theme-primary) 30%, transparent)' }}
               />
 
               {/* Orbiting Icons */}
               <div className="absolute inset-0 animate-orbit">
-                <div 
+                <div
                   className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm"
-                  style={{ 
+                  style={{
                     background: 'var(--theme-surface)',
                     borderColor: 'color-mix(in srgb, var(--theme-primary) 50%, transparent)',
                     borderWidth: '1px',
@@ -79,9 +92,9 @@ export function HeroSection() {
               </div>
 
               <div className="absolute inset-0 animate-orbit" style={{ animationDelay: '-8s' }}>
-                <div 
+                <div
                   className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm"
-                  style={{ 
+                  style={{
                     background: 'var(--theme-surface)',
                     borderColor: 'color-mix(in srgb, var(--theme-secondary) 50%, transparent)',
                     borderWidth: '1px'
@@ -92,9 +105,9 @@ export function HeroSection() {
               </div>
 
               <div className="absolute inset-0 animate-orbit" style={{ animationDelay: '-16s' }}>
-                <div 
+                <div
                   className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm"
-                  style={{ 
+                  style={{
                     background: 'var(--theme-surface)',
                     borderColor: 'rgba(148, 163, 184, 0.4)',
                     borderWidth: '1px'
@@ -108,9 +121,9 @@ export function HeroSection() {
             {/* Profile Image Container */}
             <div className="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
               {/* Gradient Border */}
-              <div 
+              <div
                 className="absolute inset-0 rounded-full p-[3px] shadow-2xl"
-                style={{ 
+                style={{
                   background: `linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))`,
                   boxShadow: '0 8px 32px var(--theme-glow)'
                 }}
@@ -132,9 +145,9 @@ export function HeroSection() {
           {/* Text Content */}
           <div className="text-center lg:text-left order-2 lg:order-1 flex-1 max-w-xl lg:max-w-none">
             {/* Badge */}
-            <div 
+            <div
               className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-5 transition-colors"
-              style={{ 
+              style={{
                 background: 'color-mix(in srgb, var(--theme-primary) 15%, transparent)',
                 border: '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)'
               }}
@@ -159,9 +172,8 @@ export function HeroSection() {
                   key={id}
                   onClick={(e) => handleTechClick(id, e)}
                   disabled={isTransitioning}
-                  className={`flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r ${themeColor} border backdrop-blur-md transition-all duration-300 hover:scale-105 disabled:opacity-70 ${
-                    theme === id ? 'ring-2 ring-offset-2 ring-offset-[var(--theme-background)] ring-[var(--theme-primary)]' : ''
-                  }`}
+                  className={`flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r ${themeColor} border backdrop-blur-md transition-all duration-300 hover:scale-105 disabled:opacity-70 ${theme === id ? 'ring-2 ring-offset-2 ring-offset-[var(--theme-background)] ring-[var(--theme-primary)]' : ''
+                    }`}
                   title={`Switch to ${label} theme`}
                 >
                   <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -173,20 +185,20 @@ export function HeroSection() {
             {/* Description */}
             <p className="text-sm sm:text-base text-slate-400 max-w-lg mx-auto lg:mx-0 mb-5 sm:mb-6 leading-relaxed">
               Mobile App Developer specializing in{' '}
-              <button 
-                onClick={(e) => handleTechClick('flutter', e)} 
+              <button
+                onClick={(e) => handleTechClick('flutter', e)}
                 className="text-cyan-400 font-semibold hover:underline cursor-pointer"
               >
                 Flutter
               </button>,{' '}
-              <button 
-                onClick={(e) => handleTechClick('android', e)} 
+              <button
+                onClick={(e) => handleTechClick('android', e)}
                 className="text-green-400 font-semibold hover:underline cursor-pointer"
               >
                 Kotlin
               </button>, &{' '}
-              <button 
-                onClick={(e) => handleTechClick('ios', e)} 
+              <button
+                onClick={(e) => handleTechClick('ios', e)}
                 className="text-blue-400 font-semibold hover:underline cursor-pointer"
               >
                 Swift
@@ -199,7 +211,7 @@ export function HeroSection() {
               <Link
                 href="/#contact"
                 className="btn-shine w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl text-white font-semibold shadow-xl transition-all duration-300 hover:scale-105 text-sm"
-                style={{ 
+                style={{
                   background: `linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))`,
                   boxShadow: '0 8px 24px var(--theme-glow)'
                 }}
@@ -209,9 +221,9 @@ export function HeroSection() {
               </Link>
               <a
                 href="/cv.pdf"
-                download
+                onClick={handleDownloadCV}
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-transparent border-2 font-semibold transition-all duration-300 hover:scale-105 text-sm"
-                style={{ 
+                style={{
                   borderColor: 'var(--theme-border)',
                   color: 'var(--theme-primary)'
                 }}
@@ -230,7 +242,7 @@ export function HeroSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`p-3 rounded-xl text-slate-400 ${color} transition-all duration-300 hover:scale-110 flex items-center justify-center`}
-                  style={{ 
+                  style={{
                     background: 'var(--theme-surface)',
                     border: '1px solid var(--theme-border)'
                   }}

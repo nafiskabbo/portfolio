@@ -12,9 +12,11 @@ import {
   YouTubeIcon,
   InstagramIcon,
   UpworkIcon,
+  CheckCircleIcon,
 } from './Icons';
 import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
+import { sendContactEmail } from '../actions/send-email';
 
 const contactLinks = [
   {
@@ -51,12 +53,12 @@ const socialLinks = [
 
 const projectCategories = [
   { value: '', label: 'Select project type' },
-  { value: 'mobile-flutter', label: 'Mobile App - Flutter' },
-  { value: 'mobile-android', label: 'Mobile App - Android' },
-  { value: 'mobile-ios', label: 'Mobile App - iOS' },
-  { value: 'web-app', label: 'Web Application' },
-  { value: 'ai-ml', label: 'AI / ML Integration' },
-  { value: 'other', label: 'Other' },
+  { value: 'Mobile App - Flutter', label: 'Mobile App - Flutter' },
+  { value: 'Mobile App - Android', label: 'Mobile App - Android' },
+  { value: 'Mobile App - iOS', label: 'Mobile App - iOS' },
+  { value: 'Web Application', label: 'Web Application' },
+  { value: 'AI / ML Integration', label: 'AI / ML Integration' },
+  { value: 'Other', label: 'Other' },
 ];
 
 export function ContactSection() {
@@ -69,6 +71,7 @@ export function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -98,22 +101,43 @@ export function ContactSection() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    const categoryLabel = projectCategories.find(c => c.value === formData.category)?.label || formData.category;
-    const emailSubject = encodeURIComponent(`[${categoryLabel}] ${formData.subject}`);
-    const emailBody = encodeURIComponent(
-      `From: ${formData.email}\n\nProject Type: ${categoryLabel}\n\nMessage:\n${formData.message}`
-    );
+    try {
+      const result = await sendContactEmail({
+        email: formData.email,
+        category: formData.category,
+        subject: formData.subject,
+        message: formData.message,
+      });
 
-    window.location.href = `mailto:nafiskabbo30@gmail.com?subject=${emailSubject}&body=${emailBody}`;
+      if (result.success) {
+        setSubmitStatus('success');
+        setFormData({ email: '', subject: '', category: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+        setErrorMessage(result.error || 'Something went wrong.');
+      }
+    } catch {
+      setSubmitStatus('error');
+      setErrorMessage('Failed to send. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => setSubmitStatus('idle'), 5000);
+    }
+  };
 
-    setIsSubmitting(false);
-    setSubmitStatus('success');
-
-    setTimeout(() => {
-      setFormData({ email: '', subject: '', category: '', message: '' });
-      setSubmitStatus('idle');
-    }, 3000);
+  const handleDownloadCV = (e: React.MouseEvent) => {
+    e.preventDefault();
+    // Open in new tab
+    window.open('/cv.pdf', '_blank');
+    // Trigger download
+    const link = document.createElement('a');
+    link.href = '/cv.pdf';
+    link.download = 'cv.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -124,12 +148,12 @@ export function ContactSection() {
     >
       {/* Theme Background */}
       <ThemeBackgroundCompact />
-      
+
       {/* 2D Mascot decorations */}
       <div className="hidden lg:block absolute right-12 top-1/4 z-0 opacity-30">
         <Mascot2D size="medium" position="right" />
       </div>
-      
+
       <div className="hidden xl:block absolute left-8 bottom-24 z-0 opacity-25">
         <Mascot2D size="small" position="left" />
       </div>
@@ -174,7 +198,7 @@ export function ContactSection() {
                       required
                       placeholder="you@example.com"
                       className="w-full px-3 py-2.5 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
-                      style={{ 
+                      style={{
                         background: 'var(--theme-background)',
                         border: '1px solid var(--theme-border)'
                       }}
@@ -193,7 +217,7 @@ export function ContactSection() {
                       onChange={handleInputChange}
                       required
                       className="w-full px-3 py-2.5 rounded-lg text-sm text-white focus:outline-none transition-colors appearance-none cursor-pointer"
-                      style={{ 
+                      style={{
                         background: 'var(--theme-background)',
                         border: '1px solid var(--theme-border)',
                         backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e")`,
@@ -226,7 +250,7 @@ export function ContactSection() {
                     required
                     placeholder="Project inquiry..."
                     className="w-full px-3 py-2.5 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none transition-colors"
-                    style={{ 
+                    style={{
                       background: 'var(--theme-background)',
                       border: '1px solid var(--theme-border)'
                     }}
@@ -247,7 +271,7 @@ export function ContactSection() {
                     rows={4}
                     placeholder="Tell me about your project..."
                     className="w-full px-3 py-2.5 rounded-lg text-sm text-white placeholder-slate-500 focus:outline-none transition-colors resize-none"
-                    style={{ 
+                    style={{
                       background: 'var(--theme-background)',
                       border: '1px solid var(--theme-border)'
                     }}
@@ -259,7 +283,7 @@ export function ContactSection() {
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg text-white font-semibold shadow-lg transition-all duration-300 hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100 text-sm"
-                  style={{ 
+                  style={{
                     background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
                     boxShadow: '0 4px 20px var(--theme-glow)'
                   }}
@@ -270,7 +294,12 @@ export function ContactSection() {
                       <span>Sending...</span>
                     </>
                   ) : submitStatus === 'success' ? (
-                    <span>Opening Email Client...</span>
+                    <>
+                      <CheckCircleIcon className="w-4 h-4" />
+                      <span>Message Sent!</span>
+                    </>
+                  ) : submitStatus === 'error' ? (
+                    <span className="text-red-300">{errorMessage}</span>
                   ) : (
                     <>
                       <SendIcon className="w-4 h-4" />
@@ -297,7 +326,7 @@ export function ContactSection() {
                   rel="noopener noreferrer"
                   className="group theme-card p-3 rounded-xl transition-all duration-300 hover:scale-[1.02]"
                 >
-                  <div 
+                  <div
                     className="w-8 h-8 rounded-lg flex items-center justify-center mb-2 group-hover:scale-110 transition-transform"
                     style={{ background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))' }}
                   >
@@ -334,7 +363,7 @@ export function ContactSection() {
                 <a
                   href="mailto:nafiskabbo30@gmail.com"
                   className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-white font-semibold text-xs transition-all duration-300 hover:scale-105"
-                  style={{ 
+                  style={{
                     background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
                     boxShadow: '0 2px 12px var(--theme-glow)'
                   }}
@@ -344,7 +373,7 @@ export function ContactSection() {
                 </a>
                 <a
                   href="/cv.pdf"
-                  download
+                  onClick={handleDownloadCV}
                   className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg font-semibold transition-all duration-300 hover:scale-105 text-xs"
                   style={{ border: '1px solid var(--theme-border)', color: 'var(--theme-primary)' }}
                 >
@@ -355,7 +384,7 @@ export function ContactSection() {
             </div>
 
             {/* Availability Badge */}
-            <div 
+            <div
               className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl"
               style={{ background: 'color-mix(in srgb, var(--theme-primary) 10%, transparent)', border: '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)' }}
             >
