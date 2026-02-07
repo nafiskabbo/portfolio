@@ -1,8 +1,8 @@
 # Nafis Islam Kabbo - Portfolio
 
-A modern, responsive portfolio website built with Next.js 15, React 19, and Tailwind CSS. Showcasing my work as a Mobile & Web Developer specializing in Flutter, Kotlin, Swift, and cross-platform development.
+A modern, responsive portfolio website built with Next.js 16, React 19, and Tailwind CSS. Showcasing my work as a Mobile & Web Developer specializing in Flutter, Kotlin, Swift, and cross-platform development.
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-cyan?style=for-the-badge&logo=tailwindcss)
@@ -27,7 +27,7 @@ A modern, responsive portfolio website built with Next.js 15, React 19, and Tail
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Library**: React 19
 - **Styling**: Tailwind CSS 4
 - **Language**: TypeScript
