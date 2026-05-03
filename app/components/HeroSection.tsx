@@ -128,9 +128,9 @@ export function HeroSection() {
                   boxShadow: '0 8px 32px var(--theme-glow)'
                 }}
               >
-                <div className="w-full h-full rounded-full overflow-hidden" style={{ background: 'var(--theme-surface)' }}>
+                <div className="relative h-full w-full overflow-hidden rounded-full" style={{ background: 'var(--theme-surface)' }}>
                   <Image
-                    src="/personal.jpg"
+                    src="/personal.webp"
                     alt="Nafis Islam Kabbo"
                     fill
                     className="object-cover rounded-full"

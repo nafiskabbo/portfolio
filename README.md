@@ -91,7 +91,7 @@ portfolio/
 │   └── page.tsx
 ├── public/
 │   ├── cv.pdf             # Downloadable CV
-│   ├── personal.jpg       # Profile photo
+│   ├── personal.webp      # Profile photo
 │   └── logo_*.{jpg,png}   # App logos
 └── README.md
 ```
