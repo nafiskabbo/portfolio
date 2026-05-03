@@ -10,6 +10,7 @@ import {
   AndroidIcon,
   AppleIcon,
   FlutterIcon,
+  AutomationIcon,
   YouTubeIcon,
   InstagramIcon,
   UpworkIcon,
@@ -40,6 +41,7 @@ const techStack: { icon: typeof AndroidIcon; label: string; theme: Theme }[] = [
   { icon: AppleIcon, label: 'iOS', theme: 'ios' },
   { icon: FlutterIcon, label: 'Flutter', theme: 'flutter' },
   { icon: NextJsIcon, label: 'Next.js', theme: 'web' },
+  { icon: AutomationIcon, label: 'AI / Automation', theme: 'automation' },
 ];
 
 export function Footer() {
@@ -69,7 +71,7 @@ export function Footer() {
             </p>
 
             {/* Tech Stack Icons - Clickable */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="text-slate-500 text-xs mr-1">Theme:</span>
               {techStack.map(({ icon: Icon, label, theme: targetTheme }) => {
                 const isActive = theme === targetTheme;

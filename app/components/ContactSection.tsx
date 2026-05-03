@@ -17,6 +17,7 @@ import {
 import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
 import { sendContactEmail } from '../actions/send-email';
+import { projectCategoryOptions } from '../data/project-categories';
 
 const contactLinks = [
   {
@@ -49,16 +50,6 @@ const socialLinks = [
   { icon: UpworkIcon, href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca', label: 'Upwork' },
   { icon: YouTubeIcon, href: 'https://www.youtube.com/@nafiskabbo30', label: 'YouTube' },
   { icon: InstagramIcon, href: 'https://www.instagram.com/nafiskabbo30/', label: 'Instagram' },
-];
-
-const projectCategories = [
-  { value: '', label: 'Select project type' },
-  { value: 'Mobile App - Flutter', label: 'Mobile App - Flutter' },
-  { value: 'Mobile App - Android', label: 'Mobile App - Android' },
-  { value: 'Mobile App - iOS', label: 'Mobile App - iOS' },
-  { value: 'Web Application', label: 'Web Application' },
-  { value: 'AI / ML Integration', label: 'AI / ML Integration' },
-  { value: 'Other', label: 'Other' },
 ];
 
 export function ContactSection() {
@@ -227,7 +218,7 @@ export function ContactSection() {
                         paddingRight: '2rem'
                       }}
                     >
-                      {projectCategories.map(({ value, label }) => (
+                      {projectCategoryOptions.map(({ value, label }) => (
                         <option key={value} value={value} style={{ background: 'var(--theme-surface)' }}>
                           {label}
                         </option>

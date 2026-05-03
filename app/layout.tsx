@@ -4,6 +4,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { ChatAssistantShell } from "./components/ChatAssistantShell";
 import "./globals.css";
 
 const inter = Inter({
@@ -94,7 +95,10 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Suspense fallback={null}>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            {children}
+            <ChatAssistantShell />
+          </ThemeProvider>
         </Suspense>
         <SpeedInsights />
         <Analytics />
