@@ -20,18 +20,24 @@ export interface Project {
 
 /** Map tags to themes for clickable theme switching */
 export const TAG_THEME_MAP: Record<string, Theme> = {
-  'Flutter': 'flutter',
-  'Swift': 'ios',
-  'SwiftUI': 'ios',
-  'iOS': 'ios',
-  'Android': 'android',
-  'Kotlin': 'android',
+  Flutter: 'flutter',
+  Swift: 'ios',
+  SwiftUI: 'ios',
+  iOS: 'ios',
+  Android: 'android',
+  Kotlin: 'android',
   'Next.js': 'web',
+  AI: 'automation',
+  'AI Automation': 'automation',
+  n8n: 'automation',
+  LangChain: 'automation',
+  OpenAI: 'automation',
+  Workflows: 'automation',
 };
 
 /**
  * All projects in display order:
- * healtone, eMaisha, santa, deenhub, viozor, edipic, elsie
+ * heal-tone … stride-soles … elsie
  */
 export const ALL_PROJECTS: Project[] = [
   {
@@ -122,6 +128,22 @@ export const ALL_PROJECTS: Project[] = [
     ],
     platform: 'ios',
     category: 'ai',
+  },
+  {
+    id: 'stride-soles',
+    title: 'Stride Soles',
+    description:
+      'Fitness and lifestyle companion app for tracking activity and staying motivated—with a polished cross-platform experience on Android, iOS, and web.',
+    image: '/logo_stride_soles.png',
+    gradient: 'from-orange-500 to-rose-600',
+    tags: ['Flutter', 'Android', 'iOS', 'Health'],
+    links: [
+      { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.stridesoles.app' },
+      { type: 'ios', url: 'https://apps.apple.com/us/app/stride-soles/id6451224411' },
+      { type: 'web', url: 'https://www.stridesoles.com/' },
+    ],
+    platform: 'cross-platform',
+    category: 'utility',
   },
   {
     id: 'elsie',

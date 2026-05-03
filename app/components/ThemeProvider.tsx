@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 
-export type Theme = 'android' | 'ios' | 'flutter' | 'web';
+export type Theme = 'android' | 'ios' | 'flutter' | 'web' | 'automation';
 
 interface ThemeContextType {
   theme: Theme;
@@ -62,6 +62,18 @@ export const themeConfig = {
     gradient: 'from-pink-400 to-purple-500',
     pattern: 'web',
   },
+  automation: {
+    name: 'AI Automation',
+    primary: '#E879F9',
+    secondary: '#FBBF24',
+    accent: '#38BDF8',
+    background: '#070510',
+    surface: '#12091F',
+    border: '#352454',
+    glow: 'rgba(232, 121, 249, 0.35)',
+    gradient: 'from-fuchsia-400 via-amber-400 to-sky-400',
+    pattern: 'automation',
+  },
 } as const;
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
@@ -76,7 +88,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     const urlTheme = searchParams.get('theme') as Theme | null;
     const savedTheme = localStorage.getItem('portfolio-theme') as Theme | null;
-    const validThemes: Theme[] = ['android', 'ios', 'flutter', 'web'];
+    const validThemes: Theme[] = ['android', 'ios', 'flutter', 'web', 'automation'];
     
     let initialTheme: Theme = 'android';
     

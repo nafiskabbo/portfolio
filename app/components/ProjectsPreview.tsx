@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon, SmartphoneIcon } from './Icons';
 import { useTheme } from './ThemeProvider';
 import { ThemeBackgroundCompact } from './ThemeBackground';
@@ -25,6 +26,7 @@ const platformBadge = {
 export function ProjectsPreview() {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const router = useRouter();
   const { setTheme, isTransitioning } = useTheme();
 
   useEffect(() => {
@@ -90,7 +92,16 @@ export function ProjectsPreview() {
             return (
               <div
                 key={project.id}
-                className={`group theme-card rounded-xl overflow-hidden transition-all duration-500 hover:scale-[1.02] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+                role="link"
+                tabIndex={0}
+                onClick={() => router.push(`/projects/${project.id}`)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    router.push(`/projects/${project.id}`);
+                  }
+                }}
+                className={`group theme-card rounded-xl overflow-hidden transition-all duration-500 hover:scale-[1.02] cursor-pointer ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Project Header */}
@@ -111,6 +122,7 @@ export function ProjectsPreview() {
                       src={project.image}
                       alt={project.title}
                       fill
+                      sizes="(max-width: 639px) 64px, 80px"
                       className="object-cover"
                     />
                   </div>
@@ -118,6 +130,12 @@ export function ProjectsPreview() {
 
                 {/* Project Content */}
                 <div className="p-4">
+                  <p
+                    className="text-[11px] sm:text-xs font-bold uppercase tracking-wide mb-3"
+                    style={{ color: 'var(--theme-secondary)' }}
+                  >
+                    Case study
+                  </p>
                   <h3 className="text-sm sm:text-base font-bold text-white mb-2 group-hover:text-[var(--theme-primary)] transition-colors line-clamp-1">
                     {project.title}
                   </h3>
@@ -132,7 +150,11 @@ export function ProjectsPreview() {
                       return (
                         <button
                           key={tag}
-                          onClick={() => isClickable && handleTagClick(tag)}
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (isClickable) handleTagClick(tag);
+                          }}
                           disabled={!isClickable || isTransitioning}
                           className={`px-2 py-0.5 rounded-full text-[10px] font-medium transition-all ${
                             isClickable ? 'cursor-pointer hover:scale-105' : 'cursor-default'
@@ -158,6 +180,7 @@ export function ProjectsPreview() {
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
                           className={`p-2 rounded-lg text-slate-400 ${color} transition-all duration-300 flex items-center justify-center`}
                           style={{ background: 'var(--theme-background)' }}
                         >

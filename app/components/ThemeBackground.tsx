@@ -340,6 +340,74 @@ const WebElements = memo(function WebElements({ elements }: { elements: Floating
   );
 });
 
+// AI automation — nodes, bots, workflow cues
+const AutomationElements = memo(function AutomationElements({ elements }: { elements: FloatingElement[] }) {
+  const labels = ['n8n', 'RAG', 'API', 'BOT', 'LLM'];
+
+  return (
+    <>
+      {elements.map((el) => (
+        <div
+          key={el.id}
+          className="absolute animate-float-slow pointer-events-none"
+          style={{
+            left: `${el.x}%`,
+            top: `${el.y}%`,
+            animationDuration: `${el.speed}s`,
+            animationDelay: `${el.delay}s`,
+          }}
+        >
+          {el.type === 0 ? (
+            <span
+              className="font-mono font-bold tracking-tighter"
+              style={{
+                fontSize: el.size * 0.55,
+                color: `rgba(245, 158, 11, ${el.opacity * 2.8})`,
+                textShadow: `0 0 12px rgba(192, 132, 252, ${el.opacity * 2})`,
+              }}
+            >
+              {labels[el.id % labels.length]}
+            </span>
+          ) : el.type === 1 ? (
+            <svg width={el.size * 1.1} height={el.size * 1.1} viewBox="0 0 24 24" style={{ opacity: el.opacity * 1.6 }}>
+              <circle cx="8" cy="12" r="3" fill="rgba(192,132,252,0.85)" />
+              <circle cx="16" cy="8" r="2.5" fill="rgba(245,158,11,0.9)" />
+              <circle cx="16" cy="16" r="2.5" fill="rgba(34,211,238,0.85)" />
+              <path d="M11 12 L14 8 M11 12 L14 16" stroke="rgba(192,132,252,0.5)" strokeWidth="1" fill="none" />
+            </svg>
+          ) : el.type === 2 ? (
+            <svg width={el.size} height={el.size * 1.2} viewBox="0 0 24 28" style={{ opacity: el.opacity * 1.5 }}>
+              <rect x="4" y="6" width="16" height="14" rx="3" fill="none" stroke="#C084FC" strokeWidth="1.2" />
+              <circle cx="9" cy="12" r="1.2" fill="#22D3EE" />
+              <circle cx="15" cy="12" r="1.2" fill="#22D3EE" />
+              <path d="M9 17h6" stroke="#F59E0B" strokeWidth="1" strokeLinecap="round" />
+            </svg>
+          ) : el.type === 3 ? (
+            <div
+              className="rounded-lg"
+              style={{
+                width: el.size * 2,
+                height: 3,
+                background: `linear-gradient(90deg, rgba(192,132,252,${el.opacity * 3}), rgba(245,158,11,${el.opacity * 2}), transparent)`,
+              }}
+            />
+          ) : (
+            <div
+              className="rounded-full border"
+              style={{
+                width: el.size * 0.85,
+                height: el.size * 0.85,
+                borderColor: `rgba(34, 211, 238, ${el.opacity * 2})`,
+                background: `radial-gradient(circle, rgba(192,132,252,${el.opacity * 0.4}), transparent 70%)`,
+              }}
+            />
+          )}
+        </div>
+      ))}
+    </>
+  );
+});
+
 interface ThemeBackgroundProps {
   className?: string;
   intensity?: 'low' | 'medium' | 'high';
@@ -368,6 +436,8 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
         return <FlutterElements elements={elements} />;
       case 'web':
         return <WebElements elements={elements} />;
+      case 'automation':
+        return <AutomationElements elements={elements} />;
       default:
         return <AndroidElements elements={elements} />;
     }
@@ -428,6 +498,8 @@ export function ThemeBackgroundCompact({ className = '' }: { className?: string 
         return <FlutterElements elements={elements} />;
       case 'web':
         return <WebElements elements={elements} />;
+      case 'automation':
+        return <AutomationElements elements={elements} />;
       default:
         return <AndroidElements elements={elements} />;
     }

@@ -19,6 +19,7 @@ import {
   DatabaseIcon,
   AIIcon,
   CodeIcon,
+  AutomationIcon,
   RocketIcon,
   CheckCircleIcon,
   UserCheckIcon,
@@ -30,15 +31,21 @@ import { Mascot2D, MascotIcon } from './Mascot2D';
 
 // Map skills to themes
 const skillThemeMap: Record<string, Theme> = {
-  'Android': 'android',
-  'Kotlin': 'android',
-  'iOS': 'ios',
-  'Swift': 'ios',
-  'Flutter': 'flutter',
-  'TypeScript': 'web',
-  'JavaScript': 'web',
+  Android: 'android',
+  Kotlin: 'android',
+  iOS: 'ios',
+  Swift: 'ios',
+  Flutter: 'flutter',
+  TypeScript: 'web',
+  JavaScript: 'web',
   'Node.js': 'web',
   'Next.js': 'web',
+  'AI Integration': 'automation',
+  'ML Features': 'automation',
+  Automation: 'automation',
+  n8n: 'automation',
+  Chatbots: 'automation',
+  'LLM APIs': 'automation',
 };
 
 const skillCategories = [
@@ -75,11 +82,11 @@ const skillCategories = [
   },
   {
     title: 'AI & Automation',
-    icon: AIIcon,
+    icon: AutomationIcon,
     skills: [
-      { name: 'AI Integration', icon: AIIcon, level: 85, color: 'bg-violet-500' },
-      { name: 'ML Features', icon: CodeIcon, level: 78, color: 'bg-pink-500' },
-      { name: 'Automation', icon: RocketIcon, level: 88, color: 'bg-indigo-500' },
+      { name: 'n8n', icon: AutomationIcon, level: 88, color: 'bg-amber-500' },
+      { name: 'Chatbots', icon: AIIcon, level: 90, color: 'bg-violet-500' },
+      { name: 'LLM APIs', icon: CodeIcon, level: 88, color: 'bg-cyan-500' },
     ],
   },
 ];

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTheme, Theme, themeConfig } from './ThemeProvider';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useId } from 'react';
 
 interface Mascot2DProps {
   size?: 'small' | 'medium' | 'large';
@@ -357,6 +357,147 @@ const WebMascot = memo(function WebMascot({ size }: { size: number }) {
   );
 });
 
+/** AI / automation — neural hub + workflow canvas (vivid, layered; pairs with automation theme tokens) */
+const AutomationMascot = memo(function AutomationMascot({ size }: { size: number }) {
+  const uid = useId().replace(/:/g, '');
+  const hubGrad = `${uid}-hub`;
+  const nodeA = `${uid}-node-a`;
+  const nodeB = `${uid}-node-b`;
+  const aurora = `${uid}-aurora`;
+  const ringGrad = `${uid}-ring`;
+  const flowGlow = `${uid}-flow`;
+
+  return (
+    <div
+      className="relative animate-float-slow"
+      style={{
+        width: size,
+        height: size,
+        perspective: '1000px',
+      }}
+    >
+      <div
+        className="pointer-events-none absolute inset-0 rounded-full opacity-[0.55] blur-xl scale-110"
+        style={{
+          background:
+            'radial-gradient(ellipse 65% 55% at 45% 40%, rgba(232, 121, 249, 0.45), transparent 62%), radial-gradient(ellipse 50% 45% at 75% 75%, rgba(251, 191, 36, 0.28), transparent 55%), radial-gradient(ellipse 45% 40% at 15% 80%, rgba(56, 189, 248, 0.22), transparent 50%)',
+        }}
+      />
+      <div
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full blur-lg"
+        style={{
+          width: size * 0.62,
+          height: size * 0.16,
+          background: 'radial-gradient(ellipse, rgba(232, 121, 249, 0.42), rgba(251, 191, 36, 0.12), transparent 72%)',
+        }}
+      />
+      <svg viewBox="0 0 100 100" className="relative z-[1] h-full w-full drop-shadow-[0_12px_32px_rgba(232,121,249,0.35)]">
+        <defs>
+          <radialGradient id={aurora} cx="38%" cy="32%" r="65%">
+            <stop offset="0%" stopColor="#FDE68A" stopOpacity="0.9" />
+            <stop offset="45%" stopColor="#E879F9" stopOpacity="0.55" />
+            <stop offset="100%" stopColor="#4C1D95" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id={hubGrad} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#F0ABFC" />
+            <stop offset="35%" stopColor="#A855F7" />
+            <stop offset="70%" stopColor="#6366F1" />
+            <stop offset="100%" stopColor="#38BDF8" />
+          </linearGradient>
+          <linearGradient id={nodeA} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FBBF24" />
+            <stop offset="100%" stopColor="#F97316" />
+          </linearGradient>
+          <linearGradient id={nodeB} x1="100%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F472B6" />
+            <stop offset="100%" stopColor="#A855F7" />
+          </linearGradient>
+          <linearGradient id={ringGrad} x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#FBBF24" stopOpacity="0.9" />
+            <stop offset="50%" stopColor="#E879F9" stopOpacity="0.85" />
+            <stop offset="100%" stopColor="#38BDF8" stopOpacity="0.9" />
+          </linearGradient>
+          <linearGradient id={flowGlow} x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#E879F9" />
+            <stop offset="100%" stopColor="#38BDF8" />
+          </linearGradient>
+          <filter id={`${uid}-glow`} x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur stdDeviation="1.2" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <filter id={`${uid}-soft`}>
+            <feGaussianBlur stdDeviation="0.35" result="b" />
+            <feMerge>
+              <feMergeNode in="b" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <circle cx="50" cy="50" r="46" fill={`url(#${aurora})`} opacity="0.55" />
+
+        <g opacity="0.65">
+          <circle cx="50" cy="50" r="38" fill="none" stroke={`url(#${ringGrad})`} strokeWidth="0.6" strokeDasharray="4 6">
+            <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="48s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="50" cy="50" r="41" fill="none" stroke="rgba(56, 189, 248, 0.35)" strokeWidth="0.5" strokeDasharray="2 10">
+            <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="36s" repeatCount="indefinite" />
+          </circle>
+        </g>
+
+        <path
+          d="M22 32 H78 M22 68 H78 M50 38 V62"
+          stroke="rgba(148, 163, 184, 0.45)"
+          strokeWidth="1.25"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <path
+          d="M22 32 H78 M22 68 H78 M50 38 V62"
+          stroke={`url(#${flowGlow})`}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          fill="none"
+          opacity="0.28"
+          style={{ mixBlendMode: 'screen' }}
+        />
+
+        <rect x="11" y="21" width="24" height="17" rx="5" fill={`url(#${nodeA})`} filter={`url(#${uid}-glow)`} opacity="0.98" />
+        <rect x="65" y="21" width="24" height="17" rx="5" fill={`url(#${nodeA})`} filter={`url(#${uid}-glow)`} opacity="0.98" />
+        <rect x="38" y="65" width="24" height="17" rx="5" fill={`url(#${nodeB})`} opacity="0.96" />
+
+        <circle cx="50" cy="50" r="21.5" fill={`url(#${hubGrad})`} filter={`url(#${uid}-soft)`} />
+        <ellipse cx="38" cy="36" rx="14" ry="10" fill="rgba(255,255,255,0.22)" />
+        <ellipse cx="41" cy="46" rx="4" ry="4.5" fill="#0c0615" />
+        <ellipse cx="59" cy="46" rx="4" ry="4.5" fill="#0c0615" />
+        <circle cx="43" cy="44.5" r="1.2" fill="#67E8F9" opacity="0.95" />
+        <circle cx="61" cy="44.5" r="1.2" fill="#67E8F9" opacity="0.95" />
+        <path
+          d="M37 58 Q50 68 63 58"
+          stroke="#0c0615"
+          strokeWidth="1.75"
+          fill="none"
+          strokeLinecap="round"
+          opacity="0.92"
+        />
+
+        <circle cx="79" cy="79" r="5" fill="#FBBF24" opacity="0.95">
+          <animate attributeName="opacity" values="0.55;1;0.55" dur="2.4s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="21" cy="79" r="4" fill="#38BDF8" opacity="0.9">
+          <animate attributeName="opacity" values="0.45;0.95;0.45" dur="2.8s" repeatCount="indefinite" />
+        </circle>
+        <circle cx="50" cy="14" r="3" fill="#F472B6" opacity="0.85">
+          <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite" />
+        </circle>
+      </svg>
+    </div>
+  );
+});
+
 // Export the main Mascot2D component
 export function Mascot2D({ 
   size = 'medium', 
@@ -393,6 +534,8 @@ export function Mascot2D({
         return <FlutterMascot size={sizeValue} />;
       case 'web':
         return <WebMascot size={sizeValue} />;
+      case 'automation':
+        return <AutomationMascot size={sizeValue} />;
       default:
         return <AndroidMascot size={sizeValue} />;
     }
@@ -428,4 +571,4 @@ export function MascotIcon({ className = '' }: { className?: string }) {
 }
 
 // Export individual mascots for direct use
-export { AndroidMascot, IOSMascot, FlutterMascot, WebMascot };
+export { AndroidMascot, IOSMascot, FlutterMascot, WebMascot, AutomationMascot };

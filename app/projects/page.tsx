@@ -3,6 +3,7 @@
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
@@ -34,6 +35,7 @@ const linkConfig = {
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState('all');
+  const router = useRouter();
   const { setTheme, isTransitioning } = useTheme();
 
   const filteredProjects = useMemo(() => {
@@ -131,6 +133,15 @@ export default function ProjectsPage() {
                     <motion.div
                       key={project.id}
                       layout
+                      role="link"
+                      tabIndex={0}
+                      onClick={() => router.push(`/projects/${project.id}`)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          router.push(`/projects/${project.id}`);
+                        }
+                      }}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
@@ -139,7 +150,7 @@ export default function ProjectsPage() {
                         delay: index * 0.04,
                         layout: { duration: 0.3 }
                       }}
-                      className="group theme-card rounded-xl overflow-hidden flex flex-col"
+                      className="group theme-card rounded-xl overflow-hidden flex flex-col cursor-pointer"
                     >
                       {/* Visual Header */}
                       <div className={`relative h-36 sm:h-40 bg-gradient-to-br ${project.gradient} overflow-hidden`}>
@@ -160,6 +171,7 @@ export default function ProjectsPage() {
                               src={project.image}
                               alt={project.title}
                               fill
+                              sizes="(max-width: 639px) 72px, 88px"
                               className="object-cover"
                             />
                           </div>
@@ -169,6 +181,12 @@ export default function ProjectsPage() {
                       {/* Content Section */}
                       <div className="p-4 flex flex-col flex-1">
                         <div className="flex-1">
+                          <p
+                            className="text-[10px] font-bold uppercase tracking-wider mb-2"
+                            style={{ color: 'var(--theme-secondary)' }}
+                          >
+                            Case study
+                          </p>
                           <h3 className="text-sm sm:text-base font-bold text-white mb-2 group-hover:text-[var(--theme-primary)] transition-colors line-clamp-1">
                             {project.title}
                           </h3>
@@ -183,7 +201,11 @@ export default function ProjectsPage() {
                               return (
                                 <button
                                   key={tag}
-                                  onClick={() => isClickable && handleTagClick(tag)}
+                                  type="button"
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    if (isClickable) handleTagClick(tag);
+                                  }}
                                   disabled={!isClickable || isTransitioning}
                                   className={`px-2 py-0.5 rounded-md text-[10px] font-semibold transition-all ${isClickable ? 'cursor-pointer hover:scale-105' : 'cursor-default'
                                     }`}
@@ -210,6 +232,7 @@ export default function ProjectsPage() {
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
                                 className="group/btn flex items-center gap-1.5 p-2 rounded-lg text-white transition-all duration-300"
                                 style={{ background: 'var(--theme-background)', border: '1px solid var(--theme-border)' }}
                                 title={config.label}
@@ -275,7 +298,7 @@ export default function ProjectsPage() {
                   boxShadow: '0 8px 24px var(--theme-glow)'
                 }}
               >
-                <span>Hire Me Now</span>
+                <span>Get in touch</span>
                 <ArrowLeftIcon className="w-4 h-4 rotate-180" />
               </Link>
             </div>

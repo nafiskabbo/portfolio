@@ -65,6 +65,18 @@ export const FlutterIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   </svg>
 );
 
+/** Workflows, chatbots, n8n-style automation */
+export const AutomationIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <circle cx="6" cy="8" r="2.5" />
+    <circle cx="18" cy="6" r="2.5" />
+    <circle cx="18" cy="18" r="2.5" />
+    <circle cx="6" cy="16" r="2.5" />
+    <path d="M8.2 9.2 14 7M16 8.5 16 15.5M14 17 8.2 14.8" />
+    <path d="M12 11v2l1 1" opacity={0.85} />
+  </svg>
+);
+
 export const KotlinIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="currentColor">
     <path d="M24 24H0V0h24L12 12Z" />
@@ -362,5 +374,18 @@ export const UserCheckIcon = ({ className = "w-6 h-6", style }: IconProps) => (
     <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
     <circle cx="8.5" cy="7" r="4" />
     <polyline points="17 11 19 13 23 9" />
+  </svg>
+);
+
+export const SparklesIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z" />
+    <path d="M5 3v4M19 17v4M3 21h4M17 5h4" />
+  </svg>
+);
+
+export const QuoteIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+  <svg className={className} style={style} viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.982.149-.03.299-.045.45-.045 1.206 0 2.116.865 2.116 2.09 0 1.206-.916 2.092-2.116 2.092-1.18 0-2.009-.756-2.543-1.409zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.982.149-.03.299-.045.45-.045 1.206 0 2.116.865 2.116 2.09 0 1.206-.916 2.092-2.116 2.092-1.18 0-2.009-.756-2.543-1.409z" />
   </svg>
 );

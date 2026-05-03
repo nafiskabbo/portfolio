@@ -68,6 +68,18 @@
   --theme-text-muted: #F9A8D4;
 }
 
+/* AI automation — workflows, bots, orchestration */
+[data-theme="automation"] {
+  --theme-primary: #C084FC;
+  --theme-secondary: #F59E0B;
+  --theme-accent: #22D3EE;
+  --theme-background: #0B0618;
+  --theme-surface: #150D28;
+  --theme-border: #2D2145;
+  --theme-glow: rgba(192, 132, 252, 0.22);
+  --theme-text-muted: #E9D5FF;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

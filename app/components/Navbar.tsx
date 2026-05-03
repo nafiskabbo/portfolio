@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { MenuIcon, CloseIcon, AndroidIcon, AppleIcon, FlutterIcon, NextJsIcon } from './Icons';
-import { useTheme, themeConfig, Theme } from './ThemeProvider';
+import { MenuIcon, CloseIcon, AndroidIcon, AppleIcon, FlutterIcon, NextJsIcon, AutomationIcon } from './Icons';
+import { useTheme, Theme } from './ThemeProvider';
 
 const navLinks = [
   { href: '/', label: 'Home' },
@@ -20,6 +20,7 @@ const themeOptions: { id: Theme; icon: typeof AndroidIcon; label: string }[] = [
   { id: 'ios', icon: AppleIcon, label: 'iOS' },
   { id: 'flutter', icon: FlutterIcon, label: 'Flutter' },
   { id: 'web', icon: NextJsIcon, label: 'Next.js' },
+  { id: 'automation', icon: AutomationIcon, label: 'AI Automation' },
 ];
 
 export function Navbar() {
@@ -55,6 +56,7 @@ export function Navbar() {
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
+    if (href === '/#projects') return pathname === '/' || pathname.startsWith('/projects');
     if (href.startsWith('/#')) return pathname === '/';
     return pathname === href || pathname.startsWith(href + '/');
   };
@@ -124,7 +126,7 @@ export function Navbar() {
 
               {/* Theme Dropdown */}
               <div
-                className={`absolute right-0 top-full mt-2 w-44 py-2 rounded-xl bg-[var(--theme-surface)] border border-[var(--theme-border)] shadow-xl shadow-black/20 transition-all duration-200 ${
+                className={`absolute right-0 top-full mt-2 w-52 py-2 rounded-xl bg-[var(--theme-surface)] border border-[var(--theme-border)] shadow-xl shadow-black/20 transition-all duration-200 ${
                   isThemeMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-2 invisible'
                 }`}
               >

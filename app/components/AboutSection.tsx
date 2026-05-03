@@ -1,14 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { GraduationIcon, CodeIcon, MobileIcon, CheckCircleIcon, BriefcaseIcon } from './Icons';
+import { GraduationIcon, CodeIcon, MobileIcon, CheckCircleIcon } from './Icons';
 import { ThemeBackground } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
 
 const stats = [
   { value: '5+', label: 'Years Exp' },
   { value: '50+', label: 'Projects' },
-  { value: '30+', label: 'Clients' },
+  { value: '50+', label: 'Clients' },
   { value: '8', label: 'Countries' },
 ];
 
@@ -42,7 +42,8 @@ const whatIBuild = [
   'Cross-Platform (Flutter)',
   'Web Applications',
   'Backend APIs',
-  'AI Integration',
+  'AI integration',
+  'AI automation — chatbots, n8n, workflows',
 ];
 
 const availability = [
@@ -197,31 +198,18 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Availability Section - Redesigned */}
+        {/* Availability — single-pixel gradient ring for even corners */}
         <div
           className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           style={{ transitionDelay: '400ms' }}
         >
-          {/* Gradient border wrapper */}
-          <div 
-            className="relative p-[2px] rounded-2xl overflow-hidden"
+          <div
+            className="rounded-2xl p-px shadow-lg"
             style={{
               background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary), var(--theme-accent))',
             }}
           >
-            {/* Animated glow effect */}
-            <div 
-              className="absolute inset-0 blur-xl opacity-50 animate-pulse-glow"
-              style={{
-                background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
-              }}
-            />
-            
-            {/* Inner content */}
-            <div 
-              className="relative rounded-2xl p-6 lg:p-8"
-              style={{ background: 'var(--theme-surface)' }}
-            >
+            <div className="rounded-2xl p-6 lg:p-8" style={{ background: 'var(--theme-surface)' }}>
               {/* Header */}
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
@@ -264,7 +252,7 @@ export function AboutSection() {
 
               {/* Availability Grid */}
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {availability.map(({ title, description, icon }, index) => (
+                {availability.map(({ title, description, icon }) => (
                   <div
                     key={title}
                     className="group relative p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-default"

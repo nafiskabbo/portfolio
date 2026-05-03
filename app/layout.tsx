@@ -91,6 +91,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth" data-theme="android" suppressHydrationWarning>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
+        suppressHydrationWarning
       >
         <Suspense fallback={null}>
           <ThemeProvider>{children}</ThemeProvider>
