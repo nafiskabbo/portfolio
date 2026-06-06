@@ -6,6 +6,7 @@ import { ProjectDetailView } from '../../components/ProjectDetailView';
 import { ThemeBackground } from '../../components/ThemeBackground';
 import { ALL_PROJECTS } from '../../data/projects';
 import { getProjectDetail } from '../../data/project-details';
+import { SITE_URL } from '@/lib/site';
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -25,6 +26,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: project.title,
       description: project.description,
+      url: `${SITE_URL}/projects/${id}`,
+    },
+    alternates: {
+      canonical: `${SITE_URL}/projects/${id}`,
     },
   };
 }

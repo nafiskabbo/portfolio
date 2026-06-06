@@ -5,6 +5,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ChatAssistantShell } from "./components/ChatAssistantShell";
+import { JsonLd } from "./components/JsonLd";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,8 +26,7 @@ export const metadata: Metadata = {
     default: "Nafis Kabbo | Mobile Developer — Android, iOS & Flutter",
     template: "%s | Nafis Kabbo",
   },
-  description:
-    "Nafis Kabbo — Mobile Developer specializing in Native Android (Kotlin), Native iOS (SwiftUI/Swift), and Flutter cross-platform development. 5+ years building production apps with clean architecture, AI integration, and modern UI/UX.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Nafis Kabbo",
     "Kabbo",
@@ -48,17 +49,25 @@ export const metadata: Metadata = {
     "AI Mobile Apps",
     "Bangladesh Developer",
   ],
-  authors: [{ name: "Nafis Kabbo", url: "https://nafiskabbo.dev" }],
+  authors: [{ name: "Nafis Kabbo", url: SITE_URL }],
   creator: "Nafis Kabbo",
-  metadataBase: new URL("https://nafiskabbo.dev"),
+  metadataBase: new URL(SITE_URL),
   openGraph: {
     type: "website",
     locale: "en_US",
     title: "Nafis Kabbo — Mobile Developer | Android, iOS & Flutter",
     description:
       "Building high-performance mobile apps with Native Android, Native iOS, and Flutter. 5+ years of production experience with AI integration and clean architecture.",
-    siteName: "Nafis Kabbo Portfolio",
-    url: "https://nafiskabbo.dev",
+    siteName: SITE_NAME,
+    url: SITE_URL,
+    images: [
+      {
+        url: "/personal.webp",
+        width: 512,
+        height: 512,
+        alt: "Nafis Islam Kabbo — Mobile Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -66,6 +75,7 @@ export const metadata: Metadata = {
     description:
       "Building high-performance mobile apps with Native Android, Native iOS, and Flutter. 5+ years of production experience.",
     creator: "@nafiskabbo30",
+    images: ["/personal.webp"],
   },
   robots: {
     index: true,
@@ -79,7 +89,10 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://nafiskabbo.dev",
+    canonical: SITE_URL,
+    types: {
+      "text/markdown": SITE_URL,
+    },
   },
 };
 
@@ -94,6 +107,7 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
+        <JsonLd />
         <Suspense fallback={null}>
           <ThemeProvider>
             {children}

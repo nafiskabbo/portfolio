@@ -1,0 +1,140 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Portfolio Chat API",
+    "description": "AI chat assistant for Nafis Kabbo's portfolio — answers questions about experience, skills, and projects.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Nafis Kabbo",
+      "email": "nafiskabbo30@gmail.com",
+      "url": "https://nafiskabbo.dev"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://nafiskabbo.dev",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/api/chat": {
+      "post": {
+        "operationId": "sendChatMessage",
+        "summary": "Send a chat message",
+        "description": "Send conversation turns and receive an AI-generated reply about the portfolio.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChatRequest"
+              },
+              "example": {
+                "messages": [
+                  {
+                    "role": "user",
+                    "content": "What mobile platforms do you specialize in?"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChatResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request body"
+          },
+          "429": {
+            "description": "Rate limit exceeded"
+          },
+          "503": {
+            "description": "Service unavailable"
+          }
+        }
+      }
+    },
+    "/api/health": {
+      "get": {
+        "operationId": "healthCheck",
+        "summary": "Health check",
+        "responses": {
+          "200": {
+            "description": "Service is healthy",
+            "content": {
+              "application/health+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChatTurn": {
+        "type": "object",
+        "required": ["role", "content"],
+        "properties": {
+          "role": {
+            "type": "string",
+            "enum": ["user", "assistant"]
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 6000
+          }
+        }
+      },
+      "ChatRequest": {
+        "type": "object",
+        "required": ["messages"],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 40,
+            "items": {
+              "$ref": "#/components/schemas/ChatTurn"
+            }
+          }
+        }
+      },
+      "ChatResponse": {
+        "type": "object",
+        "required": ["reply", "modelUsed"],
+        "properties": {
+          "reply": {
+            "type": "string"
+          },
+          "modelUsed": {
+            "type": "string"
+          }
+        }
+      },
+      "HealthResponse": {
+        "type": "object",
+        "required": ["status"],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": ["pass"]
+          }
+        }
+      }
+    }
+  }
+}

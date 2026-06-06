@@ -5,10 +5,12 @@ import { SkillsSection } from './components/SkillsSection';
 import { ProjectsPreview } from './components/ProjectsPreview';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { WebMcpTools } from './components/WebMcpTools';
 
 export default function Home() {
   return (
     <>
+      <WebMcpTools />
       <Navbar />
       <main className="text-white" style={{ background: 'var(--theme-background)' }}>
         <HeroSection />
