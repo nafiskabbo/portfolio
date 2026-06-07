@@ -30,11 +30,14 @@ Content-Type: application/json
 }
 ```
 
+## Authentication
+
+External agents must send `X-API-Key` (contact site owner). Browser chat on the portfolio uses same-origin requests.
+
 ## Limits
 
 - 24 requests per 10 minutes per IP
 - 1–40 conversation turns per request
-- No authentication required
 
 ## Docs
 

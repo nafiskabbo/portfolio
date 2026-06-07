@@ -4,21 +4,22 @@ import { SITE_URL } from '@/lib/site';
 function buildAuthMd(): string {
   return `# Authentication — ${SITE_URL}
 
-This site is a public portfolio. No agent registration or OAuth tokens are required to browse content or use the public chat API.
+This site is a public portfolio. Browsing requires no authentication.
 
-## Public APIs
+## APIs
 
 | API | Auth | Docs |
 |-----|------|------|
-| Portfolio Chat | None (rate-limited) | ${SITE_URL}/docs/api/chat |
+| Portfolio Chat | Origin (browser) or \`X-API-Key\` | ${SITE_URL}/docs/api/chat |
+| Lead tracking | Signed URLs (HMAC) | ${SITE_URL}/docs/api/tracking |
 
 ## Rate limits
 
-The chat API allows 24 requests per 10 minutes per IP address.
+Chat: 24 requests per 10 minutes per IP. Tracking: 80/hour per IP. Abusive IPs are auto-blocked.
 
 ## Protected resources
 
-None. All published pages and the chat API are publicly accessible.
+Chat and tracking APIs reject unsigned or cross-origin abuse. API keys and signing secrets are server-only env vars.
 `;
 }
 

@@ -16,7 +16,8 @@ export default function ChatApiDocsPage() {
     <main className="mx-auto max-w-3xl px-6 py-16 text-slate-200">
       <h1 className="mb-4 text-3xl font-bold text-white">Portfolio Chat API</h1>
       <p className="mb-8 text-slate-400">
-        Public, rate-limited API for AI agents and integrations. No authentication required.
+        Rate-limited API for the portfolio chatbot and trusted integrations. Requests must come
+        from this site or include a valid <code className="text-cyan-300">X-API-Key</code> header.
       </p>
 
       <section className="mb-10 space-y-4">
@@ -44,8 +45,18 @@ export default function ChatApiDocsPage() {
       </section>
 
       <section className="mb-10 space-y-4">
+        <h2 className="text-xl font-semibold text-white">Authentication</h2>
+        <p className="text-slate-400">
+          Browser requests from {SITE_URL} are allowed via Origin/Referer check. External agents
+          must send <code className="text-cyan-300">X-API-Key: &lt;CHAT_API_KEY&gt;</code>.
+        </p>
+      </section>
+
+      <section className="mb-10 space-y-4">
         <h2 className="text-xl font-semibold text-white">Rate limits</h2>
-        <p className="text-slate-400">24 messages per 10 minutes per IP address.</p>
+        <p className="text-slate-400">
+          24 messages per 10 minutes per IP. Abusive IPs are auto-blocked for 24 hours.
+        </p>
       </section>
 
       <section className="space-y-3">

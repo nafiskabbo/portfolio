@@ -3,39 +3,12 @@ import {
   runPortfolioChatWithFallback,
   type ChatTurn,
 } from '@/lib/portfolio-chat/providers';
+import { getClientIp } from '@/lib/security/client-ip';
+import { canAccessChatApi } from '@/lib/security/api-guard';
+import { checkRateLimit, CHAT_RATE_LIMIT } from '@/lib/security/rate-limit';
 
 export const runtime = 'nodejs';
 export const maxDuration = 120;
-
-const RATE_WINDOW_MS = 10 * 60_000;
-const RATE_MAX = 24;
-const rateBuckets = new Map<string, number[]>();
-
-function getClientIp(headers: Headers): string {
-  const forwarded = headers.get('x-forwarded-for');
-  if (forwarded) {
-    const first = forwarded.split(',')[0]?.trim();
-    if (first) return first;
-  }
-  return headers.get('x-real-ip') || 'unknown';
-}
-
-function allowRate(ip: string): boolean {
-  const now = Date.now();
-  const prev = rateBuckets.get(ip) ?? [];
-  const recent = prev.filter((t) => now - t < RATE_WINDOW_MS);
-  if (recent.length >= RATE_MAX) return false;
-  recent.push(now);
-  rateBuckets.set(ip, recent);
-  if (rateBuckets.size > 5000) {
-    for (const [k, v] of rateBuckets) {
-      const fresh = v.filter((t) => now - t < RATE_WINDOW_MS);
-      if (fresh.length === 0) rateBuckets.delete(k);
-      else rateBuckets.set(k, fresh);
-    }
-  }
-  return true;
-}
 
 function isValidTurns(raw: unknown): raw is ChatTurn[] {
   if (!Array.isArray(raw) || raw.length === 0 || raw.length > 40) return false;
@@ -60,8 +33,16 @@ function clipForModel(turns: ChatTurn[]): ChatTurn[] {
 }
 
 export async function POST(req: Request) {
+  if (!canAccessChatApi(req.headers)) {
+    return NextResponse.json({ error: 'Forbidden.' }, { status: 403 });
+  }
+
   const ip = getClientIp(req.headers);
-  if (!allowRate(ip)) {
+  const rate = await checkRateLimit(ip, CHAT_RATE_LIMIT);
+  if (rate.blocked) {
+    return NextResponse.json({ error: 'Access temporarily blocked.' }, { status: 403 });
+  }
+  if (!rate.allowed) {
     return NextResponse.json(
       { error: 'Too many messages. Please try again in a few minutes.' },
       { status: 429 }
