@@ -98,21 +98,21 @@ export function PortfolioChatbot({ variant = 'fab' }: PortfolioChatbotProps) {
   const [formBusy, setFormBusy] = useState(false);
   const [formStatus, setFormStatus] = useState<'idle' | 'ok' | 'err'>('idle');
   const [formErr, setFormErr] = useState('');
-  const [shuffledPrompts, setShuffledPrompts] = useState<string[]>(() => [...suggestedPrompts]);
-  const [shuffledBriefStarters, setShuffledBriefStarters] = useState<string[]>(() => [...briefStarters]);
+  const [shuffledPrompts, setShuffledPrompts] = useState<string[]>(() => shuffle(suggestedPrompts));
+  const [shuffledBriefStarters, setShuffledBriefStarters] = useState<string[]>(() =>
+    shuffle(briefStarters)
+  );
   const listRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setShuffledPrompts(shuffle(suggestedPrompts));
-    setShuffledBriefStarters(shuffle(briefStarters));
+  const toggleFab = useCallback(() => {
+    setOpen((wasOpen) => {
+      if (!wasOpen) {
+        setShuffledPrompts(shuffle(suggestedPrompts));
+        setShuffledBriefStarters(shuffle(briefStarters));
+      }
+      return !wasOpen;
+    });
   }, []);
-
-  useEffect(() => {
-    if (isFab && open) {
-      setShuffledPrompts(shuffle(suggestedPrompts));
-      setShuffledBriefStarters(shuffle(briefStarters));
-    }
-  }, [isFab, open]);
 
   const scrollToBottom = useCallback(() => {
     requestAnimationFrame(() => {
@@ -620,7 +620,7 @@ export function PortfolioChatbot({ variant = 'fab' }: PortfolioChatbotProps) {
       {isFab && !(open && fullscreen) && (
         <button
           type="button"
-          onClick={() => setOpen((v) => !v)}
+          onClick={toggleFab}
           className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full text-white shadow-xl transition hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--theme-primary)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--theme-background)]"
           style={{
             background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',

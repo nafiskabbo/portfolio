@@ -1,13 +1,12 @@
 'use client';
 
-import { useTheme, Theme, themeConfig } from './ThemeProvider';
+import { useTheme, themeConfig } from './ThemeProvider';
 import { memo, useMemo, useId } from 'react';
 
 interface Mascot2DProps {
   size?: 'small' | 'medium' | 'large';
   position?: 'left' | 'right' | 'center';
   className?: string;
-  variant?: 'default' | 'minimal';
 }
 
 // Android Robot Mascot - 2D with 3D illusion effect
@@ -503,7 +502,6 @@ export function Mascot2D({
   size = 'medium', 
   position = 'right',
   className = '',
-  variant = 'default'
 }: Mascot2DProps) {
   const { theme } = useTheme();
   

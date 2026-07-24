@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
-import { PlayStoreIcon, AppStoreIcon, WebIcon, ExternalLinkIcon, ArrowLeftIcon, AndroidIcon, AppleIcon, FlutterIcon, CodeIcon, RocketIcon, WalletIcon, WrenchIcon, SmartphoneIcon } from '../components/Icons';
+import { PlayStoreIcon, AppStoreIcon, WebIcon, ExternalLinkIcon, ArrowLeftIcon, AndroidIcon, AppleIcon, FlutterIcon, CodeIcon, RocketIcon, WalletIcon, WrenchIcon, SmartphoneIcon, GithubIcon } from '../components/Icons';
 import { useTheme } from '../components/ThemeProvider';
 import { ThemeBackground } from '../components/ThemeBackground';
 import { Mascot2D } from '../components/Mascot2D';
@@ -18,6 +18,7 @@ const categories = [
   { id: 'ai', label: 'AI Apps', icon: CodeIcon },
   { id: 'utility', label: 'Utility', icon: WrenchIcon },
   { id: 'fintech', label: 'Fintech', icon: WalletIcon },
+  { id: 'open-source', label: 'Open Source', icon: GithubIcon },
 ];
 
 const platformBadge = {
@@ -25,12 +26,14 @@ const platformBadge = {
   ios: { icon: AppleIcon, label: 'iOS' },
   'cross-platform': { icon: FlutterIcon, label: 'Cross-Platform' },
   'native-multiplatform': { icon: SmartphoneIcon, label: 'Android & iOS' },
+  web: { icon: WebIcon, label: 'Web' },
 };
 
 const linkConfig = {
   android: { icon: PlayStoreIcon, label: 'Play Store' },
   ios: { icon: AppStoreIcon, label: 'App Store' },
   web: { icon: WebIcon, label: 'Website' },
+  github: { icon: GithubIcon, label: 'GitHub' },
 };
 
 export default function ProjectsPage() {
@@ -228,7 +231,7 @@ export default function ProjectsPage() {
                             const config = linkConfig[link.type];
                             return (
                               <a
-                                key={link.type}
+                                key={`${link.type}-${link.url}`}
                                 href={link.url}
                                 target="_blank"
                                 rel="noopener noreferrer"

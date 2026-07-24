@@ -88,6 +88,9 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  verification: {
+    google: "4b8J6NrWHLMITLuVCfJLqqXJRMLzERtxpjMp6SKuXpc",
+  },
   alternates: {
     canonical: SITE_URL,
     types: {
@@ -102,7 +105,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" data-theme="android" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="scroll-smooth"
+      data-scroll-behavior="smooth"
+      data-theme="android"
+      suppressHydrationWarning
+    >
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         suppressHydrationWarning

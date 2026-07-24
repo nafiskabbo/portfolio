@@ -9,6 +9,7 @@ import {
   PlayStoreIcon,
   AppStoreIcon,
   WebIcon,
+  GithubIcon,
   SparklesIcon,
   QuoteIcon,
 } from './Icons';
@@ -19,6 +20,7 @@ const linkIcons = {
   android: { icon: PlayStoreIcon, label: 'Play Store' },
   ios: { icon: AppStoreIcon, label: 'App Store' },
   web: { icon: WebIcon, label: 'Website' },
+  github: { icon: GithubIcon, label: 'GitHub' },
 };
 
 interface ProjectDetailViewProps {
@@ -106,7 +108,7 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
                   const Icon = cfg.icon;
                   return (
                     <a
-                      key={link.type}
+                      key={`${link.type}-${link.url}`}
                       href={link.url}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -214,29 +216,44 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
                   scrollbarColor: 'color-mix(in srgb, var(--theme-primary) 45%, transparent) transparent',
                 }}
               >
-                {d.screenshots.map((shot, i) => (
-                  <motion.figure
-                    key={`${shot.src}-${i}`}
-                    initial={{ opacity: 0, y: 12 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: Math.min(i * 0.04, 0.24) }}
-                    className="group relative shrink-0 snap-start overflow-hidden rounded-xl ring-1 ring-white/10 shadow-xl"
-                    style={{
-                      width: 'min(240px, 72vw)',
-                      aspectRatio: '9 / 16',
-                      maxHeight: 'min(70vh, 560px)',
-                    }}
-                  >
-                    <Image
-                      src={shot.src}
-                    alt="Project screenshot"
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-                      sizes="(max-width: 640px) 72vw, 240px"
-                    />
-                  </motion.figure>
-                ))}
+                {d.screenshots.map((shot, i) => {
+                  const isLandscape = shot.aspect === 'landscape';
+                  return (
+                    <motion.figure
+                      key={`${shot.src}-${i}`}
+                      initial={{ opacity: 0, y: 12 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: Math.min(i * 0.04, 0.24) }}
+                      className="group relative shrink-0 snap-start overflow-hidden rounded-xl ring-1 ring-white/10 shadow-xl"
+                      style={
+                        isLandscape
+                          ? {
+                              width: 'min(720px, 88vw)',
+                              aspectRatio: '16 / 9',
+                              maxHeight: 'min(55vh, 420px)',
+                            }
+                          : {
+                              width: 'min(240px, 72vw)',
+                              aspectRatio: '9 / 16',
+                              maxHeight: 'min(70vh, 560px)',
+                            }
+                      }
+                    >
+                      <Image
+                        src={shot.src}
+                        alt={shot.alt}
+                        fill
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                        sizes={
+                          isLandscape
+                            ? '(max-width: 640px) 88vw, 720px'
+                            : '(max-width: 640px) 72vw, 240px'
+                        }
+                      />
+                    </motion.figure>
+                  );
+                })}
               </div>
             </div>
           </div>

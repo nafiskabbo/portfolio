@@ -7,7 +7,6 @@ import {
   EmailIcon,
   WhatsAppIcon,
   DownloadIcon,
-  ExternalLinkIcon,
   SendIcon,
   YouTubeIcon,
   InstagramIcon,

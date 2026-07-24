@@ -83,7 +83,7 @@ export const KotlinIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   </svg>
 );
 
-export const SwiftIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+export const SwiftIcon = ({ className = "w-6 h-6" }: IconProps) => (
   <svg className={className} viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
     <defs>
       <linearGradient id="swift-grad" x1="-134.494" y1="-171.82" x2="-134.497" y2="-171.89" gradientTransform="matrix(240, 0, 0, -205.6, 32295, -35312.585)" gradientUnits="userSpaceOnUse">
@@ -107,7 +107,7 @@ export const TypeScriptIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   </svg>
 );
 
-export const NodeJsIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+export const NodeJsIcon = ({ className = "w-6 h-6" }: IconProps) => (
   <svg className={className} viewBox="0 0 44 50" xmlns="http://www.w3.org/2000/svg">
     <defs>
       <clipPath id="hexClip">
@@ -162,7 +162,7 @@ export const SQLIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   </svg>
 );
 
-export const PlayStoreIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+export const PlayStoreIcon = ({ className = "w-6 h-6" }: IconProps) => (
   <svg className={className} viewBox="0 0 133 133" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path fill="#47bcff" d="m16.779 3.052 74.857 43.207 28.819 16.649c2.704 1.627 2.726 5.514.042 7.162l-.127.085-103.528 59.771-.085.042a4.176 4.176 0 0 1-3.232.359c-1.69-.507-3.022-2.049-3.022-4.056V6.728c0-2.007 1.331-3.549 3.022-4.056 1.035-.297 2.197-.233 3.254.38z" />
     <path fill="#0bdf74" d="m16.779 3.052 74.857 43.207L72.832 66.5 13.525 2.671c1.035-.296 2.197-.232 3.254.381z" />
@@ -171,7 +171,7 @@ export const PlayStoreIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   </svg>
 );
 
-export const AppStoreIcon = ({ className = "w-6 h-6", style }: IconProps) => (
+export const AppStoreIcon = ({ className = "w-6 h-6" }: IconProps) => (
   <svg className={className} viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
     <linearGradient id="a_appstore" x1="256" x2="256" y1=".032" y2="511.968" gradientUnits="userSpaceOnUse">
       <stop offset="0" stopColor="#00bffc"></stop>

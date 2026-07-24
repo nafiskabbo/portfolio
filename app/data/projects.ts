@@ -1,7 +1,7 @@
 import { Theme } from '../components/ThemeProvider';
 
 export interface ProjectLink {
-  type: 'android' | 'ios' | 'web';
+  type: 'android' | 'ios' | 'web' | 'github';
   url: string;
 }
 
@@ -13,8 +13,8 @@ export interface Project {
   gradient: string;
   tags: string[];
   links: ProjectLink[];
-  platform: 'android' | 'ios' | 'cross-platform' | 'native-multiplatform';
-  category: 'ai' | 'mobile' | 'fintech' | 'utility';
+  platform: 'android' | 'ios' | 'cross-platform' | 'native-multiplatform' | 'web';
+  category: 'ai' | 'mobile' | 'fintech' | 'utility' | 'open-source';
   featured?: boolean;
 }
 
@@ -27,6 +27,7 @@ export const TAG_THEME_MAP: Record<string, Theme> = {
   Android: 'android',
   Kotlin: 'android',
   'Next.js': 'web',
+  TypeScript: 'web',
   AI: 'automation',
   'AI Automation': 'automation',
   n8n: 'automation',
@@ -37,7 +38,7 @@ export const TAG_THEME_MAP: Record<string, Theme> = {
 
 /**
  * All projects in display order:
- * heal-tone … stride-soles … elsie
+ * emu8086web … heal-tone … stride-soles … elsie
  */
 export const ALL_PROJECTS: Project[] = [
   {
@@ -146,6 +147,22 @@ export const ALL_PROJECTS: Project[] = [
     category: 'utility',
   },
   {
+    id: 'emu8086web',
+    title: 'emu8086web',
+    description:
+      'Browser-based 8086 assembler and step debugger — write, assemble, and debug MASM-style assembly entirely in the browser. Open source modernization of classic emu8086.',
+    image: '/logo_emu_8086.svg',
+    gradient: 'from-slate-600 to-cyan-700',
+    tags: ['Next.js', 'TypeScript', '8086', 'Open Source'],
+    links: [
+      { type: 'web', url: 'https://emu-8086-web.vercel.app/' },
+      { type: 'github', url: 'https://github.com/nafiskabbo/emu_8086_web' },
+    ],
+    platform: 'web',
+    category: 'open-source',
+    featured: true,
+  },
+  {
     id: 'elsie',
     title: 'Elsie',
     description: 'A feature-rich mobile application with modern Material Design and intuitive user experience.',
@@ -160,5 +177,5 @@ export const ALL_PROJECTS: Project[] = [
   },
 ];
 
-/** First 4 projects for the home page preview */
-export const FEATURED_PROJECTS = ALL_PROJECTS.slice(0, 4);
+/** Featured projects for the home page preview */
+export const FEATURED_PROJECTS = ALL_PROJECTS.filter((p) => p.featured).slice(0, 4);

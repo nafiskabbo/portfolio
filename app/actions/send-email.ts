@@ -29,6 +29,15 @@ function isRateLimited(email: string): boolean {
 
 function sanitize(input: string): string {
   return input
+    .replace(/[\r\n]+/g, ' ')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .trim();
+}
+
+function sanitizeMultiline(input: string): string {
+  return input
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
@@ -83,14 +92,14 @@ export async function sendContactEmail(data: ContactFormData): Promise<ActionRes
     const safeEmail = sanitize(email);
     const safeCategory = sanitize(category);
     const safeSubject = sanitize(subject);
-    const safeMessage = sanitize(message);
+    const safeMessage = sanitizeMultiline(message);
 
     await transporter.sendMail({
       from: `"Portfolio Contact" <${smtpUser}>`,
       to: recipientEmail,
       replyTo: safeEmail,
       subject: `[Portfolio] [${safeCategory}] ${safeSubject}`,
-      text: `From: ${safeEmail}\nProject Type: ${safeCategory}\n\nMessage:\n${message}`,
+      text: `From: ${safeEmail}\nProject Type: ${safeCategory}\n\nMessage:\n${safeMessage}`,
       html: `
         <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; padding: 24px; background: #0f172a; color: #e2e8f0; border-radius: 12px;">
           <h2 style="color: #3DDC84; margin: 0 0 20px 0; font-size: 20px;">New Portfolio Inquiry</h2>

@@ -1,7 +1,7 @@
 'use client';
 
-import { useTheme, Theme } from './ThemeProvider';
-import { memo, useState, useEffect } from 'react';
+import { useTheme } from './ThemeProvider';
+import { memo, useMemo, useSyncExternalStore } from 'react';
 
 interface FloatingElement {
   id: number;
@@ -416,15 +416,15 @@ interface ThemeBackgroundProps {
 export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeBackgroundProps) {
   const { theme } = useTheme();
   const elementCount = intensity === 'low' ? 12 : intensity === 'medium' ? 20 : 30;
-
-  // Start with deterministic elements, then randomize on client
-  const [elements, setElements] = useState<FloatingElement[]>(() => generateDefaultElements(elementCount));
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setElements(generateRandomElements(elementCount));
-    setMounted(true);
-  }, [elementCount]);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  const elements = useMemo(
+    () => (mounted ? generateRandomElements(elementCount) : generateDefaultElements(elementCount)),
+    [mounted, elementCount]
+  );
 
   const renderElements = () => {
     switch (theme) {
@@ -478,15 +478,15 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
 // Compact background for smaller sections
 export function ThemeBackgroundCompact({ className = '' }: { className?: string }) {
   const { theme } = useTheme();
-
-  // Start with deterministic elements, then randomize on client
-  const [elements, setElements] = useState<FloatingElement[]>(() => generateDefaultElements(8));
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setElements(generateRandomElements(8));
-    setMounted(true);
-  }, []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
+  const elements = useMemo(
+    () => (mounted ? generateRandomElements(8) : generateDefaultElements(8)),
+    [mounted]
+  );
 
   const renderMiniElements = () => {
     switch (theme) {

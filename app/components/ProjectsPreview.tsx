@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon, SmartphoneIcon } from './Icons';
+import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon, SmartphoneIcon, GithubIcon } from './Icons';
 import { useTheme } from './ThemeProvider';
 import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
@@ -14,6 +14,7 @@ const linkIcons = {
   android: { icon: PlayStoreIcon, color: 'hover:text-green-400' },
   ios: { icon: AppStoreIcon, color: 'hover:text-blue-400' },
   web: { icon: WebIcon, color: 'hover:text-cyan-400' },
+  github: { icon: GithubIcon, color: 'hover:text-white' },
 };
 
 const platformBadge = {
@@ -21,6 +22,7 @@ const platformBadge = {
   ios: { icon: AppleIcon, label: 'iOS' },
   'cross-platform': { icon: FlutterIcon, label: 'Cross-Platform' },
   'native-multiplatform': { icon: SmartphoneIcon, label: 'Android & iOS' },
+  web: { icon: WebIcon, label: 'Web' },
 };
 
 export function ProjectsPreview() {
@@ -176,7 +178,7 @@ export function ProjectsPreview() {
                       const { icon: Icon, color } = linkIcons[link.type];
                       return (
                         <a
-                          key={link.type}
+                          key={`${link.type}-${link.url}`}
                           href={link.url}
                           target="_blank"
                           rel="noopener noreferrer"

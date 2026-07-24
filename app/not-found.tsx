@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { HomeIcon, ArrowRightIcon } from './components/Icons';
 import { ThemeBackground } from './components/ThemeBackground';
 import { Mascot2D } from './components/Mascot2D';
-import { useTheme } from './components/ThemeProvider';
 
 const codeLines = [
   'const page = await fetch(url);',
@@ -23,7 +22,6 @@ const funFacts = [
 ];
 
 export default function NotFound() {
-  const { theme } = useTheme();
   const [currentLine, setCurrentLine] = useState(0);
   const [displayedCode, setDisplayedCode] = useState<string[]>([]);
   const [currentFact, setCurrentFact] = useState(0);

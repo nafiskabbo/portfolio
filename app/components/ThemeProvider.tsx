@@ -76,48 +76,50 @@ export const themeConfig = {
   },
 } as const;
 
+function applyTheme(newTheme: Theme) {
+  const config = themeConfig[newTheme];
+  const root = document.documentElement;
+
+  root.style.setProperty('--theme-primary', config.primary);
+  root.style.setProperty('--theme-secondary', config.secondary);
+  root.style.setProperty('--theme-accent', config.accent);
+  root.style.setProperty('--theme-background', config.background);
+  root.style.setProperty('--theme-surface', config.surface);
+  root.style.setProperty('--theme-border', config.border);
+  root.style.setProperty('--theme-glow', config.glow);
+  root.setAttribute('data-theme', newTheme);
+}
+
+const VALID_THEMES: Theme[] = ['android', 'ios', 'flutter', 'web', 'automation'];
+
+function readInitialTheme(searchParams: URLSearchParams): Theme {
+  const urlTheme = searchParams.get('theme') as Theme | null;
+  if (urlTheme && VALID_THEMES.includes(urlTheme)) return urlTheme;
+  if (typeof window !== 'undefined') {
+    const savedTheme = localStorage.getItem('portfolio-theme') as Theme | null;
+    if (savedTheme && VALID_THEMES.includes(savedTheme)) return savedTheme;
+  }
+  return 'android';
+}
+
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('android');
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const [theme, setThemeState] = useState<Theme>('android');
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  // Initialize theme from URL or localStorage
+  // Hydrate theme from URL / localStorage after mount (client-only storage)
   useEffect(() => {
-    const urlTheme = searchParams.get('theme') as Theme | null;
-    const savedTheme = localStorage.getItem('portfolio-theme') as Theme | null;
-    const validThemes: Theme[] = ['android', 'ios', 'flutter', 'web', 'automation'];
-    
-    let initialTheme: Theme = 'android';
-    
-    if (urlTheme && validThemes.includes(urlTheme)) {
-      initialTheme = urlTheme;
-    } else if (savedTheme && validThemes.includes(savedTheme)) {
-      initialTheme = savedTheme;
-    }
-    
-    setThemeState(initialTheme);
+    const initialTheme = readInitialTheme(searchParams);
     applyTheme(initialTheme);
-    setMounted(true);
+    const frame = requestAnimationFrame(() => {
+      setThemeState(initialTheme);
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
   }, [searchParams]);
-
-  const applyTheme = (newTheme: Theme) => {
-    const config = themeConfig[newTheme];
-    const root = document.documentElement;
-    
-    root.style.setProperty('--theme-primary', config.primary);
-    root.style.setProperty('--theme-secondary', config.secondary);
-    root.style.setProperty('--theme-accent', config.accent);
-    root.style.setProperty('--theme-background', config.background);
-    root.style.setProperty('--theme-surface', config.surface);
-    root.style.setProperty('--theme-border', config.border);
-    root.style.setProperty('--theme-glow', config.glow);
-    
-    // Update data attribute for CSS selectors
-    root.setAttribute('data-theme', newTheme);
-  };
 
   const setTheme = useCallback((newTheme: Theme, withAnimation = true, clickEvent?: MouseEvent) => {
     if (newTheme === theme) return;

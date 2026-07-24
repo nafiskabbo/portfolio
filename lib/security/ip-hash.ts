@@ -1,7 +1,12 @@
 import { createHash, createHmac, timingSafeEqual } from 'crypto';
 
 function getSalt(): string {
-  return process.env.IP_HASH_SALT || process.env.TRACKING_SIGNING_SECRET || 'dev-only-salt';
+  const salt = process.env.IP_HASH_SALT || process.env.TRACKING_SIGNING_SECRET;
+  if (salt) return salt;
+  if (process.env.NODE_ENV === 'production') {
+    throw new Error('IP_HASH_SALT or TRACKING_SIGNING_SECRET must be set in production');
+  }
+  return 'dev-only-salt';
 }
 
 export function hashIp(ip: string): string {

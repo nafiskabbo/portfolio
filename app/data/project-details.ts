@@ -21,6 +21,8 @@ export interface ProjectScreenshot {
   src: string;
   alt: string;
   caption?: string;
+  /** Default `portrait` (9:16 phone). Use `landscape` for desktop/web shots (16:9). */
+  aspect?: 'portrait' | 'landscape';
 }
 
 export interface ProjectDetailContent {
@@ -34,6 +36,33 @@ export interface ProjectDetailContent {
 }
 
 export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
+  emu8086web: {
+    problem:
+      'Students and developers learning 8086 assembly were stuck with aging desktop-only tools that don’t run well across modern platforms.',
+    solution:
+      'A full browser IDE that assembles and step-debugs MASM-style 8086 code in place — registers, flags, memory, stack, DOS/BIOS interrupts, and shareable program links with no install required.',
+    techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Custom 8086 interpreter'],
+    highlights: [
+      'Multi-file workspace with compile, run, step, and breakpoints',
+      'CPU registers, flags, data segment, hex memory dump, stack & call stack',
+      'CRT console with DOS INT 21h / BIOS INT 10h / INT 16h I/O',
+      'Shareable links, autosave, light/dark themes — MIT open source',
+    ],
+    metrics: [
+      { label: 'Platform', value: 'Web · any OS' },
+      { label: 'License', value: 'MIT' },
+      { label: 'Engine', value: 'In-browser 8086' },
+    ],
+    testimonials: [],
+    screenshots: [
+      {
+        src: '/screenshot_emu8086_1.webp',
+        alt: 'emu8086web IDE — assembler and debugger',
+        caption: 'IDE · assemble & step-debug',
+        aspect: 'landscape',
+      },
+    ],
+  },
   'heal-tone': {
     problem: 'Listeners wanted studio-grade healing tones and preset journeys without a cluttered or unreliable audio UX.',
     solution:
