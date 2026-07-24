@@ -36,13 +36,13 @@ interface ChatMessage {
 const welcomeMessage: ChatMessage = {
   role: 'assistant',
   content:
-    "Hi — I'm here to help you plan your project with Nafis (apps, websites, or both). What do you want to build first?",
+    "Hi. I'm here to help you plan your project with Nafis (apps, websites, or both). What do you want to build first?",
 };
 
 const suggestedPrompts = [
-  'Flutter vs native — how do I choose in plain words?',
+  'Flutter vs native: how do I choose in plain words?',
   'What happens after I send a message or the contact form?',
-  'I need a website and an app — can one person handle both?',
+  'I need a website and an app: can one person handle both?',
   'How long might a simple MVP take?',
   'What info do you need from me to reply with a clear next step?',
   'Can you add AI (chat, search, automation) to my product?',
@@ -52,7 +52,7 @@ const briefStarters = [
   'Quote for: … (describe product in one line)',
   'Deadline: I need … ready by …',
   'Budget: rough range is … (optional)',
-  'Platforms: Android / iOS / web / not sure — please advise',
+  'Platforms: Android / iOS / web / not sure; please advise',
   'I have designs at: … (link or “not yet”)',
 ] as const;
 
@@ -206,7 +206,7 @@ export function PortfolioChatbot({ variant = 'fab' }: PortfolioChatbotProps) {
           {
             role: 'assistant',
             content:
-              'Sent. Nafis will read your email and reply personally — same as the main contact form on the site.',
+              'Sent. Nafis will read your email and reply personally, same as the main contact form on the site.',
           },
         ]);
         setTimeout(() => setFormStatus('idle'), 4000);
@@ -281,7 +281,7 @@ export function PortfolioChatbot({ variant = 'fab' }: PortfolioChatbotProps) {
             Chat with Nafis&apos;s studio
           </h2>
           <p className="text-[11px] text-slate-400 sm:text-xs">
-            Apps, websites, and AI — ask in simple words; we keep answers short and clear.
+            Apps, websites, and AI. Ask in simple words; we keep answers short and clear.
           </p>
         </div>
         <div className="flex shrink-0 flex-wrap items-center justify-end gap-0.5 sm:gap-1">

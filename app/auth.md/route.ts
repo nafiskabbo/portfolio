@@ -1,8 +1,8 @@
 import { SITE_URL } from '@/lib/site';
 
-/** Public portfolio — no agent registration or OAuth required. */
+/** Public portfolio - no agent registration or OAuth required. */
 function buildAuthMd(): string {
-  return `# Authentication — ${SITE_URL}
+  return `# Authentication - ${SITE_URL}
 
 This site is a public portfolio. Browsing requires no authentication.
 

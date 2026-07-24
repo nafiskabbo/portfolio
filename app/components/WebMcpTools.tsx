@@ -62,8 +62,8 @@ export function WebMcpTools() {
           properties: {
             category: {
               type: 'string',
-              enum: ['ai', 'mobile', 'fintech', 'utility'],
-              description: 'Optional category filter',
+              enum: ['ai', 'mobile', 'fintech', 'utility', 'open-source'],
+              description: 'Optional category filter (open-source includes emu8086web)',
             },
           },
         },
@@ -93,7 +93,8 @@ export function WebMcpTools() {
           properties: {
             id: {
               type: 'string',
-              description: 'Project slug (e.g. heal-tone, deenhub)',
+              description:
+                'Project slug (e.g. emu8086web, heal-tone, deenhub, santa-chat, emaisha-pay)',
             },
           },
           required: ['id'],
@@ -102,14 +103,16 @@ export function WebMcpTools() {
           const id = String(input.id);
           const project = ALL_PROJECTS.find((p) => p.id === id);
           if (!project) {
-            return { error: 'Project not found', id };
+            return { error: 'Project not found', id, availableIds: ALL_PROJECTS.map((p) => p.id) };
           }
           return {
             id: project.id,
             title: project.title,
             description: project.description,
             platform: project.platform,
+            category: project.category,
             tags: project.tags,
+            featured: Boolean(project.featured),
             links: project.links,
             url: `${window.location.origin}/projects/${project.id}`,
           };

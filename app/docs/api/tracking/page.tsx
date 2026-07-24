@@ -21,13 +21,13 @@ export default function TrackingApiDocsPage() {
         <h2 className="text-xl font-semibold text-white">Endpoints</h2>
         <ul className="list-inside list-disc space-y-2 text-slate-400">
           <li>
-            <code className="text-cyan-300">GET /api/t/pixel</code> — 1×1 GIF (email open)
+            <code className="text-cyan-300">GET /api/t/pixel</code> - 1×1 GIF (email open)
           </li>
           <li>
-            <code className="text-cyan-300">GET|POST /api/t/click</code> — click beacon
+            <code className="text-cyan-300">GET|POST /api/t/click</code> - click beacon
           </li>
           <li>
-            <code className="text-cyan-300">GET /api/t/r</code> — log + redirect to destination
+            <code className="text-cyan-300">GET /api/t/r</code> - log + redirect to destination
           </li>
         </ul>
       </section>

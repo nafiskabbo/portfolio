@@ -4,7 +4,17 @@ import { SITE_DESCRIPTION, SITE_URL } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Projects',
   description:
-    'Mobile and AI apps by Nafis Kabbo — Flutter, Kotlin Android, Swift iOS, and cross-platform production apps.',
+    'Apps and open-source tools by Nafis Kabbo: Flutter, Kotlin Android, Swift iOS, Next.js web, AI products, and emu8086web (browser 8086 assembler).',
+  keywords: [
+    'Nafis Kabbo projects',
+    'Flutter apps',
+    'Android apps',
+    'iOS apps',
+    'emu8086web',
+    '8086 assembler',
+    'open source',
+    'AI apps',
+  ],
   openGraph: {
     title: 'Projects | Nafis Kabbo',
     description: SITE_DESCRIPTION,

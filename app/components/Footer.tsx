@@ -67,7 +67,7 @@ export function Footer() {
               <span className="text-xl font-bold theme-gradient-text">Nafis Kabbo</span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-4 max-w-md">
-              Mobile Developer specializing in Flutter, Kotlin, and Swift. Building beautiful apps with clean architecture.
+              Product-focused mobile developer helping startups and agencies ship store-ready apps that grow revenue and retention.
             </p>
 
             {/* Tech Stack Icons - Clickable */}

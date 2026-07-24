@@ -621,3 +621,165 @@ button:focus-visible {
   color: var(--theme-text-muted, var(--theme-primary));
   opacity: 0.8;
 }
+
+/* —— My Journey timeline (CSS-only; opacity/transform only) —— */
+@keyframes journey-draw {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes journey-pulse-travel {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes journey-node-in {
+  from {
+    opacity: 0;
+    transform: scale(0.55);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes journey-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.85);
+    opacity: 0;
+  }
+}
+
+.journey-line-track {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--theme-primary) 35%, transparent),
+    color-mix(in srgb, var(--theme-secondary) 45%, transparent),
+    color-mix(in srgb, var(--theme-accent) 35%, transparent)
+  );
+}
+
+.journey-line-beam {
+  background: linear-gradient(
+    180deg,
+    var(--theme-primary),
+    var(--theme-secondary),
+    var(--theme-accent)
+  );
+  transform: scaleY(0);
+  transform-origin: top;
+  opacity: 0.95;
+}
+
+.journey-line-glow {
+  height: 18%;
+  top: 0;
+  opacity: 0;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in srgb, var(--theme-primary) 80%, white),
+    transparent
+  );
+  filter: blur(3px);
+  will-change: top, opacity;
+}
+
+.journey-timeline.is-active .journey-line-beam {
+  animation: journey-draw 1.1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.journey-timeline.is-active .journey-line-glow {
+  animation: journey-pulse-travel 3.2s ease-in-out 1.1s infinite;
+}
+
+.journey-node {
+  opacity: 0;
+  transform: scale(0.55);
+}
+
+.journey-timeline.is-active .journey-node {
+  animation: journey-node-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: calc(0.28s + (var(--journey-i, 0) * 0.18s));
+}
+
+.journey-node-ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 9999px;
+  border: 1.5px solid color-mix(in srgb, var(--theme-primary) 70%, transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.journey-timeline.is-active .journey-node-ring {
+  animation: journey-ring 2.4s ease-out infinite;
+  animation-delay: calc(1.15s + (var(--journey-i, 0) * 0.35s));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journey-line-beam {
+    transform: scaleY(1);
+    animation: none !important;
+  }
+
+  .journey-line-glow {
+    display: none;
+  }
+
+  .journey-node {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
+  }
+
+  .journey-node-ring {
+    display: none;
+  }
+}
+
+/* Hero name caret (Claude-style blink) */
+@keyframes typewriter-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.typewriter-caret {
+  animation: typewriter-caret-blink 1.05s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-caret {
+    display: none;
+  }
+}

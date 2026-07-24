@@ -5,7 +5,7 @@ import { SITE_URL } from '@/lib/site';
 export const metadata: Metadata = {
   title: 'Portfolio Chat API',
   description:
-    'OpenAPI documentation for the portfolio chat API — ask questions about Nafis Kabbo skills and projects.',
+    'OpenAPI documentation for the portfolio chat API - ask questions about Nafis Kabbo skills and projects.',
   alternates: {
     canonical: `${SITE_URL}/docs/api/chat`,
   },

@@ -37,14 +37,16 @@ export const TAG_THEME_MAP: Record<string, Theme> = {
 };
 
 /**
- * All projects in display order:
- * emu8086web … heal-tone … stride-soles … elsie
+ * Display order (1-based):
+ * 1 heal-tone … 6 edipic, 7 emu8086web, 8 elsie, 9 stride-soles.
+ * emu8086web is not featured.
  */
 export const ALL_PROJECTS: Project[] = [
   {
     id: 'heal-tone',
     title: 'Heal Tone AI Frequency Sounds',
-    description: 'A wellness app featuring AI-generated healing frequencies and soundscapes for meditation, relaxation, and therapeutic sound therapy.',
+    description:
+      'A wellness app featuring AI-generated healing frequencies and soundscapes for meditation, relaxation, and therapeutic sound therapy.',
     image: '/logo_healtone.jpg',
     gradient: 'from-purple-500 to-violet-600',
     tags: ['Flutter', 'AI', 'Health'],
@@ -60,12 +62,16 @@ export const ALL_PROJECTS: Project[] = [
   {
     id: 'emaisha-pay',
     title: 'eMaisha Pay',
-    description: 'A corporate payment and financial management app enabling seamless business transactions, automated reconciliation, and real-time reporting.',
+    description:
+      'A corporate payment and financial management app enabling seamless business transactions, automated reconciliation, and real-time reporting.',
     image: '/logo_emaisha_pay.png',
     gradient: 'from-blue-500 to-indigo-600',
     tags: ['Android', 'Fintech', 'Payments'],
     links: [
-      { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.cabraltech.emaishacorporateapp&hl=en' },
+      {
+        type: 'android',
+        url: 'https://play.google.com/store/apps/details?id=com.cabraltech.emaishacorporateapp&hl=en',
+      },
     ],
     platform: 'android',
     category: 'fintech',
@@ -74,7 +80,8 @@ export const ALL_PROJECTS: Project[] = [
   {
     id: 'santa-chat',
     title: 'Santa Personal Video & Call',
-    description: 'An interactive app where users can video call and chat with Santa Claus. Features AI-powered conversations and personalized video messages.',
+    description:
+      'An interactive app where users can video call and chat with Santa Claus. Features AI-powered conversations and personalized video messages.',
     image: '/logo_santa_app.png',
     gradient: 'from-red-500 to-rose-600',
     tags: ['Kotlin', 'SwiftUI', 'AI', 'Video Call'],
@@ -90,7 +97,8 @@ export const ALL_PROJECTS: Project[] = [
   {
     id: 'deenhub',
     title: 'DeenHub: Quran, Prayer & Qibla',
-    description: 'A comprehensive Islamic app with Quran reading, prayer times, Qibla direction, AI-powered Hadith search, and nearby mosque finder.',
+    description:
+      'A comprehensive Islamic app with Quran reading, prayer times, Qibla direction, AI-powered Hadith search, and nearby mosque finder.',
     image: '/logo_deenhub.jpeg',
     gradient: 'from-emerald-500 to-teal-600',
     tags: ['Flutter', 'Islamic', 'AI'],
@@ -105,7 +113,8 @@ export const ALL_PROJECTS: Project[] = [
   {
     id: 'viozor',
     title: 'Viozor 2: AI Video Generator',
-    description: 'Cutting-edge AI video generation app that transforms text and images into stunning videos with advanced editing capabilities.',
+    description:
+      'Cutting-edge AI video generation app that transforms text and images into stunning videos with advanced editing capabilities.',
     image: '/logo_viozor.jpg',
     gradient: 'from-cyan-500 to-blue-600',
     tags: ['Swift', 'AI', 'iOS'],
@@ -119,7 +128,8 @@ export const ALL_PROJECTS: Project[] = [
   {
     id: 'edipic',
     title: 'Edipic AI Image Editor',
-    description: 'Professional AI-powered image editing app with advanced filters, background removal, and intelligent enhancement tools.',
+    description:
+      'Professional AI-powered image editing app with advanced filters, background removal, and intelligent enhancement tools.',
     image: '/logo_edipic.jpg',
     gradient: 'from-amber-500 to-orange-600',
     tags: ['Swift', 'AI', 'Image Processing'],
@@ -134,7 +144,7 @@ export const ALL_PROJECTS: Project[] = [
     id: 'stride-soles',
     title: 'Stride Soles',
     description:
-      'Fitness and lifestyle companion app for tracking activity and staying motivated—with a polished cross-platform experience on Android, iOS, and web.',
+      'Fitness and lifestyle companion app for tracking activity and staying motivated, with a polished cross-platform experience on Android, iOS, and web.',
     image: '/logo_stride_soles.png',
     gradient: 'from-orange-500 to-rose-600',
     tags: ['Flutter', 'Android', 'iOS', 'Health'],
@@ -150,32 +160,30 @@ export const ALL_PROJECTS: Project[] = [
     id: 'emu8086web',
     title: 'emu8086web',
     description:
-      'Browser-based 8086 assembler and step debugger — write, assemble, and debug MASM-style assembly entirely in the browser. Open source modernization of classic emu8086.',
+      'Browser-based 8086 assembler and step debugger: write, assemble, and debug MASM-style assembly entirely in the browser. Open source modernization of classic emu8086.',
     image: '/logo_emu_8086.svg',
     gradient: 'from-slate-600 to-cyan-700',
-    tags: ['Next.js', 'TypeScript', '8086', 'Open Source'],
+    tags: ['Next.js', 'TypeScript', '8086', 'Open Source', 'Assembler', 'Emulator'],
     links: [
       { type: 'web', url: 'https://emu-8086-web.vercel.app/' },
       { type: 'github', url: 'https://github.com/nafiskabbo/emu_8086_web' },
     ],
     platform: 'web',
     category: 'open-source',
-    featured: true,
   },
   {
     id: 'elsie',
     title: 'Elsie',
-    description: 'A feature-rich mobile application with modern Material Design and intuitive user experience.',
+    description:
+      'A feature-rich mobile application with modern Material Design and intuitive user experience.',
     image: '/logo_elsie.jpg',
     gradient: 'from-pink-500 to-rose-600',
     tags: ['Android', 'Kotlin', 'Mobile App'],
-    links: [
-      { type: 'android', url: 'https://play.google.com/store/apps/details?id=com.elsie.app' },
-    ],
+    links: [{ type: 'android', url: 'https://play.google.com/store/apps/details?id=com.elsie.app' }],
     platform: 'android',
     category: 'utility',
   },
 ];
 
-/** Featured projects for the home page preview */
+/** Featured projects for the home page preview (first 4 featured, display order) */
 export const FEATURED_PROJECTS = ALL_PROJECTS.filter((p) => p.featured).slice(0, 4);

@@ -83,7 +83,7 @@ export function ProjectsPreview() {
             <span className="theme-gradient-text">Projects</span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-            Mobile applications built with passion, available on App Store and Play Store.
+            Real products in production: wellness, payments, AI entertainment, faith tools, and more.
           </p>
         </div>
 

@@ -14,7 +14,7 @@ const AI_BOTS = [
 
 function buildRobotsTxt(): string {
   const lines: string[] = [
-    '# https://nafiskabbo.dev — robots.txt (RFC 9309)',
+    '# https://nafiskabbo.dev - robots.txt (RFC 9309)',
     '',
     'User-agent: *',
     'Allow: /',

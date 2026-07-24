@@ -288,10 +288,10 @@ export default function ProjectsPage() {
                 style={{ background: 'var(--theme-glow)' }}
               />
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 relative z-10">
-                Ready to Start Your Journey?
+                Need an app that ships and sticks?
               </h2>
               <p className="text-slate-400 text-sm mb-6 max-w-lg mx-auto relative z-10">
-                Let&apos;s build something exceptional together. Available for new projects.
+                Tell me the outcome you want. I&apos;ll map it to a clear plan and timeline.
               </p>
               <Link
                 href="/#contact"

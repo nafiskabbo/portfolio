@@ -31,18 +31,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: `${SITE_URL}/llms.txt`,
+      url: `${SITE_URL}/docs/api/tracking`,
       lastModified: now,
       changeFrequency: 'monthly',
       priority: 0.4,
     },
+    {
+      url: `${SITE_URL}/llms.txt`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = ALL_PROJECTS.map((project) => ({
+  const projectRoutes: MetadataRoute.Sitemap = ALL_PROJECTS.map((project, index) => ({
     url: `${SITE_URL}/projects/${project.id}`,
     lastModified: now,
     changeFrequency: 'monthly' as const,
-    priority: 0.8,
+    // Featured / earlier projects rank slightly higher for crawlers
+    priority: project.featured ? 0.85 : Math.max(0.65, 0.8 - index * 0.02),
   }));
 
   return [...staticRoutes, ...projectRoutes];

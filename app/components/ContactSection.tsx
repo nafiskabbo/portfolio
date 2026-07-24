@@ -155,11 +155,11 @@ export function ContactSection() {
             Get In Touch
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">
-            Let&apos;s Build Something{' '}
-            <span className="theme-gradient-text">Amazing</span>
+            Tell me what you need{' '}
+            <span className="theme-gradient-text">shipped</span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base max-w-xl mx-auto">
-            Have a project in mind? I&apos;m available for freelance work and always excited to collaborate.
+            Share your goal, platforms, and timeline. I&apos;ll reply with next steps, usually within 24 hours.
           </p>
         </div>
 

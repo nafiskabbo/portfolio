@@ -6,7 +6,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { ChatAssistantShell } from "./components/ChatAssistantShell";
 import { JsonLd } from "./components/JsonLd";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, YEARS_OF_EXPERIENCE_LABEL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -23,7 +23,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Nafis Kabbo | Mobile Developer — Android, iOS & Flutter",
+    default: "Nafis Kabbo | Product-focused Mobile Developer - Android, iOS & Flutter",
     template: "%s | Nafis Kabbo",
   },
   description: SITE_DESCRIPTION,
@@ -33,6 +33,7 @@ export const metadata: Metadata = {
     "Nafis",
     "Nafis Islam Kabbo",
     "Mobile Developer",
+    "Web Developer",
     "Android Developer",
     "Android Development",
     "iOS Developer",
@@ -40,6 +41,8 @@ export const metadata: Metadata = {
     "Kotlin Developer",
     "Swift Developer",
     "SwiftUI",
+    "Next.js Developer",
+    "TypeScript",
     "Cross-Platform Developer",
     "Native Android",
     "Native iOS",
@@ -47,6 +50,13 @@ export const metadata: Metadata = {
     "Mobile App Developer",
     "Freelance Developer",
     "AI Mobile Apps",
+    "Open Source",
+    "emu8086",
+    "emu8086web",
+    "8086 assembler",
+    "8086 emulator",
+    "browser assembler",
+    "MASM",
     "Bangladesh Developer",
   ],
   authors: [{ name: "Nafis Kabbo", url: SITE_URL }],
@@ -55,9 +65,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Nafis Kabbo — Mobile Developer | Android, iOS & Flutter",
-    description:
-      "Building high-performance mobile apps with Native Android, Native iOS, and Flutter. 5+ years of production experience with AI integration and clean architecture.",
+    title: "Nafis Kabbo - Product-focused Mobile Developer | Android, iOS & Flutter",
+    description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     url: SITE_URL,
     images: [
@@ -65,15 +74,14 @@ export const metadata: Metadata = {
         url: "/personal.webp",
         width: 512,
         height: 512,
-        alt: "Nafis Islam Kabbo — Mobile Developer",
+        alt: "Nafis Islam Kabbo - Mobile & Web Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nafis Kabbo — Mobile Developer | Android, iOS & Flutter",
-    description:
-      "Building high-performance mobile apps with Native Android, Native iOS, and Flutter. 5+ years of production experience.",
+    title: "Nafis Kabbo - Product-focused Mobile Developer | Android, iOS & Flutter",
+    description: `Helping startups and agencies ship store-ready apps. ${YEARS_OF_EXPERIENCE_LABEL} years · 50+ production releases · outcomes that grow revenue and retention.`,
     creator: "@nafiskabbo30",
     images: ["/personal.webp"],
   },

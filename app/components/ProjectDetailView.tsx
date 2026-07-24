@@ -282,7 +282,7 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
                       <div className="relative mb-4 aspect-video w-full overflow-hidden rounded-xl border border-[var(--theme-border)] bg-black/20">
                         <Image
                           src={t.feedbackImage}
-                          alt={`${project.title} — client feedback`}
+                          alt={`${project.title} - client feedback`}
                           fill
                           className="object-contain"
                           sizes="(max-width: 768px) 100vw, 50vw"
@@ -328,7 +328,7 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
             />
             <p className="text-white font-semibold text-lg mb-2 relative z-10">Like what you see?</p>
             <p className="text-slate-400 text-sm mb-6 max-w-md mx-auto relative z-10">
-              Tell me about your app or automation—scope, stack, and timeline.
+              Tell me about your app or automation: scope, stack, and timeline.
             </p>
             <Link
               href="/#contact"

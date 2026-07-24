@@ -93,28 +93,28 @@ const skillCategories = [
 
 const whyChooseMe = [
   {
-    title: 'Clean & Scalable Code',
-    description: 'Maintainable, well-documented code with strong architecture patterns.',
-    icon: CodeIcon,
-    features: ['SOLID Principles', 'Design Patterns'],
-  },
-  {
-    title: 'Fast Delivery',
-    description: 'Efficient workflows ensure your project launches on time.',
-    icon: RocketIcon,
-    features: ['Agile Process', 'Quick Iterations'],
-  },
-  {
-    title: 'Clear Communication',
-    description: 'Regular updates and responsive communication throughout.',
-    icon: UserCheckIcon,
-    features: ['24/7 Available', 'Progress Reports'],
-  },
-  {
-    title: 'Quality Guaranteed',
-    description: 'Rigorous testing and post-launch support for success.',
+    title: 'Store-ready products',
+    description: 'From concept to App Store & Play Store release, not demos that stall.',
     icon: CheckCircleIcon,
-    features: ['Unit Testing', 'Free Bug Fixes'],
+    features: ['Production QA', 'Store launch'],
+  },
+  {
+    title: 'Faster shipping',
+    description: 'Tight loops and clear ownership so startups and agencies move quicker.',
+    icon: RocketIcon,
+    features: ['Parallel delivery', 'MVP speed'],
+  },
+  {
+    title: 'Business outcomes',
+    description: 'Work tied to retention, ops time, and revenue, not vanity features.',
+    icon: UserCheckIcon,
+    features: ['Up to 3× revenue', '~70% ops cut'],
+  },
+  {
+    title: 'Steady communication',
+    description: 'Regular updates, honest estimates, and handoff you can maintain.',
+    icon: CodeIcon,
+    features: ['Clear briefs', 'Post-launch support'],
   },
 ];
 
@@ -169,15 +169,15 @@ export function SkillsSection() {
         {/* Section Header */}
         <div className="text-center mb-10 lg:mb-12">
           <span className="theme-badge inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4">
-            Tech Stack
+            How I deliver
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3">
-            Skills &{' '}
-            <span className="theme-gradient-text">Expertise</span>
+            Tools behind the{' '}
+            <span className="theme-gradient-text">results</span>
           </h2>
           <p className="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto">
-            Specialized in mobile development with a strong foundation in web technologies.
-            <span className="text-slate-500 text-xs block mt-1">Click on any skill to change the theme!</span>
+            The stack that gets your product to store and keeps it stable as users grow.
+            <span className="text-slate-500 text-xs block mt-1">Click a skill to preview that theme.</span>
           </p>
         </div>
 

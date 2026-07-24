@@ -40,13 +40,13 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
     problem:
       'Students and developers learning 8086 assembly were stuck with aging desktop-only tools that don’t run well across modern platforms.',
     solution:
-      'A full browser IDE that assembles and step-debugs MASM-style 8086 code in place — registers, flags, memory, stack, DOS/BIOS interrupts, and shareable program links with no install required.',
+      'A full browser IDE that assembles and step-debugs MASM-style 8086 code in place: registers, flags, memory, stack, DOS/BIOS interrupts, and shareable program links with no install required.',
     techStack: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Custom 8086 interpreter'],
     highlights: [
       'Multi-file workspace with compile, run, step, and breakpoints',
       'CPU registers, flags, data segment, hex memory dump, stack & call stack',
       'CRT console with DOS INT 21h / BIOS INT 10h / INT 16h I/O',
-      'Shareable links, autosave, light/dark themes — MIT open source',
+      'Shareable links, autosave, light/dark themes: MIT open source',
     ],
     metrics: [
       { label: 'Platform', value: 'Web · any OS' },
@@ -57,7 +57,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
     screenshots: [
       {
         src: '/screenshot_emu8086_1.webp',
-        alt: 'emu8086web IDE — assembler and debugger',
+        alt: 'emu8086web IDE: assembler and debugger',
         caption: 'IDE · assemble & step-debug',
         aspect: 'landscape',
       },
@@ -86,7 +86,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
       { src: '/screenshot_healtone_1.webp', alt: 'Heal Tone experience', caption: 'Product (local hero)' },
       {
         src: 'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/67/3d/61/673d612a-92b7-2ba8-4cce-4156d0b559db/Simulator_Screenshot_-_iPhone_16_Pro_Max_-_2025-07-03_at_21.09.06.png/460x998bb.webp',
-        alt: 'Heal Tone iOS — healing presets',
+        alt: 'Heal Tone iOS - healing presets',
         caption: 'Healing sessions',
       },
       {
@@ -148,7 +148,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
     ],
   },
   'santa-chat': {
-    problem: 'Families wanted a magical seasonal experience—calls and chats—that felt real without fragile hacks.',
+    problem: 'Families wanted a magical seasonal experience (calls and chats) that felt real without fragile hacks.',
     solution:
       'Native Android & iOS with AI-assisted conversations, polished calling UX, and kid-safe flows parents can trust.',
     techStack: ['Kotlin', 'SwiftUI', 'Realtime AV', 'AI dialog', 'Store release pipelines'],
@@ -255,7 +255,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
   viozor: {
     problem: 'Creators wanted cinematic AI video without watermarks, steep learning curves, or desktop-only tools.',
     solution:
-      'Native iOS pipeline around prompting, preview, and export—optimized for thumb-first creation and share-ready output.',
+      'Native iOS pipeline around prompting, preview, and export, optimized for thumb-first creation and share-ready output.',
     techStack: ['Swift', 'SwiftUI', 'AVFoundation', 'On-device perf', 'Video AI APIs'],
     metrics: [
       { label: 'Output', value: 'No watermark' },
@@ -340,7 +340,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
     ],
   },
   'stride-soles': {
-    problem: 'Users wanted motivation and clarity across devices—mobile-first with a credible web presence.',
+    problem: 'Users wanted motivation and clarity across devices, mobile-first with a credible web presence.',
     solution:
       'Cross-platform Flutter delivery with consistent UX on Android & iOS plus a marketing site for discovery and trust.',
     techStack: ['Flutter', 'Dart', 'Android & iOS releases', 'Web landing', 'Analytics-ready architecture'],

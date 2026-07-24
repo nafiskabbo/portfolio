@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Portfolio Chat API",
-    "description": "AI chat assistant for Nafis Kabbo's portfolio — answers questions about experience, skills, and projects.",
+    "description": "AI chat assistant for Nafis Kabbo's portfolio - answers questions about experience, skills, and projects.",
     "version": "1.0.0",
     "contact": {
       "name": "Nafis Kabbo",
