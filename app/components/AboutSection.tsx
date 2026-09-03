@@ -219,15 +219,6 @@ export function AboutSection() {
               aria-hidden
             />
 
-            <div
-              className="pointer-events-none absolute inset-y-4 right-[38%] hidden w-px lg:block"
-              style={{
-                backgroundImage:
-                  'repeating-linear-gradient(to bottom, var(--theme-border) 0 6px, transparent 6px 12px)',
-              }}
-              aria-hidden
-            />
-
             <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-0 pl-5 sm:pl-6 lg:pl-8">
               <div className="py-7 sm:py-8 lg:py-10 pr-5 sm:pr-6 lg:pr-10">
                 <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-5 font-mono text-[10px] sm:text-xs tracking-[0.18em] uppercase text-slate-500">
@@ -293,11 +284,19 @@ export function AboutSection() {
               </div>
 
               <div
-                className="py-6 sm:py-8 lg:py-10 px-5 sm:px-6 lg:px-8 lg:pl-10"
+                className="relative py-6 sm:py-8 lg:py-10 px-5 sm:px-6 lg:px-8 lg:pl-10"
                 style={{
                   background: 'color-mix(in srgb, var(--theme-background) 55%, transparent)',
                 }}
               >
+                <div
+                  className="pointer-events-none absolute inset-y-4 left-0 hidden w-px lg:block"
+                  style={{
+                    backgroundImage:
+                      'repeating-linear-gradient(to bottom, var(--theme-border) 0 6px, transparent 6px 12px)',
+                  }}
+                  aria-hidden
+                />
                 <p className="font-mono text-[10px] sm:text-xs tracking-[0.18em] uppercase text-slate-500 mb-4">
                   Booking lines
                 </p>
