@@ -1,5 +1,4 @@
 import { ALL_PROJECTS } from '../data/projects';
-import { getProjectDetail } from '../data/project-details';
 import {
   SITE_AUTHOR,
   SITE_DESCRIPTION,
@@ -34,8 +33,6 @@ export function JsonLd() {
       'Open Source',
       '8086 Assembly',
       'emu8086',
-      'Assembler',
-      'Emulator',
     ],
     alumniOf: {
       '@type': 'CollegeOrUniversity',
@@ -55,63 +52,18 @@ export function JsonLd() {
     },
   };
 
+  // Lightweight ItemList only. Full SoftwareApplication lives on /projects/[id].
   const projectsSchema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
     name: 'Portfolio Projects',
     numberOfItems: ALL_PROJECTS.length,
-    itemListElement: ALL_PROJECTS.map((project, index) => {
-      const detail = getProjectDetail(project.id);
-      const isOpenSource = project.category === 'open-source';
-      const github = project.links.find((l) => l.type === 'github')?.url;
-      const web = project.links.find((l) => l.type === 'web')?.url;
-
-      const work = {
-        '@type': isOpenSource ? 'SoftwareSourceCode' : 'SoftwareApplication',
-        name: project.title,
-        description: project.description,
-        url: `${SITE_URL}/projects/${project.id}`,
-        image: `${SITE_URL}${project.image}`,
-        keywords: project.tags.join(', '),
-        applicationCategory: project.category,
-        operatingSystem:
-          project.platform === 'web'
-            ? 'Web Browser'
-            : project.platform === 'android'
-              ? 'Android'
-              : project.platform === 'ios'
-                ? 'iOS'
-                : 'Android, iOS',
-        ...(detail?.techStack?.length
-          ? { programmingLanguage: detail.techStack }
-          : {}),
-        ...(web ? { downloadUrl: web } : {}),
-        ...(github ? { codeRepository: github } : {}),
-        ...(isOpenSource
-          ? {
-              license: 'https://opensource.org/licenses/MIT',
-              runtimePlatform: 'Web Browser',
-            }
-          : {
-              offers: {
-                '@type': 'Offer',
-                price: '0',
-                priceCurrency: 'USD',
-              },
-            }),
-        author: {
-          '@type': 'Person',
-          name: SITE_AUTHOR.name,
-          url: SITE_URL,
-        },
-      };
-
-      return {
-        '@type': 'ListItem',
-        position: index + 1,
-        item: work,
-      };
-    }),
+    itemListElement: ALL_PROJECTS.map((project, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: project.title,
+      url: `${SITE_URL}/projects/${project.id}`,
+    })),
   };
 
   const professionalService = {

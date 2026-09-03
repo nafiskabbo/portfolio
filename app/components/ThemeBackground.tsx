@@ -408,6 +408,18 @@ const AutomationElements = memo(function AutomationElements({ elements }: { elem
   );
 });
 
+function subscribeReducedMotion(onStoreChange: () => void) {
+  if (typeof window === 'undefined') return () => {};
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  mq.addEventListener('change', onStoreChange);
+  return () => mq.removeEventListener('change', onStoreChange);
+}
+
+function getReducedMotionSnapshot() {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 interface ThemeBackgroundProps {
   className?: string;
   intensity?: 'low' | 'medium' | 'high';
@@ -415,10 +427,16 @@ interface ThemeBackgroundProps {
 
 export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeBackgroundProps) {
   const { theme } = useTheme();
-  const elementCount = intensity === 'low' ? 12 : intensity === 'medium' ? 20 : 30;
+  // One fixed layer in layout — keep density close to the old per-section feel.
+  const elementCount = intensity === 'low' ? 10 : intensity === 'medium' ? 18 : 26;
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
+    () => false
+  );
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
     () => false
   );
   const elements = useMemo(
@@ -448,7 +466,6 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
       className={`absolute inset-0 overflow-hidden pointer-events-none theme-bg-animated ${className}`}
       style={{ background: 'var(--theme-background)' }}
     >
-      {/* Base gradient layer */}
       <div
         className="absolute inset-0"
         style={{
@@ -459,12 +476,14 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
         }}
       />
 
-      {/* Animated floating elements - only show after mount to avoid flicker */}
-      <div className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}>
-        {renderElements()}
-      </div>
+      {!reducedMotion && (
+        <div
+          className={`absolute inset-0 overflow-hidden transition-opacity duration-500 ${mounted ? 'opacity-100' : 'opacity-0'}`}
+        >
+          {renderElements()}
+        </div>
+      )}
 
-      {/* Subtle noise overlay */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
@@ -475,12 +494,17 @@ export function ThemeBackground({ className = '', intensity = 'medium' }: ThemeB
   );
 }
 
-// Compact background for smaller sections
+/** Soft section wash — gradients + light floats, no solid plate that hides the root bg. */
 export function ThemeBackgroundCompact({ className = '' }: { className?: string }) {
   const { theme } = useTheme();
   const mounted = useSyncExternalStore(
     () => () => {},
     () => true,
+    () => false
+  );
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
     () => false
   );
   const elements = useMemo(
@@ -506,10 +530,7 @@ export function ThemeBackgroundCompact({ className = '' }: { className?: string 
   };
 
   return (
-    <div
-      className={`absolute inset-0 overflow-hidden ${className}`}
-      style={{ background: 'var(--theme-background)' }}
-    >
+    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
       <div
         className="absolute inset-0"
         style={{
@@ -519,11 +540,13 @@ export function ThemeBackgroundCompact({ className = '' }: { className?: string 
           `,
         }}
       />
-
-      {/* Mini floating elements */}
-      <div className={`absolute inset-0 overflow-hidden opacity-70 transition-opacity duration-500 ${mounted ? 'opacity-70' : 'opacity-0'}`}>
-        {renderMiniElements()}
-      </div>
+      {!reducedMotion && (
+        <div
+          className={`absolute inset-0 overflow-hidden opacity-60 transition-opacity duration-500 ${mounted ? 'opacity-60' : 'opacity-0'}`}
+        >
+          {renderMiniElements()}
+        </div>
+      )}
     </div>
   );
 }

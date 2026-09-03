@@ -2,6 +2,7 @@
 
 import type { CSSProperties } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import clsx from 'clsx';
 import {
@@ -20,7 +21,14 @@ import {
 } from 'lucide-react';
 import { sendContactEmail } from '../actions/send-email';
 import { projectCategoryOptions } from '../data/project-categories';
-import { ChatMarkdown } from './portfolio-chat/ChatMarkdown';
+
+const ChatMarkdown = dynamic(
+  () => import('./portfolio-chat/ChatMarkdown').then((m) => m.ChatMarkdown),
+  {
+    ssr: false,
+    loading: () => <p className="text-sm text-slate-400">…</p>,
+  }
+);
 
 export interface PortfolioChatbotProps {
   /** `fab` = floating launcher (default). `page` = full-page chat at `/chat`. */

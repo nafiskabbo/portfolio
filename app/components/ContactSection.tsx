@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import {
   LinkedInIcon,
   FreelancerIcon,
@@ -13,8 +13,8 @@ import {
   UpworkIcon,
   CheckCircleIcon,
 } from './Icons';
+import { useReveal } from './Reveal';
 import { ThemeBackgroundCompact } from './ThemeBackground';
-import { Mascot2D } from './Mascot2D';
 import { sendContactEmail } from '../actions/send-email';
 import { projectCategoryOptions } from '../data/project-categories';
 
@@ -52,7 +52,7 @@ const socialLinks = [
 ];
 
 export function ContactSection() {
-  const [isVisible, setIsVisible] = useState(false);
+  const { ref: sectionRef, visible: isVisible } = useReveal();
   const [formData, setFormData] = useState({
     email: '',
     subject: '',
@@ -62,24 +62,6 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -119,9 +101,7 @@ export function ContactSection() {
 
   const handleDownloadCV = (e: React.MouseEvent) => {
     e.preventDefault();
-    // Open in new tab
     window.open('/cv.pdf', '_blank');
-    // Trigger download
     const link = document.createElement('a');
     link.href = '/cv.pdf';
     link.download = 'cv.pdf';
@@ -136,18 +116,7 @@ export function ContactSection() {
       id="contact"
       className="relative py-16 lg:py-20 overflow-hidden"
     >
-      {/* Theme Background */}
       <ThemeBackgroundCompact />
-
-      {/* 2D Mascot decorations */}
-      <div className="hidden lg:block absolute right-12 top-1/4 z-0 opacity-30">
-        <Mascot2D size="medium" position="right" />
-      </div>
-
-      <div className="hidden xl:block absolute left-8 bottom-24 z-0 opacity-25">
-        <Mascot2D size="small" position="left" />
-      </div>
-
       <div className="relative z-10 section-container">
         {/* Section Header */}
         <div className="text-center mb-10">

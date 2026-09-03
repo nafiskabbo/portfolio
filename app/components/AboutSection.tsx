@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import { GraduationIcon, CodeIcon, MobileIcon, CheckCircleIcon } from './Icons';
-import { ThemeBackground } from './ThemeBackground';
+import { useReveal } from './Reveal';
+import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
 import { getYearsOfExperienceLabel } from '@/lib/experience';
 
@@ -63,25 +63,7 @@ const availability = [
 ];
 
 export function AboutSection() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const { ref: sectionRef, visible: isVisible } = useReveal();
 
   return (
     <section
@@ -89,16 +71,10 @@ export function AboutSection() {
       id="about"
       className="relative py-16 lg:py-20 overflow-hidden"
     >
-      <ThemeBackground intensity="medium" />
-
-      <div className="hidden lg:block absolute left-8 top-1/4 z-10">
+      <ThemeBackgroundCompact />
+      <div className="hidden lg:block absolute left-8 top-1/4 z-10 opacity-70">
         <Mascot2D size="medium" position="left" />
       </div>
-
-      <div className="hidden xl:block absolute right-8 bottom-32 z-10 opacity-40">
-        <Mascot2D size="small" position="right" />
-      </div>
-
       <div className="relative z-10 section-container">
         <div className="text-center mb-10 lg:mb-12">
           <span className="theme-badge inline-block px-4 py-1.5 rounded-full text-xs font-bold tracking-wide uppercase mb-4">

@@ -12,7 +12,7 @@ export default function Home() {
     <>
       <WebMcpTools />
       <Navbar />
-      <main className="text-white" style={{ background: 'var(--theme-background)' }}>
+      <main className="relative text-white">
         <HeroSection />
         <AboutSection />
         <SkillsSection />

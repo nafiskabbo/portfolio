@@ -782,4 +782,20 @@ button:focus-visible {
   .typewriter-caret {
     display: none;
   }
+
+  .animate-float,
+  .animate-float-slow,
+  .animate-spin-slow,
+  .animate-pulse-glow,
+  .animate-orbit,
+  .animate-orbit-reverse,
+  .animate-blob,
+  .theme-bg-animated,
+  .theme-bg-animated::before {
+    animation: none !important;
+  }
+
+  .theme-bg-animated::before {
+    display: none;
+  }
 }

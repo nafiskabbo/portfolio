@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { ThemeBackground } from "./components/ThemeBackground";
 import { ChatAssistantShell } from "./components/ChatAssistantShell";
 import { JsonLd } from "./components/JsonLd";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL, YEARS_OF_EXPERIENCE_LABEL } from "@/lib/site";
@@ -21,6 +23,8 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const themeInitScript = `(function(){try{var k='portfolio-theme',v=['android','ios','flutter','web','automation'],q=new URLSearchParams(location.search).get('theme'),t=(q&&v.indexOf(q)!==-1)?q:localStorage.getItem(k);if(t&&v.indexOf(t)!==-1)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
 export const metadata: Metadata = {
   title: {
     default: "Nafis Kabbo | Product-focused Mobile Developer - Android, iOS & Flutter",
@@ -29,10 +33,11 @@ export const metadata: Metadata = {
   description: SITE_DESCRIPTION,
   keywords: [
     "Nafis Kabbo",
+    "Nafis Islam Kabbo",
     "Kabbo",
     "Nafis",
-    "Nafis Islam Kabbo",
     "Mobile Developer",
+    "Mobile App Developer",
     "Web Developer",
     "Android Developer",
     "Android Development",
@@ -47,21 +52,24 @@ export const metadata: Metadata = {
     "Native Android",
     "Native iOS",
     "App Development",
-    "Mobile App Developer",
     "Freelance Developer",
     "AI Mobile Apps",
     "Open Source",
     "emu8086",
     "emu8086web",
     "8086 assembler",
-    "8086 emulator",
-    "browser assembler",
-    "MASM",
     "Bangladesh Developer",
   ],
   authors: [{ name: "Nafis Kabbo", url: SITE_URL }],
   creator: "Nafis Kabbo",
   metadataBase: new URL(SITE_URL),
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png", sizes: "32x32" },
+      { url: "/logo.webp", type: "image/webp", sizes: "512x512" },
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -79,7 +87,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "Nafis Kabbo - Product-focused Mobile Developer | Android, iOS & Flutter",
     description: `Helping startups and agencies ship store-ready apps. ${YEARS_OF_EXPERIENCE_LABEL} years · 50+ production releases · outcomes that grow revenue and retention.`,
     creator: "@nafiskabbo30",
@@ -124,9 +132,15 @@ export default function RootLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
+        <Script id="theme-init" strategy="beforeInteractive">
+          {themeInitScript}
+        </Script>
         <JsonLd />
         <Suspense fallback={null}>
           <ThemeProvider>
+            <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden>
+              <ThemeBackground intensity="high" />
+            </div>
             {children}
             <ChatAssistantShell />
           </ThemeProvider>

@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { PlayStoreIcon, AppStoreIcon, WebIcon, ArrowRightIcon, AndroidIcon, AppleIcon, FlutterIcon, SmartphoneIcon, GithubIcon } from './Icons';
 import { useTheme } from './ThemeProvider';
+import { useReveal } from './Reveal';
 import { ThemeBackgroundCompact } from './ThemeBackground';
-import { Mascot2D } from './Mascot2D';
 import { FEATURED_PROJECTS, TAG_THEME_MAP, type Project } from '../data/projects';
 
 const linkIcons = {
@@ -26,27 +25,9 @@ const platformBadge = {
 };
 
 export function ProjectsPreview() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const { ref: sectionRef, visible: isVisible } = useReveal();
   const router = useRouter();
   const { setTheme, isTransitioning } = useTheme();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   const handleTagClick = (tag: string) => {
     const targetTheme = TAG_THEME_MAP[tag];
@@ -61,17 +42,7 @@ export function ProjectsPreview() {
       id="projects"
       className="relative py-16 lg:py-20 overflow-hidden"
     >
-      {/* Theme Background */}
       <ThemeBackgroundCompact />
-      
-      {/* 2D Mascot decorations */}
-      <div className="hidden lg:block absolute right-8 top-1/4 z-10 opacity-40">
-        <Mascot2D size="small" position="right" />
-      </div>
-      <div className="hidden xl:block absolute left-6 bottom-24 z-10 opacity-30">
-        <Mascot2D size="small" position="left" />
-      </div>
-
       <div className="relative z-10 section-container">
         {/* Section Header */}
         <div className="text-center mb-10 lg:mb-12">

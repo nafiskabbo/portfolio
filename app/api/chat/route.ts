@@ -8,7 +8,7 @@ import { canAccessChatApi } from '@/lib/security/api-guard';
 import { checkRateLimit, CHAT_RATE_LIMIT } from '@/lib/security/rate-limit';
 
 export const runtime = 'nodejs';
-export const maxDuration = 120;
+export const maxDuration = 45;
 
 function isValidTurns(raw: unknown): raw is ChatTurn[] {
   if (!Array.isArray(raw) || raw.length === 0 || raw.length > 40) return false;

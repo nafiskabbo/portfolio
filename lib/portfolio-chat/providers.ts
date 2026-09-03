@@ -5,14 +5,28 @@ export interface ChatTurn {
   content: string;
 }
 
-/** Gemini (Google AI Studio) first, then top free OpenRouter models by quality/coverage. */
+/** Short chain: primary Gemini, one Gemini fallback, one OpenRouter free model. */
 export const portfolioChatModelChain = [
   { provider: 'gemini' as const, model: 'gemini-3.1-flash-lite-preview' },
   { provider: 'gemini' as const, model: 'gemma-4-31b-it' },
-  { provider: 'openrouter' as const, model: 'tencent/hy3-preview:free' },
   { provider: 'openrouter' as const, model: 'openai/gpt-oss-120b:free' },
-  { provider: 'openrouter' as const, model: 'inclusionai/ling-2.6-1t:free' },
 ] as const;
+
+const MODEL_TIMEOUT_MS = 12_000;
+
+async function withTimeout<T>(promise: Promise<T>, ms: number, label: string): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      promise,
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new Error(`${label} timed out after ${ms}ms`)), ms);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
 
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta';
 const OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions';
@@ -150,14 +164,22 @@ export async function runPortfolioChatWithFallback(
           errors.push('Gemini: missing GEMINI_API_KEY');
           continue;
         }
-        const reply = await callGemini(keys.geminiApiKey, step.model, messages);
+        const reply = await withTimeout(
+          callGemini(keys.geminiApiKey, step.model, messages),
+          MODEL_TIMEOUT_MS,
+          `gemini/${step.model}`
+        );
         return { reply, modelUsed: `${step.provider}:${step.model}` };
       }
       if (!keys.openrouterApiKey) {
         errors.push('OpenRouter: missing OPENROUTER_API_KEY');
         continue;
       }
-      const reply = await callOpenRouter(keys.openrouterApiKey, step.model, messages);
+      const reply = await withTimeout(
+        callOpenRouter(keys.openrouterApiKey, step.model, messages),
+        MODEL_TIMEOUT_MS,
+        `openrouter/${step.model}`
+      );
       return { reply, modelUsed: `${step.provider}:${step.model}` };
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);

@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // LAN access in `next dev` (phone/other device on same Wi‑Fi).
+  allowedDevOrigins: ["192.168.0.233", "127.0.0.1", "localhost"],
+  experimental: {
+    optimizePackageImports: ["framer-motion"],
+  },
   images: {
     remotePatterns: [
       {

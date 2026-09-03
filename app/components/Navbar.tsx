@@ -77,7 +77,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg group-hover:scale-105 transition-all duration-300">
-              <Image src="/logo.png" alt="Nafis Logo" width={40} height={40} className="object-cover" />
+              <Image src="/logo.webp" alt="Nafis Logo" width={40} height={40} className="object-cover" />
             </div>
             <span className="text-lg font-bold theme-gradient-text">Nafis</span>
           </Link>

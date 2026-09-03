@@ -62,7 +62,7 @@ export function Footer() {
           <div className="sm:col-span-2">
             <Link href="/" className="inline-flex items-center gap-2 mb-4">
               <div className="w-9 h-9 rounded-lg overflow-hidden shadow-lg" style={{ boxShadow: '0 4px 12px var(--theme-glow)' }}>
-                <Image src="/logo.png" alt="Nafis Logo" width={36} height={36} className="object-cover" />
+                <Image src="/logo.webp" alt="Nafis Logo" width={36} height={36} className="object-cover" />
               </div>
               <span className="text-xl font-bold theme-gradient-text">Nafis Kabbo</span>
             </Link>

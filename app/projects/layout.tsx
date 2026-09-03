@@ -7,6 +7,7 @@ export const metadata: Metadata = {
     'Apps and open-source tools by Nafis Kabbo: Flutter, Kotlin Android, Swift iOS, Next.js web, AI products, and emu8086web (browser 8086 assembler).',
   keywords: [
     'Nafis Kabbo projects',
+    'Nafis Islam Kabbo',
     'Flutter apps',
     'Android apps',
     'iOS apps',

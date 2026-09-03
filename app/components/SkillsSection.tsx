@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
 import {
   AndroidIcon,
   AppleIcon,
@@ -23,8 +22,9 @@ import {
   NextJsIcon,
 } from './Icons';
 import { useTheme, Theme } from './ThemeProvider';
+import { useReveal } from './Reveal';
 import { ThemeBackgroundCompact } from './ThemeBackground';
-import { Mascot2D, MascotIcon } from './Mascot2D';
+import { Mascot2D } from './Mascot2D';
 
 // Map skills to themes
 const skillThemeMap: Record<string, Theme> = {
@@ -38,9 +38,9 @@ const skillThemeMap: Record<string, Theme> = {
   'Node.js': 'web',
   'Next.js': 'web',
   Automation: 'automation',
-  n8n: 'automation',
   Chatbots: 'automation',
   'LLM APIs': 'automation',
+  n8n: 'automation',
 };
 
 const skillCategories = [
@@ -87,26 +87,8 @@ const skillCategories = [
 ];
 
 export function SkillsSection() {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const { ref: sectionRef, visible: isVisible } = useReveal();
   const { theme, setTheme, isTransitioning } = useTheme();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   const handleSkillClick = (skillName: string, e: React.MouseEvent) => {
     const targetTheme = skillThemeMap[skillName];
@@ -121,18 +103,10 @@ export function SkillsSection() {
       id="skills"
       className="relative py-16 lg:py-20 overflow-hidden"
     >
-      {/* Theme Background */}
       <ThemeBackgroundCompact />
-      
-      {/* 2D Mascot elements */}
-      <div className="hidden lg:block absolute right-8 top-1/4 z-10 opacity-50">
+      <div className="hidden lg:block absolute right-8 top-1/4 z-10 opacity-45">
         <Mascot2D size="small" position="right" />
       </div>
-      
-      <div className="hidden xl:block absolute left-6 bottom-40 z-10 opacity-40">
-        <MascotIcon />
-      </div>
-
       <div className="relative z-10 section-container">
         {/* Section Header */}
         <div className="text-center mb-10 lg:mb-12">

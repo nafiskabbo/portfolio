@@ -1,7 +1,12 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
-import { PortfolioChatbot } from './PortfolioChatbot';
+
+const PortfolioChatbot = dynamic(
+  () => import('./PortfolioChatbot').then((m) => m.PortfolioChatbot),
+  { ssr: false, loading: () => null }
+);
 
 /** FAB chat on all routes except the dedicated full-page `/chat` route. */
 export function ChatAssistantShell() {

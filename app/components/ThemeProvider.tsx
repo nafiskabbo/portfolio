@@ -64,13 +64,13 @@ export const themeConfig = {
   },
   automation: {
     name: 'AI Automation',
-    primary: '#E879F9',
-    secondary: '#FBBF24',
-    accent: '#38BDF8',
-    background: '#070510',
-    surface: '#12091F',
-    border: '#352454',
-    glow: 'rgba(232, 121, 249, 0.35)',
+    primary: '#C084FC',
+    secondary: '#F59E0B',
+    accent: '#22D3EE',
+    background: '#0B0618',
+    surface: '#150D28',
+    border: '#2D2145',
+    glow: 'rgba(192, 132, 252, 0.22)',
     gradient: 'from-fuchsia-400 via-amber-400 to-sky-400',
     pattern: 'automation',
   },
@@ -92,54 +92,62 @@ function applyTheme(newTheme: Theme) {
 
 const VALID_THEMES: Theme[] = ['android', 'ios', 'flutter', 'web', 'automation'];
 
+function isTheme(value: string | null): value is Theme {
+  return !!value && (VALID_THEMES as string[]).includes(value);
+}
+
+function readThemeFromDom(): Theme {
+  if (typeof document === 'undefined') return 'android';
+  const attr = document.documentElement.getAttribute('data-theme');
+  return isTheme(attr) ? attr : 'android';
+}
+
 function readInitialTheme(searchParams: URLSearchParams): Theme {
-  const urlTheme = searchParams.get('theme') as Theme | null;
-  if (urlTheme && VALID_THEMES.includes(urlTheme)) return urlTheme;
+  const urlTheme = searchParams.get('theme');
+  if (isTheme(urlTheme)) return urlTheme;
   if (typeof window !== 'undefined') {
-    const savedTheme = localStorage.getItem('portfolio-theme') as Theme | null;
-    if (savedTheme && VALID_THEMES.includes(savedTheme)) return savedTheme;
+    const savedTheme = localStorage.getItem('portfolio-theme');
+    if (isTheme(savedTheme)) return savedTheme;
   }
-  return 'android';
+  return readThemeFromDom();
 }
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  // Match pre-paint script / SSR default to avoid a second flash.
   const [theme, setThemeState] = useState<Theme>('android');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
-  // Hydrate theme from URL / localStorage after mount (client-only storage)
   useEffect(() => {
     const initialTheme = readInitialTheme(searchParams);
     applyTheme(initialTheme);
-    const frame = requestAnimationFrame(() => {
-      setThemeState(initialTheme);
-      setMounted(true);
-    });
+    // Defer so we don't cascade a sync render inside the effect (lint + hydration).
+    const frame = requestAnimationFrame(() => setThemeState(initialTheme));
     return () => cancelAnimationFrame(frame);
   }, [searchParams]);
 
   const setTheme = useCallback((newTheme: Theme, withAnimation = true, clickEvent?: MouseEvent) => {
     if (newTheme === theme) return;
-    
-    if (withAnimation) {
+
+    const prefersReduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (withAnimation && !prefersReduced) {
       setIsTransitioning(true);
-      
-      // Get click position for radial effect origin
+
       const x = clickEvent?.clientX ?? window.innerWidth / 2;
       const y = clickEvent?.clientY ?? window.innerHeight / 2;
-      
-      // Calculate max distance to corners for proper coverage
+
       const maxDistance = Math.max(
         Math.hypot(x, y),
         Math.hypot(window.innerWidth - x, y),
         Math.hypot(x, window.innerHeight - y),
         Math.hypot(window.innerWidth - x, window.innerHeight - y)
       );
-      
-      // Create container for effects
+
       const effectsContainer = document.createElement('div');
       effectsContainer.style.cssText = `
         position: fixed;
@@ -149,8 +157,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         overflow: hidden;
       `;
       document.body.appendChild(effectsContainer);
-      
-      // Radial wipe effect
+
       const ripple = document.createElement('div');
       ripple.style.cssText = `
         position: absolute;
@@ -164,37 +171,26 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         animation: theme-ripple 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       `;
       effectsContainer.appendChild(ripple);
-      
-      // Add CSS animation dynamically
+
       const style = document.createElement('style');
       style.textContent = `
         @keyframes theme-ripple {
-          0% {
-            width: 0;
-            height: 0;
-            opacity: 1;
-          }
-          100% {
-            width: ${maxDistance * 2.5}px;
-            height: ${maxDistance * 2.5}px;
-            opacity: 0;
-          }
+          0% { width: 0; height: 0; opacity: 1; }
+          100% { width: ${maxDistance * 2.5}px; height: ${maxDistance * 2.5}px; opacity: 0; }
         }
         @keyframes particle-float {
-          0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 1;
-          }
-          100% {
-            transform: translate(var(--tx), var(--ty)) scale(0);
-            opacity: 0;
-          }
+          0% { transform: translate(0, 0) scale(1); opacity: 1; }
+          100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+        }
+        @keyframes theme-flash-new {
+          0% { opacity: 0; }
+          30% { opacity: 1; }
+          100% { opacity: 0; }
         }
       `;
       document.head.appendChild(style);
-      
-      // Create particles explosion
-      const particleCount = 20;
+
+      const particleCount = 12;
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         const angle = (i / particleCount) * Math.PI * 2;
@@ -203,7 +199,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         const ty = Math.sin(angle) * distance;
         const size = 4 + Math.random() * 8;
         const delay = Math.random() * 0.2;
-        
+
         particle.style.cssText = `
           position: absolute;
           left: ${x}px;
@@ -219,8 +215,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         `;
         effectsContainer.appendChild(particle);
       }
-      
-      // Flash overlay for smooth color transition
+
       const flash = document.createElement('div');
       flash.style.cssText = `
         position: absolute;
@@ -229,52 +224,35 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         opacity: 0;
         animation: theme-flash-new 0.5s ease-out forwards;
       `;
-      
-      const flashStyle = document.createElement('style');
-      flashStyle.textContent = `
-        @keyframes theme-flash-new {
-          0% { opacity: 0; }
-          30% { opacity: 1; }
-          100% { opacity: 0; }
-        }
-      `;
-      document.head.appendChild(flashStyle);
       effectsContainer.appendChild(flash);
-      
-      // Apply theme after brief delay
+
       setTimeout(() => {
         setThemeState(newTheme);
         applyTheme(newTheme);
         localStorage.setItem('portfolio-theme', newTheme);
-        
-        // Update URL
+
         const newParams = new URLSearchParams(searchParams.toString());
         newParams.set('theme', newTheme);
         router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
       }, 150);
-      
-      // Clean up
+
       setTimeout(() => {
         effectsContainer.remove();
         style.remove();
-        flashStyle.remove();
         setIsTransitioning(false);
       }, 1000);
     } else {
       setThemeState(newTheme);
       applyTheme(newTheme);
       localStorage.setItem('portfolio-theme', newTheme);
+
+      if (withAnimation) {
+        const newParams = new URLSearchParams(searchParams.toString());
+        newParams.set('theme', newTheme);
+        router.replace(`${pathname}?${newParams.toString()}`, { scroll: false });
+      }
     }
   }, [theme, pathname, router, searchParams]);
-
-  // Prevent hydration mismatch
-  if (!mounted) {
-    return (
-      <ThemeContext.Provider value={{ theme: 'android', setTheme: () => {}, isTransitioning: false }}>
-        {children}
-      </ThemeContext.Provider>
-    );
-  }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, isTransitioning }}>

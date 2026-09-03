@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation';
 import { Navbar } from '../../components/Navbar';
 import { Footer } from '../../components/Footer';
 import { ProjectDetailView } from '../../components/ProjectDetailView';
-import { ThemeBackground } from '../../components/ThemeBackground';
 import { ALL_PROJECTS } from '../../data/projects';
 import { getProjectDetail } from '../../data/project-details';
 import { SITE_AUTHOR, SITE_URL } from '@/lib/site';
@@ -120,14 +119,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const jsonLd = buildProjectJsonLd(project, detail ?? undefined);
 
   return (
-    <div className="flex min-h-screen flex-col text-white" style={{ background: 'var(--theme-background)' }}>
+    <div className="flex min-h-screen flex-col text-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Navbar />
       <main className="relative flex-1 pt-0">
-        <ThemeBackground intensity="low" className="fixed inset-0 -z-10" />
         <ProjectDetailView project={project} detail={detail} />
       </main>
       <Footer />
