@@ -1,4 +1,4 @@
-import { GraduationIcon, CodeIcon, MobileIcon, CheckCircleIcon } from './Icons';
+import { GraduationIcon, CodeIcon, MobileIcon } from './Icons';
 import { Reveal } from './Reveal';
 import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
@@ -53,11 +53,12 @@ const clientOutcomes: OutcomeItem[] = [
   { kind: 'text', text: 'Releases that scale with growth' },
 ];
 
-const availability = [
-  { title: 'Freelance', description: 'Ship your next release' },
-  { title: 'Startups', description: 'MVP to store launch' },
-  { title: 'Remote', description: 'Async-friendly delivery' },
-  { title: 'Agencies', description: 'Reliable surge capacity' },
+/** Work-ticket line items: what I'm booking, not marketing pillars */
+const bookingLines = [
+  { lane: 'Freelance', detail: 'Your next store release' },
+  { lane: 'Startup', detail: 'MVP through launch' },
+  { lane: 'Remote', detail: 'Async, timezone-flexible' },
+  { lane: 'Agency', detail: 'Surge capacity on call' },
 ];
 
 export function AboutSection() {
@@ -204,59 +205,82 @@ export function AboutSection() {
           hiddenClassName="opacity-0 translate-y-8"
           visibleClassName="opacity-100 translate-y-0"
         >
-          <div
-            className="rounded-2xl p-px shadow-lg"
+          <aside
+            aria-label="Availability"
+            className="relative overflow-hidden rounded-sm"
             style={{
-              background:
-                'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary), var(--theme-accent))',
+              background: 'var(--theme-surface)',
+              border: '1px solid var(--theme-border)',
             }}
           >
             <div
-              className="rounded-2xl p-6 lg:p-8"
-              style={{ background: 'var(--theme-surface)' }}
-            >
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-                <div className="flex items-center gap-4">
-                  <div
-                    className="relative flex items-center gap-2 px-4 py-2 rounded-full overflow-hidden"
-                    style={{
-                      background:
-                        'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
-                      boxShadow: '0 4px 20px var(--theme-glow)',
-                    }}
-                  >
-                    <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                    <span className="relative w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
-                    <span className="relative text-white font-bold text-sm tracking-wide">
-                      HIRING ME
-                    </span>
-                  </div>
+              className="absolute inset-y-0 left-0 w-1.5"
+              style={{ background: 'var(--theme-primary)' }}
+              aria-hidden
+            />
 
-                  <div className="hidden sm:block">
-                    <h3 className="text-xl lg:text-2xl font-bold text-white">
-                      Available for Opportunities
-                    </h3>
-                    <p className="text-slate-400 text-sm">
-                      Let&apos;s build something amazing together
-                    </p>
-                  </div>
+            <div
+              className="pointer-events-none absolute inset-y-4 right-[38%] hidden w-px lg:block"
+              style={{
+                backgroundImage:
+                  'repeating-linear-gradient(to bottom, var(--theme-border) 0 6px, transparent 6px 12px)',
+              }}
+              aria-hidden
+            />
+
+            <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-0 pl-5 sm:pl-6 lg:pl-8">
+              <div className="py-7 sm:py-8 lg:py-10 pr-5 sm:pr-6 lg:pr-10">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-5 font-mono text-[10px] sm:text-xs tracking-[0.18em] uppercase text-slate-500">
+                  <span className="inline-flex items-center gap-2">
+                    <span
+                      className="relative flex h-2 w-2"
+                      aria-hidden
+                    >
+                      <span
+                        className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60 motion-reduce:animate-none"
+                        style={{ background: 'var(--theme-primary)' }}
+                      />
+                      <span
+                        className="relative inline-flex h-2 w-2 rounded-full"
+                        style={{ background: 'var(--theme-primary)' }}
+                      />
+                    </span>
+                    Status
+                  </span>
+                  <span className="text-slate-600" aria-hidden>
+                    /
+                  </span>
+                  <span>Reply usually within 24h</span>
                 </div>
+
+                <p
+                  className="font-mono text-[clamp(3.5rem,12vw,6.5rem)] leading-[0.85] font-bold tracking-tight"
+                  style={{ color: 'var(--theme-primary)' }}
+                >
+                  OPEN
+                </p>
+
+                <p className="mt-5 max-w-md text-slate-300 text-sm sm:text-base leading-relaxed">
+                  Taking freelance builds, startup MVPs, and agency surge work.
+                  Send the product, platforms, and deadline.
+                </p>
 
                 <a
                   href="#contact"
-                  className="group flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                  className="group mt-7 inline-flex items-center gap-2 px-4 py-2.5 rounded-sm font-semibold text-sm text-white transition-transform duration-300 hover:translate-x-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                   style={{
-                    background: 'var(--theme-background)',
-                    border: '1px solid var(--theme-border)',
-                    color: 'var(--theme-primary)',
+                    background:
+                      'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                    outlineColor: 'var(--theme-primary)',
                   }}
                 >
-                  <span>Get in Touch</span>
+                  Send a brief
                   <svg
-                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    className="w-4 h-4 transition-transform group-hover:translate-x-0.5"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    aria-hidden
                   >
                     <path
                       strokeLinecap="round"
@@ -268,54 +292,35 @@ export function AboutSection() {
                 </a>
               </div>
 
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {availability.map(({ title, description }) => (
-                  <div
-                    key={title}
-                    className="group relative p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-default"
-                    style={{
-                      background: 'var(--theme-background)',
-                      border: '1px solid var(--theme-border)',
-                    }}
-                  >
-                    <div
-                      className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{
-                        background:
-                          'radial-gradient(circle at center, var(--theme-glow), transparent 70%)',
-                      }}
-                    />
-
-                    <div className="relative">
-                      <div className="flex items-center gap-2 mb-2">
-                        <CheckCircleIcon
-                          className="w-4 h-4"
-                          style={{ color: 'var(--theme-primary)' }}
-                        />
-                        <h4 className="text-white font-bold text-sm">{title}</h4>
-                      </div>
-                      <p className="text-slate-400 text-xs">{description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
               <div
-                className="mt-6 pt-4 text-center"
-                style={{ borderTop: '1px solid var(--theme-border)' }}
+                className="py-6 sm:py-8 lg:py-10 px-5 sm:px-6 lg:px-8 lg:pl-10"
+                style={{
+                  background: 'color-mix(in srgb, var(--theme-background) 55%, transparent)',
+                }}
               >
-                <p className="text-slate-500 text-xs">
-                  <span className="inline-flex items-center gap-1">
-                    <span
-                      className="w-1.5 h-1.5 rounded-full animate-pulse"
-                      style={{ background: 'var(--theme-primary)' }}
-                    />
-                    Response time: Usually within 24 hours
-                  </span>
+                <p className="font-mono text-[10px] sm:text-xs tracking-[0.18em] uppercase text-slate-500 mb-4">
+                  Booking lines
                 </p>
+
+                <ul className="divide-y" style={{ borderColor: 'var(--theme-border)' }}>
+                  {bookingLines.map(({ lane, detail }) => (
+                    <li
+                      key={lane}
+                      className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0"
+                      style={{ borderColor: 'var(--theme-border)' }}
+                    >
+                      <span className="text-white font-semibold text-sm font-mono tracking-wide">
+                        {lane}
+                      </span>
+                      <span className="text-slate-400 text-xs sm:text-sm text-right">
+                        {detail}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          </div>
+          </aside>
         </Reveal>
       </div>
     </section>
