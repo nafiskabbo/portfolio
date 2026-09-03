@@ -1,54 +1,51 @@
-'use client';
-
 import Image from 'next/image';
-import { GithubIcon, LinkedInIcon, FreelancerIcon, DownloadIcon, AndroidIcon, AppleIcon, FlutterIcon, AutomationIcon, UpworkIcon } from './Icons';
-import { useTheme, Theme } from './ThemeProvider';
+import {
+  GithubIcon,
+  LinkedInIcon,
+  FreelancerIcon,
+  DownloadIcon,
+  AndroidIcon,
+  AppleIcon,
+  FlutterIcon,
+  AutomationIcon,
+  UpworkIcon,
+} from './Icons';
 import { Mascot2D } from './Mascot2D';
 import { TypewriterName } from './TypewriterName';
 import { ThemeBackgroundCompact } from './ThemeBackground';
+import { HeroThemeBadges } from './HeroThemeBadges';
 import { getYearsOfExperienceLabel } from '@/lib/experience';
 
 const yearsLabel = getYearsOfExperienceLabel();
 
 const socialLinks = [
-  { icon: GithubIcon, href: 'https://github.com/nafiskabbo', label: 'GitHub', color: 'hover:text-white hover:border-white/30' },
-  { icon: LinkedInIcon, href: 'https://www.linkedin.com/in/nafiskabbo30/', label: 'LinkedIn', color: 'hover:text-blue-400 hover:border-blue-400/30' },
-  { icon: FreelancerIcon, href: 'https://www.freelancer.com/u/nafiskabbo30', label: 'Freelancer', color: 'hover:text-cyan-400 hover:border-cyan-400/30' },
-  { icon: UpworkIcon, href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca', label: 'Upwork', color: 'hover:text-green-500 hover:border-green-500/30' },
-];
-
-const techBadges: { id: Theme; icon: typeof AndroidIcon; label: string; themeColor: string }[] = [
-  { id: 'android', icon: AndroidIcon, label: 'Android', themeColor: 'from-green-500/20 to-green-600/10 border-green-500/40 text-green-400 hover:bg-green-500/30' },
-  { id: 'ios', icon: AppleIcon, label: 'iOS', themeColor: 'from-blue-500/20 to-blue-600/10 border-blue-500/40 text-blue-400 hover:bg-blue-500/30' },
-  { id: 'flutter', icon: FlutterIcon, label: 'Flutter', themeColor: 'from-cyan-500/20 to-cyan-600/10 border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/30' },
   {
-    id: 'automation',
-    icon: AutomationIcon,
-    label: 'AI Automation',
-    themeColor: 'from-fuchsia-500/20 to-amber-500/10 border-fuchsia-500/50 text-fuchsia-200 hover:bg-fuchsia-500/20',
+    icon: GithubIcon,
+    href: 'https://github.com/nafiskabbo',
+    label: 'GitHub',
+    color: 'hover:text-white hover:border-white/30',
+  },
+  {
+    icon: LinkedInIcon,
+    href: 'https://www.linkedin.com/in/nafiskabbo30/',
+    label: 'LinkedIn',
+    color: 'hover:text-blue-400 hover:border-blue-400/30',
+  },
+  {
+    icon: FreelancerIcon,
+    href: 'https://www.freelancer.com/u/nafiskabbo30',
+    label: 'Freelancer',
+    color: 'hover:text-cyan-400 hover:border-cyan-400/30',
+  },
+  {
+    icon: UpworkIcon,
+    href: 'https://www.upwork.com/freelancers/~01b2fc2f4ff397f8ca',
+    label: 'Upwork',
+    color: 'hover:text-green-500 hover:border-green-500/30',
   },
 ];
 
 export function HeroSection() {
-  const { theme, setTheme, isTransitioning } = useTheme();
-
-  const handleTechClick = (techTheme: Theme, e: React.MouseEvent) => {
-    if (!isTransitioning) {
-      setTheme(techTheme, true, e.nativeEvent);
-    }
-  };
-
-  const handleDownloadCV = (e: React.MouseEvent) => {
-    e.preventDefault();
-    window.open('/cv.pdf', '_blank');
-    const link = document.createElement('a');
-    link.href = '/cv.pdf';
-    link.download = 'cv.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   return (
     <section
       id="home"
@@ -76,7 +73,10 @@ export function HeroSection() {
                   boxShadow: '0 8px 32px var(--theme-glow)',
                 }}
               >
-                <div className="relative h-full w-full overflow-hidden rounded-full" style={{ background: 'var(--theme-surface)' }}>
+                <div
+                  className="relative h-full w-full overflow-hidden rounded-full"
+                  style={{ background: 'var(--theme-surface)' }}
+                >
                   <Image
                     src="/personal.webp"
                     alt="Nafis Islam Kabbo"
@@ -92,14 +92,18 @@ export function HeroSection() {
             <div className="pointer-events-none absolute -inset-3 sm:-inset-5 md:-inset-6 lg:-inset-8 z-[2]">
               <div
                 className="absolute inset-0 rounded-full border border-dashed"
-                style={{ borderColor: 'color-mix(in srgb, var(--theme-primary) 30%, transparent)' }}
+                style={{
+                  borderColor:
+                    'color-mix(in srgb, var(--theme-primary) 30%, transparent)',
+                }}
               />
               <div className="absolute inset-0 animate-orbit">
                 <div
                   className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm border z-10"
                   style={{
                     background: 'var(--theme-surface)',
-                    borderColor: 'color-mix(in srgb, var(--theme-primary) 50%, transparent)',
+                    borderColor:
+                      'color-mix(in srgb, var(--theme-primary) 50%, transparent)',
                     boxShadow: '0 4px 12px var(--theme-glow)',
                   }}
                 >
@@ -131,15 +135,26 @@ export function HeroSection() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full mb-4 sm:mb-5 transition-colors"
               style={{
-                background: 'color-mix(in srgb, var(--theme-primary) 15%, transparent)',
-                border: '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)',
+                background:
+                  'color-mix(in srgb, var(--theme-primary) 15%, transparent)',
+                border:
+                  '1px solid color-mix(in srgb, var(--theme-primary) 30%, transparent)',
               }}
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: 'var(--theme-primary)' }} />
-                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: 'var(--theme-primary)' }} />
+                <span
+                  className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                  style={{ background: 'var(--theme-primary)' }}
+                />
+                <span
+                  className="relative inline-flex rounded-full h-2 w-2"
+                  style={{ background: 'var(--theme-primary)' }}
+                />
               </span>
-              <span className="text-xs sm:text-sm font-semibold tracking-wide" style={{ color: 'var(--theme-primary)' }}>
+              <span
+                className="text-xs sm:text-sm font-semibold tracking-wide"
+                style={{ color: 'var(--theme-primary)' }}
+              >
                 Open for new products · Store-ready delivery
               </span>
             </div>
@@ -150,38 +165,27 @@ export function HeroSection() {
             </h1>
 
             <p className="text-base sm:text-lg text-slate-200 font-medium mb-4 sm:mb-5 max-w-xl mx-auto lg:mx-0 leading-snug">
-              I turn product ideas into apps your users keep opening. Live on the App Store &amp; Play Store.
+              I turn product ideas into apps your users keep opening. Live on the App
+              Store &amp; Play Store.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 sm:gap-3 mb-5 sm:mb-6">
-              {techBadges.map(({ id, icon: Icon, label, themeColor }) => (
-                <button
-                  key={id}
-                  onClick={(e) => handleTechClick(id, e)}
-                  disabled={isTransitioning}
-                  className={`flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r ${themeColor} border backdrop-blur-md transition-all duration-300 hover:scale-105 disabled:opacity-70 ${
-                    theme === id ? 'ring-2 ring-offset-2 ring-offset-[var(--theme-background)] ring-[var(--theme-primary)]' : ''
-                  }`}
-                  title={`Switch to ${label} theme`}
-                >
-                  <Icon className="w-4 h-4 sm:w-5 sm:h-5 shrink-0" />
-                  <span className="font-semibold text-xs sm:text-sm whitespace-nowrap">{label}</span>
-                </button>
-              ))}
-            </div>
+            <HeroThemeBadges />
 
             <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto lg:mx-0 mb-5 sm:mb-6 leading-relaxed">
               {yearsLabel} years shipping for startups and agencies:{' '}
-              <span className="text-slate-300 font-medium">50+ production apps</span> across fintech, health, entertainment, and AI.
-              Clients have seen{' '}
-              <span className="text-slate-300 font-medium">up to 3× revenue growth</span>, cut payment ops time by ~70%, and launched
-              AI features people actually finish using. Clear estimates. Reliable releases.
+              <span className="text-slate-300 font-medium">50+ production apps</span>{' '}
+              across fintech, health, entertainment, and AI. Clients have seen{' '}
+              <span className="text-slate-300 font-medium">up to 3× revenue growth</span>,
+              cut payment ops time by ~70%, and launched AI features people actually finish
+              using. Clear estimates. Reliable releases.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 mb-5 sm:mb-6">
               <a
                 href="/cv.pdf"
-                onClick={handleDownloadCV}
+                download="cv.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 rounded-xl bg-transparent border-2 font-semibold transition-all duration-300 hover:scale-105 text-sm"
                 style={{
                   borderColor: 'var(--theme-border)',
@@ -220,23 +224,34 @@ export function HeroSection() {
         style={{
           background:
             'linear-gradient(180deg, color-mix(in srgb, var(--theme-surface) 55%, transparent) 0%, transparent 100%)',
-          borderColor: 'color-mix(in srgb, var(--theme-primary) 22%, transparent)',
-          boxShadow: '0 -12px 48px color-mix(in srgb, var(--theme-background) 85%, transparent)',
+          borderColor:
+            'color-mix(in srgb, var(--theme-primary) 22%, transparent)',
+          boxShadow:
+            '0 -12px 48px color-mix(in srgb, var(--theme-background) 85%, transparent)',
         }}
         aria-hidden
       >
         <div className="mx-auto flex max-w-xs flex-col items-center gap-2">
           <div
             className="h-1 w-full max-w-56 rounded-full opacity-90"
-            style={{ background: 'color-mix(in srgb, var(--theme-primary) 35%, transparent)' }}
+            style={{
+              background:
+                'color-mix(in srgb, var(--theme-primary) 35%, transparent)',
+            }}
           />
           <div
             className="h-1 w-[88%] max-w-48 rounded-full opacity-70"
-            style={{ background: 'color-mix(in srgb, var(--theme-secondary) 28%, transparent)' }}
+            style={{
+              background:
+                'color-mix(in srgb, var(--theme-secondary) 28%, transparent)',
+            }}
           />
           <div
             className="h-1 w-[72%] max-w-40 rounded-full opacity-50"
-            style={{ background: 'color-mix(in srgb, var(--theme-primary) 22%, transparent)' }}
+            style={{
+              background:
+                'color-mix(in srgb, var(--theme-primary) 22%, transparent)',
+            }}
           />
         </div>
       </div>

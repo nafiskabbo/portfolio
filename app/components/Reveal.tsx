@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
 type RevealProps = {
   children: ReactNode;
@@ -12,6 +12,7 @@ type RevealProps = {
   /** Fire once (default) or every time it enters. */
   once?: boolean;
   threshold?: number;
+  style?: CSSProperties;
   as?: 'div' | 'section' | 'article' | 'li' | 'span';
 };
 
@@ -26,6 +27,7 @@ export function Reveal({
   hiddenClassName = 'opacity-0 translate-y-8',
   once = true,
   threshold = 0.1,
+  style,
   as: Tag = 'div',
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
@@ -54,6 +56,7 @@ export function Reveal({
   return (
     <Tag
       ref={ref as never}
+      style={style}
       className={`transition-all duration-700 ${className} ${visible ? visibleClassName : hiddenClassName}`}
     >
       {children}

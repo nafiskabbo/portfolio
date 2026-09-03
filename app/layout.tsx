@@ -65,6 +65,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.png", type: "image/png", sizes: "32x32" },
       { url: "/logo.webp", type: "image/webp", sizes: "512x512" },
     ],
@@ -77,14 +78,6 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     url: SITE_URL,
-    images: [
-      {
-        url: "/personal.webp",
-        width: 512,
-        height: 512,
-        alt: "Nafis Islam Kabbo - Mobile & Web Developer",
-      },
-    ],
   },
   twitter: {
     card: "summary",

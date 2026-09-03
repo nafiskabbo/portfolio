@@ -1,7 +1,5 @@
-'use client';
-
 import { GraduationIcon, CodeIcon, MobileIcon, CheckCircleIcon } from './Icons';
-import { useReveal } from './Reveal';
+import { Reveal } from './Reveal';
 import { ThemeBackgroundCompact } from './ThemeBackground';
 import { Mascot2D } from './Mascot2D';
 import { getYearsOfExperienceLabel } from '@/lib/experience';
@@ -63,14 +61,8 @@ const availability = [
 ];
 
 export function AboutSection() {
-  const { ref: sectionRef, visible: isVisible } = useReveal();
-
   return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="relative py-16 lg:py-20 overflow-hidden"
-    >
+    <section id="about" className="relative py-16 lg:py-20 overflow-hidden">
       <ThemeBackgroundCompact />
       <div className="hidden lg:block absolute left-8 top-1/4 z-10 opacity-70">
         <Mascot2D size="medium" position="left" />
@@ -87,29 +79,43 @@ export function AboutSection() {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start mb-12">
-          <div
-            className={`space-y-5 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}
+          <Reveal
+            className="space-y-5"
+            hiddenClassName="opacity-0 -translate-x-12"
+            visibleClassName="opacity-100 translate-x-0"
           >
             <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
-              Since July 2020 I&apos;ve helped startups and agencies go from idea to store, with products people keep using.
+              Since July 2020 I&apos;ve helped startups and agencies go from idea to store,
+              with products people keep using.
             </p>
 
             <div className="theme-card rounded-xl p-4 lg:p-5">
-              <h3 className="text-base lg:text-lg font-bold text-white mb-4">What clients get</h3>
+              <h3 className="text-base lg:text-lg font-bold text-white mb-4">
+                What clients get
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {clientOutcomes.map((item) => (
                   <div
-                    key={item.kind === 'text' ? item.text : `${item.before}${item.highlight}${item.after}`}
+                    key={
+                      item.kind === 'text'
+                        ? item.text
+                        : `${item.before}${item.highlight}${item.after}`
+                    }
                     className="flex items-center gap-2"
                   >
-                    <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'var(--theme-primary)' }} />
+                    <div
+                      className="w-1.5 h-1.5 rounded-full shrink-0"
+                      style={{ background: 'var(--theme-primary)' }}
+                    />
                     <span className="text-slate-300 text-xs lg:text-sm">
                       {item.kind === 'text' ? (
                         item.text
                       ) : (
                         <>
                           {item.before}
-                          <span className="font-semibold text-blue-400">{item.highlight}</span>
+                          <span className="font-semibold text-blue-400">
+                            {item.highlight}
+                          </span>
                           {item.after}
                         </>
                       )}
@@ -121,27 +127,40 @@ export function AboutSection() {
 
             <div className="grid grid-cols-4 gap-2">
               {stats.map(({ value, label }) => (
-                <div
-                  key={label}
-                  className="theme-card text-center p-3 lg:p-4 rounded-xl"
-                >
-                  <div className="text-lg sm:text-xl lg:text-2xl font-bold theme-gradient-text">{value}</div>
+                <div key={label} className="theme-card text-center p-3 lg:p-4 rounded-xl">
+                  <div className="text-lg sm:text-xl lg:text-2xl font-bold theme-gradient-text">
+                    {value}
+                  </div>
                   <div className="text-slate-400 text-[10px] sm:text-xs mt-1">{label}</div>
                 </div>
               ))}
             </div>
-          </div>
+          </Reveal>
 
-          <div
-            className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}
+          <Reveal
             style={{ transitionDelay: '200ms' }}
+            hiddenClassName="opacity-0 translate-x-12"
+            visibleClassName="opacity-100 translate-x-0"
           >
             <h3 className="text-base lg:text-lg font-bold text-white mb-5 flex items-center gap-2">
-              <span className="w-8 h-0.5 rounded-full" style={{ background: 'linear-gradient(90deg, var(--theme-primary), var(--theme-secondary))' }} />
+              <span
+                className="w-8 h-0.5 rounded-full"
+                style={{
+                  background:
+                    'linear-gradient(90deg, var(--theme-primary), var(--theme-secondary))',
+                }}
+              />
               My Journey
             </h3>
-            <div className={`relative journey-timeline${isVisible ? ' is-active' : ''}`}>
-              <div className="journey-line absolute left-4 lg:left-5 top-2 bottom-2 w-0.5 overflow-hidden rounded-full" aria-hidden>
+            <Reveal
+              className="relative journey-timeline"
+              visibleClassName="is-active"
+              hiddenClassName=""
+            >
+              <div
+                className="journey-line absolute left-4 lg:left-5 top-2 bottom-2 w-0.5 overflow-hidden rounded-full"
+                aria-hidden
+              >
                 <div className="journey-line-track absolute inset-0 rounded-full" />
                 <div className="journey-line-glow absolute left-1/2 w-3 -translate-x-1/2 rounded-full" />
                 <div className="journey-line-beam absolute inset-x-0 top-0 h-full origin-top rounded-full" />
@@ -157,7 +176,8 @@ export function AboutSection() {
                     <div
                       className="journey-node absolute left-0 w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center shadow-lg ring-4 ring-[var(--theme-background)]"
                       style={{
-                        background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                        background:
+                          'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
                       }}
                     >
                       <span className="journey-node-ring" aria-hidden />
@@ -165,7 +185,9 @@ export function AboutSection() {
                     </div>
 
                     <div className="theme-card rounded-xl p-3 lg:p-4">
-                      <span className="theme-badge inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold mb-2">{year}</span>
+                      <span className="theme-badge inline-block px-2 py-0.5 rounded-full text-[10px] font-semibold mb-2">
+                        {year}
+                      </span>
                       <h4 className="text-white font-bold text-sm mb-0.5">{title}</h4>
                       <p className="text-slate-400 text-xs mb-1">{subtitle}</p>
                       <p className="text-slate-500 text-xs leading-relaxed">{description}</p>
@@ -173,38 +195,50 @@ export function AboutSection() {
                   </div>
                 ))}
               </div>
-            </div>
-          </div>
+            </Reveal>
+          </Reveal>
         </div>
 
-        <div
-          className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        <Reveal
           style={{ transitionDelay: '400ms' }}
+          hiddenClassName="opacity-0 translate-y-8"
+          visibleClassName="opacity-100 translate-y-0"
         >
           <div
             className="rounded-2xl p-px shadow-lg"
             style={{
-              background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary), var(--theme-accent))',
+              background:
+                'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary), var(--theme-accent))',
             }}
           >
-            <div className="rounded-2xl p-6 lg:p-8" style={{ background: 'var(--theme-surface)' }}>
+            <div
+              className="rounded-2xl p-6 lg:p-8"
+              style={{ background: 'var(--theme-surface)' }}
+            >
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
                 <div className="flex items-center gap-4">
                   <div
                     className="relative flex items-center gap-2 px-4 py-2 rounded-full overflow-hidden"
                     style={{
-                      background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                      background:
+                        'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
                       boxShadow: '0 4px 20px var(--theme-glow)',
                     }}
                   >
                     <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                     <span className="relative w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
-                    <span className="relative text-white font-bold text-sm tracking-wide">HIRING ME</span>
+                    <span className="relative text-white font-bold text-sm tracking-wide">
+                      HIRING ME
+                    </span>
                   </div>
 
                   <div className="hidden sm:block">
-                    <h3 className="text-xl lg:text-2xl font-bold text-white">Available for Opportunities</h3>
-                    <p className="text-slate-400 text-sm">Let&apos;s build something amazing together</p>
+                    <h3 className="text-xl lg:text-2xl font-bold text-white">
+                      Available for Opportunities
+                    </h3>
+                    <p className="text-slate-400 text-sm">
+                      Let&apos;s build something amazing together
+                    </p>
                   </div>
                 </div>
 
@@ -218,8 +252,18 @@ export function AboutSection() {
                   }}
                 >
                   <span>Get in Touch</span>
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  <svg
+                    className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
                   </svg>
                 </a>
               </div>
@@ -237,13 +281,17 @@ export function AboutSection() {
                     <div
                       className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{
-                        background: 'radial-gradient(circle at center, var(--theme-glow), transparent 70%)',
+                        background:
+                          'radial-gradient(circle at center, var(--theme-glow), transparent 70%)',
                       }}
                     />
 
                     <div className="relative">
                       <div className="flex items-center gap-2 mb-2">
-                        <CheckCircleIcon className="w-4 h-4" style={{ color: 'var(--theme-primary)' }} />
+                        <CheckCircleIcon
+                          className="w-4 h-4"
+                          style={{ color: 'var(--theme-primary)' }}
+                        />
                         <h4 className="text-white font-bold text-sm">{title}</h4>
                       </div>
                       <p className="text-slate-400 text-xs">{description}</p>
@@ -252,17 +300,23 @@ export function AboutSection() {
                 ))}
               </div>
 
-              <div className="mt-6 pt-4 text-center" style={{ borderTop: '1px solid var(--theme-border)' }}>
+              <div
+                className="mt-6 pt-4 text-center"
+                style={{ borderTop: '1px solid var(--theme-border)' }}
+              >
                 <p className="text-slate-500 text-xs">
                   <span className="inline-flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: 'var(--theme-primary)' }} />
+                    <span
+                      className="w-1.5 h-1.5 rounded-full animate-pulse"
+                      style={{ background: 'var(--theme-primary)' }}
+                    />
                     Response time: Usually within 24 hours
                   </span>
                 </p>
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
