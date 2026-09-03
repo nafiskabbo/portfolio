@@ -60,7 +60,7 @@ True streaming (SSE or UI message stream) so the first token feels fast even whe
 
 ## Content still worth trimming
 
-- Rewrite the Elsie blurb to a concrete outcome.
+- Rewrite the Elsie blurb to a concrete outcome. Done.
 - Drop subjective skill percentage bars; keep logos and categories.
 - Dedupe social/contact clusters (Hero, Contact, Footer, Chat) into one shared link module.
 - Archive or delete the large TypeScript migration docs under `docs/` now that the upgrade shipped.

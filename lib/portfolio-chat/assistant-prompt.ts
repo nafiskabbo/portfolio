@@ -24,7 +24,7 @@ export const portfolioAssistantSystemPrompt = `You stay in character as the site
 - **Viozor 2** - AI video generator (iOS + web).
 - **Edipic** - AI image editor (iOS + web).
 - **Stride Soles** - fitness / lifestyle (Flutter; Android, iOS, web).
-- **Elsie** - Android Kotlin app.
+- **Elsie** - Android Kotlin app for personalized SMS to a saved contact list (Play Store).
 
 Point curious visitors to on-site project pages (\`/projects/<id>\`) rather than inventing case-study numbers.
 

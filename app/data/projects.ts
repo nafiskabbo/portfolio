@@ -175,7 +175,7 @@ export const ALL_PROJECTS: Project[] = [
     id: 'elsie',
     title: 'Elsie',
     description:
-      'A feature-rich mobile application with modern Material Design and intuitive user experience.',
+      'Personalized SMS to a saved contact list, shipped on Google Play.',
     image: '/logo_elsie.webp',
     gradient: 'from-pink-500 to-rose-600',
     tags: ['Android', 'Kotlin', 'Mobile App'],

@@ -396,14 +396,14 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
     ],
   },
   elsie: {
-    problem: 'The product needed a dependable Android shell with modern Material patterns and room to grow features.',
+    problem: 'Needed a simple Android way to send personalized SMS to a fixed list of numbers.',
     solution:
-      'Kotlin app with clear navigation, scalable modules, and UI polish that reads premium on the Play Store.',
-    techStack: ['Kotlin', 'Jetpack', 'Material Design 3', 'REST integrations'],
+      'Kotlin app with Material UI for composing message templates and sending them to saved contacts.',
+    techStack: ['Kotlin', 'Jetpack', 'Material Design 3', 'SMS'],
     metrics: [
       { label: 'Platform', value: 'Android' },
-      { label: 'UX', value: 'Material' },
-      { label: 'Delivery', value: 'Milestone-based' },
+      { label: 'Core job', value: 'SMS blast' },
+      { label: 'Store', value: 'Play live' },
     ],
     testimonials: [
       {
