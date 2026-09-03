@@ -20,9 +20,6 @@ import {
   AIIcon,
   CodeIcon,
   AutomationIcon,
-  RocketIcon,
-  CheckCircleIcon,
-  UserCheckIcon,
   NextJsIcon,
 } from './Icons';
 import { useTheme, Theme } from './ThemeProvider';
@@ -40,8 +37,6 @@ const skillThemeMap: Record<string, Theme> = {
   JavaScript: 'web',
   'Node.js': 'web',
   'Next.js': 'web',
-  'AI Integration': 'automation',
-  'ML Features': 'automation',
   Automation: 'automation',
   n8n: 'automation',
   Chatbots: 'automation',
@@ -88,33 +83,6 @@ const skillCategories = [
       { name: 'Chatbots', icon: AIIcon, level: 90, color: 'bg-violet-500' },
       { name: 'LLM APIs', icon: CodeIcon, level: 88, color: 'bg-cyan-500' },
     ],
-  },
-];
-
-const whyChooseMe = [
-  {
-    title: 'Store-ready products',
-    description: 'From concept to App Store & Play Store release, not demos that stall.',
-    icon: CheckCircleIcon,
-    features: ['Production QA', 'Store launch'],
-  },
-  {
-    title: 'Faster shipping',
-    description: 'Tight loops and clear ownership so startups and agencies move quicker.',
-    icon: RocketIcon,
-    features: ['Parallel delivery', 'MVP speed'],
-  },
-  {
-    title: 'Business outcomes',
-    description: 'Work tied to retention, ops time, and revenue, not vanity features.',
-    icon: UserCheckIcon,
-    features: ['Up to 3× revenue', '~70% ops cut'],
-  },
-  {
-    title: 'Steady communication',
-    description: 'Regular updates, honest estimates, and handoff you can maintain.',
-    icon: CodeIcon,
-    features: ['Clear briefs', 'Post-launch support'],
   },
 ];
 
@@ -182,7 +150,7 @@ export function SkillsSection() {
         </div>
 
         {/* Skills Grid - Compact */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {skillCategories.map(({ title, icon: CategoryIcon, skills }, categoryIndex) => (
             <div
               key={title}
@@ -249,60 +217,6 @@ export function SkillsSection() {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Why Choose Me - Compact Grid */}
-        <div
-          className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-          style={{ transitionDelay: '500ms' }}
-        >
-          <div className="text-center mb-6">
-            <span className="theme-badge inline-block px-3 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase mb-3">
-              Why Work With Me
-            </span>
-            <h3 className="text-xl sm:text-2xl font-bold text-white">
-              Why Clients{' '}
-              <span className="theme-gradient-text">Choose Me</span>
-            </h3>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-            {whyChooseMe.map(({ title, description, icon: Icon, features }) => (
-              <div
-                key={title}
-                className="group theme-card p-4 rounded-xl overflow-hidden"
-              >
-                <div className="flex items-start gap-3">
-                  {/* Icon */}
-                  <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center shadow-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300"
-                    style={{ background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))' }}
-                  >
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-white font-bold text-sm mb-1">{title}</h4>
-                    <p className="text-slate-400 text-xs leading-relaxed mb-2 line-clamp-2">{description}</p>
-
-                    {/* Feature Tags */}
-                    <div className="flex flex-wrap gap-1">
-                      {features.map((feature) => (
-                        <span
-                          key={feature}
-                          className="px-2 py-0.5 rounded-full text-[10px] font-medium"
-                          style={{ background: 'var(--theme-background)', color: 'var(--theme-primary)' }}
-                        >
-                          {feature}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>

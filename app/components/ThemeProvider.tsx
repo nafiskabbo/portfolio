@@ -290,34 +290,3 @@ export function useTheme() {
   }
   return context;
 }
-
-// Helper component for clickable theme triggers
-interface ThemeTriggerProps {
-  targetTheme: Theme;
-  children: ReactNode;
-  className?: string;
-  as?: 'button' | 'span' | 'div';
-}
-
-export function ThemeTrigger({ targetTheme, children, className = '', as = 'button' }: ThemeTriggerProps) {
-  const { setTheme, theme } = useTheme();
-  const Component = as;
-  
-  const handleClick = (e: React.MouseEvent) => {
-    setTheme(targetTheme, true, e.nativeEvent);
-  };
-  
-  const isActive = theme === targetTheme;
-  
-  return (
-    <Component
-      onClick={handleClick}
-      className={`cursor-pointer transition-all duration-300 ${isActive ? 'ring-2 ring-[var(--theme-primary)] ring-offset-2 ring-offset-[var(--theme-background)]' : ''} ${className}`}
-      role="button"
-      tabIndex={0}
-      aria-label={`Switch to ${themeConfig[targetTheme].name} theme`}
-    >
-      {children}
-    </Component>
-  );
-}

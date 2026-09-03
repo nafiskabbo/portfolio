@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
-  ArrowLeftIcon,
   ExternalLinkIcon,
   PlayStoreIcon,
   AppStoreIcon,
@@ -63,21 +62,18 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
 
         <div className="relative z-10 section-container">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-slate-400 hover:text-[var(--theme-primary)] transition-all mb-8 text-sm group"
-              style={{ background: 'var(--theme-surface)', border: '1px solid var(--theme-border)' }}
-            >
-              <ArrowLeftIcon className="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform" />
-              All projects
-            </Link>
-
-            <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-12">
+            <div className="flex flex-col lg:flex-row lg:items-stretch gap-8 lg:gap-12">
               <div className="relative w-24 h-24 sm:w-28 sm:h-28 shrink-0 rounded-2xl overflow-hidden ring-2 ring-white/15 shadow-2xl">
                 <Image src={project.image} alt={project.title} fill className="object-cover" sizes="112px" priority />
               </div>
+
               <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-center gap-2 mb-3">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-3">{project.title}</h1>
+                <p className="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">{project.description}</p>
+              </div>
+
+              <div className="flex flex-col items-start lg:items-end gap-3 shrink-0 self-stretch">
+                <div className="flex flex-wrap items-center gap-2 lg:justify-end">
                   <span
                     className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full"
                     style={{
@@ -98,32 +94,30 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
                     </span>
                   ))}
                 </div>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-3">{project.title}</h1>
-                <p className="text-slate-400 text-sm sm:text-base max-w-2xl leading-relaxed">{project.description}</p>
-              </div>
 
-              <div className="flex flex-wrap gap-2 lg:justify-end">
-                {project.links.map((link) => {
-                  const cfg = linkIcons[link.type];
-                  const Icon = cfg.icon;
-                  return (
-                    <a
-                      key={`${link.type}-${link.url}`}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:scale-[1.02] shadow-lg"
-                      style={{
-                        background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
-                        boxShadow: '0 8px 24px var(--theme-glow)',
-                      }}
-                    >
-                      <Icon className="w-4 h-4" />
-                      {cfg.label}
-                      <ExternalLinkIcon className="w-3 h-3 opacity-80" />
-                    </a>
-                  );
-                })}
+                <div className="mt-auto flex flex-wrap gap-2 lg:justify-end">
+                  {project.links.map((link) => {
+                    const cfg = linkIcons[link.type];
+                    const Icon = cfg.icon;
+                    return (
+                      <a
+                        key={`${link.type}-${link.url}`}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:scale-[1.02] shadow-lg"
+                        style={{
+                          background: 'linear-gradient(135deg, var(--theme-primary), var(--theme-secondary))',
+                          boxShadow: '0 8px 24px var(--theme-glow)',
+                        }}
+                      >
+                        <Icon className="w-4 h-4" />
+                        {cfg.label}
+                        <ExternalLinkIcon className="w-3 h-3 opacity-80" />
+                      </a>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -211,7 +205,7 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
             <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-500 mb-4">Screens & product</h2>
             <div className="relative -mx-4 sm:-mx-6 px-4 sm:px-6">
               <div
-                className="flex gap-4 overflow-x-auto pb-3 pt-1 snap-x snap-mandatory scroll-pl-4 scroll-pr-4 [scrollbar-width:thin]"
+                className="flex items-center gap-4 overflow-x-auto pb-3 pt-1 snap-x snap-mandatory scroll-pl-4 scroll-pr-4 [scrollbar-width:thin]"
                 style={{
                   scrollbarColor: 'color-mix(in srgb, var(--theme-primary) 45%, transparent) transparent',
                 }}
@@ -225,31 +219,28 @@ export function ProjectDetailView({ project, detail }: ProjectDetailViewProps) {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: Math.min(i * 0.04, 0.24) }}
-                      className="group relative shrink-0 snap-start overflow-hidden rounded-xl ring-1 ring-white/10 shadow-xl"
-                      style={
-                        isLandscape
-                          ? {
-                              width: 'min(720px, 88vw)',
-                              aspectRatio: '16 / 9',
-                              maxHeight: 'min(55vh, 420px)',
-                            }
-                          : {
-                              width: 'min(240px, 72vw)',
-                              aspectRatio: '9 / 16',
-                              maxHeight: 'min(70vh, 560px)',
-                            }
-                      }
+                      className={`group relative w-auto shrink-0 snap-start overflow-hidden rounded-xl bg-black/30 shadow-xl ring-1 ring-white/10 ${
+                        isLandscape ? 'h-[min(52vh,420px)]' : 'h-[min(52vh,420px)]'
+                      }`}
+                      style={{
+                        aspectRatio: isLandscape ? '4 / 3' : '9 / 16',
+                      }}
                     >
                       <Image
                         src={shot.src}
                         alt={shot.alt}
                         fill
-                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                        className={
+                          isLandscape
+                            ? 'object-contain transition-transform duration-500 group-hover:scale-[1.01]'
+                            : 'object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]'
+                        }
                         sizes={
                           isLandscape
-                            ? '(max-width: 640px) 88vw, 720px'
-                            : '(max-width: 640px) 72vw, 240px'
+                            ? '(max-width: 640px) 80vw, 720px'
+                            : '(max-width: 640px) 40vw, 236px'
                         }
+                        priority={i === 0}
                       />
                     </motion.figure>
                   );

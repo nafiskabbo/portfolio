@@ -47,7 +47,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'Heal Tone AI Frequency Sounds',
     description:
       'A wellness app featuring AI-generated healing frequencies and soundscapes for meditation, relaxation, and therapeutic sound therapy.',
-    image: '/logo_healtone.jpg',
+    image: '/logo_healtone.webp',
     gradient: 'from-purple-500 to-violet-600',
     tags: ['Flutter', 'AI', 'Health'],
     links: [
@@ -64,7 +64,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'eMaisha Pay',
     description:
       'A corporate payment and financial management app enabling seamless business transactions, automated reconciliation, and real-time reporting.',
-    image: '/logo_emaisha_pay.png',
+    image: '/logo_emaisha_pay.webp',
     gradient: 'from-blue-500 to-indigo-600',
     tags: ['Android', 'Fintech', 'Payments'],
     links: [
@@ -82,7 +82,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'Santa Personal Video & Call',
     description:
       'An interactive app where users can video call and chat with Santa Claus. Features AI-powered conversations and personalized video messages.',
-    image: '/logo_santa_app.png',
+    image: '/logo_santa_app.webp',
     gradient: 'from-red-500 to-rose-600',
     tags: ['Kotlin', 'SwiftUI', 'AI', 'Video Call'],
     links: [
@@ -99,7 +99,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'DeenHub: Quran, Prayer & Qibla',
     description:
       'A comprehensive Islamic app with Quran reading, prayer times, Qibla direction, AI-powered Hadith search, and nearby mosque finder.',
-    image: '/logo_deenhub.jpeg',
+    image: '/logo_deenhub.webp',
     gradient: 'from-emerald-500 to-teal-600',
     tags: ['Flutter', 'Islamic', 'AI'],
     links: [
@@ -115,7 +115,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'Viozor 2: AI Video Generator',
     description:
       'Cutting-edge AI video generation app that transforms text and images into stunning videos with advanced editing capabilities.',
-    image: '/logo_viozor.jpg',
+    image: '/logo_viozor.webp',
     gradient: 'from-cyan-500 to-blue-600',
     tags: ['Swift', 'AI', 'iOS'],
     links: [
@@ -130,7 +130,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'Edipic AI Image Editor',
     description:
       'Professional AI-powered image editing app with advanced filters, background removal, and intelligent enhancement tools.',
-    image: '/logo_edipic.jpg',
+    image: '/logo_edipic.webp',
     gradient: 'from-amber-500 to-orange-600',
     tags: ['Swift', 'AI', 'Image Processing'],
     links: [
@@ -145,7 +145,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'Stride Soles',
     description:
       'Fitness and lifestyle companion app for tracking activity and staying motivated, with a polished cross-platform experience on Android, iOS, and web.',
-    image: '/logo_stride_soles.png',
+    image: '/logo_stride_soles.webp',
     gradient: 'from-orange-500 to-rose-600',
     tags: ['Flutter', 'Android', 'iOS', 'Health'],
     links: [
@@ -176,7 +176,7 @@ export const ALL_PROJECTS: Project[] = [
     title: 'Elsie',
     description:
       'A feature-rich mobile application with modern Material Design and intuitive user experience.',
-    image: '/logo_elsie.jpg',
+    image: '/logo_elsie.webp',
     gradient: 'from-pink-500 to-rose-600',
     tags: ['Android', 'Kotlin', 'Mobile App'],
     links: [{ type: 'android', url: 'https://play.google.com/store/apps/details?id=com.elsie.app' }],

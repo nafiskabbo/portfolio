@@ -362,21 +362,6 @@ export const CheckCircleIcon = ({ className = "w-6 h-6", style }: IconProps) => 
   </svg>
 );
 
-export const BriefcaseIcon = ({ className = "w-6 h-6", style }: IconProps) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-  </svg>
-);
-
-export const UserCheckIcon = ({ className = "w-6 h-6", style }: IconProps) => (
-  <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-    <circle cx="8.5" cy="7" r="4" />
-    <polyline points="17 11 19 13 23 9" />
-  </svg>
-);
-
 export const SparklesIcon = ({ className = "w-6 h-6", style }: IconProps) => (
   <svg className={className} style={style} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3Z" />

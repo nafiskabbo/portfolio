@@ -56,10 +56,10 @@ const clientOutcomes: OutcomeItem[] = [
 ];
 
 const availability = [
-  { title: 'Freelance', description: 'Ship your next release', icon: '💼' },
-  { title: 'Startups', description: 'MVP to store launch', icon: '🚀' },
-  { title: 'Remote', description: 'Async-friendly delivery', icon: '🌍' },
-  { title: 'Agencies', description: 'Reliable surge capacity', icon: '🏢' },
+  { title: 'Freelance', description: 'Ship your next release' },
+  { title: 'Startups', description: 'MVP to store launch' },
+  { title: 'Remote', description: 'Async-friendly delivery' },
+  { title: 'Agencies', description: 'Reliable surge capacity' },
 ];
 
 export function AboutSection() {
@@ -249,7 +249,7 @@ export function AboutSection() {
               </div>
 
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-                {availability.map(({ title, description, icon }) => (
+                {availability.map(({ title, description }) => (
                   <div
                     key={title}
                     className="group relative p-4 rounded-xl transition-all duration-300 hover:scale-[1.02] cursor-default"
@@ -267,10 +267,9 @@ export function AboutSection() {
 
                     <div className="relative">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xl">{icon}</span>
                         <CheckCircleIcon className="w-4 h-4" style={{ color: 'var(--theme-primary)' }} />
+                        <h4 className="text-white font-bold text-sm">{title}</h4>
                       </div>
-                      <h4 className="text-white font-bold text-sm mb-1">{title}</h4>
                       <p className="text-slate-400 text-xs">{description}</p>
                     </div>
                   </div>
