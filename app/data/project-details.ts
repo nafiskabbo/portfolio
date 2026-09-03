@@ -85,6 +85,11 @@ export const PROJECT_DETAILS: Record<string, ProjectDetailContent> = {
     screenshots: [
       { src: '/screenshot_healtone_1.webp', alt: 'Heal Tone experience', caption: 'Product (local hero)' },
       {
+        src: 'https://play-lh.googleusercontent.com/I3hrq0FAMEOuQ-SAdh1Iu4q5OE4TJsoYBteAsGVU5XEXZWcWYXJyNU4_uKKeXrol5V-UNDHDjIVbecIEG_9K=w5120-h2880',
+        alt: 'Heal Tone experience frequency healing',
+        caption: 'Frequency healing'
+      },
+      {
         src: 'https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/67/3d/61/673d612a-92b7-2ba8-4cce-4156d0b559db/Simulator_Screenshot_-_iPhone_16_Pro_Max_-_2025-07-03_at_21.09.06.png/460x998bb.webp',
         alt: 'Heal Tone iOS - healing presets',
         caption: 'Healing sessions',
