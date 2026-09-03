@@ -1,0 +1,3 @@
+[install]
+# Vercel installs with Bun; hoisted matches npm-style node_modules resolution.
+linker = "hoisted"

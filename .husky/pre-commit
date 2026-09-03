@@ -2,7 +2,7 @@
 set -e
 
 echo "pre-commit: lint"
-npm run lint
+bun run lint
 
 echo "pre-commit: typecheck"
-npm run typecheck
+bun run typecheck

@@ -2,6 +2,7 @@
   "name": "next_js",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "bun@1.4.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,7 +10,7 @@
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "verify": "npm run lint && npm run typecheck && npm run build"
+    "verify": "bun run lint && bun run typecheck && bun run build"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.107.0",

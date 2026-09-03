@@ -5,6 +5,7 @@ A modern, responsive portfolio website built with Next.js 16, React 19, and Tail
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19-blue?style=for-the-badge&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript)
+![Bun](https://img.shields.io/badge/Bun-1.4-black?style=for-the-badge&logo=bun)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-cyan?style=for-the-badge&logo=tailwindcss)
 
 ## 🚀 Features
@@ -37,8 +38,7 @@ A modern, responsive portfolio website built with Next.js 16, React 19, and Tail
 
 ### Prerequisites
 
-- Node.js 18.x or later
-- npm, yarn, pnpm, or bun
+- [Bun](https://bun.sh) 1.4.x or later (package manager; Vercel uses hoisted installs via `bunfig.toml`)
 
 ### Installation
 
@@ -52,13 +52,13 @@ cd portfolio
 2. Install dependencies:
 
 ```bash
-npm install
+bun install
 ```
 
 3. Run the development server:
 
 ```bash
-npm run dev
+bun run dev
 ```
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -66,8 +66,8 @@ npm run dev
 ### Build for Production
 
 ```bash
-npm run build
-npm run start
+bun run build
+bun run start
 ```
 
 ## 📁 Project Structure
